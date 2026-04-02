@@ -1,0 +1,28 @@
+{
+  "name": "alter-ego",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"vite\" \"bun --hot server/server.ts\"",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "build": "vite build",
+    "validate": "ajv check"
+  },
+  "dependencies": {
+    "@xstate/fsm": "^2.0.1",
+    "ajv": "^8.17.1",
+    "json-logic-js": "^2.0.2",
+    "xstate": "^5.18.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "concurrently": "^9.1.2",
+    "solid-js": "^1.9.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11",
+    "vite-plugin-solid": "^2.11.0"
+  }
+}

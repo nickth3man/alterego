@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.svelte-kit/
+*.local
+saves/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
