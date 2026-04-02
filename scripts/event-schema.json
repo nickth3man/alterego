@@ -1,0 +1,412 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://alter-ego.game/schemas/event-schema.json",
+  "title": "Storylet",
+  "description": "Event node schema for Alter Ego game",
+  "type": "object",
+  "required": ["id", "category", "lifeStages", "prerequisites", "weight", "priority", "title", "description", "moods", "choices"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["social", "physical", "emotional", "family", "vocational"],
+      "description": "Event category"
+    },
+    "lifeStages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["infancy", "childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"]
+      },
+      "minItems": 1,
+      "description": "Life stages when this event can occur"
+    },
+    "prerequisites": {
+      "$ref": "#/$defs/condition",
+      "description": "Condition that must be met for event to be available"
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Event weight for selection"
+    },
+    "maxRepeats": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Maximum times event can repeat (undefined = unlimited, 1 = once-only)"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["story", "weighted", "fill"],
+      "description": "Event priority tier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Event title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Event description/narration"
+    },
+    "moods": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/storyletMood"
+      },
+      "minItems": 1,
+      "description": "Available moods for this event"
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/storyletChoice"
+      },
+      "minItems": 1,
+      "description": "Player choices for this event"
+    }
+  },
+  "$defs": {
+    "lifeStage": {
+      "type": "string",
+      "enum": ["infancy", "childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"]
+    },
+    "eventCategory": {
+      "type": "string",
+      "enum": ["social", "physical", "emotional", "family", "vocational"]
+    },
+    "eventPriority": {
+      "type": "string",
+      "enum": ["story", "weighted", "fill"]
+    },
+    "npcStatus": {
+      "type": "string",
+      "enum": ["stranger", "acquaintance", "friend", "closeFriend", "romantic", "enemy"]
+    },
+    "memorySentiment": {
+      "type": "string",
+      "enum": ["positive", "negative", "neutral"]
+    },
+    "educationLevel": {
+      "type": "string",
+      "enum": ["none", "elementary", "high-school", "some-college", "bachelors", "masters", "doctorate"]
+    },
+    "jsonLogicRule": {
+      "type": "object",
+      "required": ["type", "rule"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "jsonLogic"
+        },
+        "rule": {
+          "type": "object",
+          "description": "JSON Logic rule object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "safeExpression": {
+      "type": "object",
+      "required": ["type", "expression"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "expression"
+        },
+        "expression": {
+          "type": "string",
+          "description": "Sandboxed expression string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "condition": {
+      "oneOf": [
+        { "$ref": "#/$defs/jsonLogicRule" },
+        { "$ref": "#/$defs/safeExpression" }
+      ]
+    },
+    "storyletMood": {
+      "type": "object",
+      "required": ["id", "label", "emoji", "color"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "emoji": { "type": "string" },
+        "color": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "relationshipChange": {
+      "type": "object",
+      "required": ["npcId", "delta"],
+      "properties": {
+        "npcId": { "type": "string" },
+        "delta": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "storyletOutcome": {
+      "type": "object",
+      "required": ["condition", "narration", "statChanges", "consequences"],
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "narration": { "type": "string" },
+        "statChanges": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "consequences": {
+          "type": "object",
+          "properties": {
+            "unlockEvents": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "blockEvents": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "death": { "type": "boolean" },
+            "tag": { "type": "string" },
+            "relationshipChanges": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/relationshipChange" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "storyletChoice": {
+      "type": "object",
+      "required": ["id", "label", "outcomes"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "compatibleMoods": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/storyletOutcome" },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "memoryEntry": {
+      "type": "object",
+      "required": ["eventId", "tags", "sentiment", "summary"],
+      "properties": {
+        "eventId": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sentiment": { "$ref": "#/$defs/memorySentiment" },
+        "summary": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "npcRelationship": {
+      "type": "object",
+      "required": ["id", "name", "trust", "affection", "memories", "status", "activeStages"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "trust": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "affection": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "memories": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memoryEntry" }
+        },
+        "status": { "$ref": "#/$defs/npcStatus" },
+        "activeStages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lifeStage" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "npcDefinition": {
+      "type": "object",
+      "required": ["id", "name", "role", "activeStages", "personality", "initialTrust", "initialAffection", "description"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "activeStages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lifeStage" }
+        },
+        "personality": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        },
+        "initialTrust": { "type": "number" },
+        "initialAffection": { "type": "number" },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "scaledStat": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "careerLevel": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "characterStats": {
+      "type": "object",
+      "required": [
+        "physical", "confidence", "intellectual", "creativity", "empathy", "resilience", "charm", "discipline",
+        "happiness", "morality", "riskTolerance", "independence",
+        "education", "career", "careerLevel", "wealth",
+        "isMarried", "hasChildren",
+        "experiencesCompleted", "narrativeTags", "relationships",
+        "age", "currentStage"
+      ],
+      "properties": {
+        "physical": { "$ref": "#/$defs/scaledStat" },
+        "confidence": { "$ref": "#/$defs/scaledStat" },
+        "intellectual": { "$ref": "#/$defs/scaledStat" },
+        "creativity": { "$ref": "#/$defs/scaledStat" },
+        "empathy": { "$ref": "#/$defs/scaledStat" },
+        "resilience": { "$ref": "#/$defs/scaledStat" },
+        "charm": { "$ref": "#/$defs/scaledStat" },
+        "discipline": { "$ref": "#/$defs/scaledStat" },
+        "happiness": { "$ref": "#/$defs/scaledStat" },
+        "morality": { "$ref": "#/$defs/scaledStat" },
+        "riskTolerance": { "$ref": "#/$defs/scaledStat" },
+        "independence": { "$ref": "#/$defs/scaledStat" },
+        "education": { "$ref": "#/$defs/educationLevel" },
+        "career": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ]
+        },
+        "careerLevel": { "$ref": "#/$defs/careerLevel" },
+        "wealth": { "$ref": "#/$defs/scaledStat" },
+        "isMarried": { "type": "boolean" },
+        "hasChildren": { "type": "boolean" },
+        "experiencesCompleted": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "narrativeTags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relationships": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/npcRelationship" }
+        },
+        "age": { "type": "number" },
+        "currentStage": { "$ref": "#/$defs/lifeStage" }
+      },
+      "additionalProperties": false
+    },
+    "gamePhase": {
+      "type": "string",
+      "enum": ["title", "quiz", "char-create", "playing", "stage-transition", "gameover", "summary"]
+    },
+    "gameState": {
+      "type": "object",
+      "required": ["player", "currentEvent", "availableEvents", "stageProgress", "gamePhase", "selectedMood", "deathProbability"],
+      "properties": {
+        "player": {
+          "type": "object",
+          "required": ["name", "gender", "personalityProfile", "stats"],
+          "properties": {
+            "name": { "type": "string" },
+            "gender": {
+              "type": "string",
+              "enum": ["male", "female", "nonbinary"]
+            },
+            "personalityProfile": {
+              "type": "object",
+              "additionalProperties": { "type": "number" }
+            },
+            "stats": { "$ref": "#/$defs/characterStats" }
+          },
+          "additionalProperties": false
+        },
+        "currentEvent": {
+          "oneOf": [
+            { "$ref": "#" },
+            { "type": "null" }
+          ]
+        },
+        "availableEvents": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "stageProgress": { "type": "number" },
+        "gamePhase": { "$ref": "#/$defs/gamePhase" },
+        "selectedMood": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ]
+        },
+        "deathProbability": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "economySnapshot": {
+      "type": "object",
+      "required": ["careerEarnings", "passiveIncome", "expenses", "netWealthChange"],
+      "properties": {
+        "careerEarnings": { "type": "number" },
+        "passiveIncome": { "type": "number" },
+        "expenses": { "type": "number" },
+        "netWealthChange": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "saveData": {
+      "type": "object",
+      "required": ["version", "timestamp", "gameState", "economySnapshot"],
+      "properties": {
+        "version": { "type": "number" },
+        "timestamp": { "type": "string" },
+        "gameState": { "$ref": "#/$defs/gameState" },
+        "economySnapshot": { "$ref": "#/$defs/economySnapshot" }
+      },
+      "additionalProperties": false
+    },
+    "saveFile": {
+      "type": "object",
+      "required": ["id", "name", "timestamp", "stage", "age", "wealth"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "stage": { "$ref": "#/$defs/lifeStage" },
+        "age": { "type": "number" },
+        "wealth": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

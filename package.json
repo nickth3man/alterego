@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "build": "vite build",
-    "validate": "ajv check"
+    "validate": "bun run scripts/validate-events.ts"
   },
   "dependencies": {
     "@xstate/fsm": "^2.0.1",
