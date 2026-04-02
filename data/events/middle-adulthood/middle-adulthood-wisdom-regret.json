@@ -1,0 +1,95 @@
+{
+  "id": "middle-adulthood-wisdom-regret",
+  "category": "emotional",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "What I Wish I'd Known",
+  "description": "A younger colleague asks if you have any advice. They're at the age you were when you made your biggest mistakes—or your bravest choices. The question opens floodgates. What do you share? What do you protect them from? What do you admit you've never figured out?",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "share-wisdom-won",
+      "label": "Share the hard-won wisdom",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You tell them everything. About the relationships you damaged by being too proud. The opportunities you missed by playing it safe. The dreams you deferred until 'later' that never came. 'Don't wait,' you say. 'Whatever you're afraid of—do it anyway. Regret is a heavy thing to carry.' They listen. They remember.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 10,
+            "morality": 8,
+            "confidence": 5
+          },
+          "consequences": {
+            "tag": "imparted-hard-wisdom"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You offer practical advice: work harder, save more, don't trust easily. But the deeper lessons—the ones that cost you—you keep to yourself. Your guidance is useful but incomplete. They thank you, not knowing what you held back.",
+          "statChanges": {
+            "confidence": 8,
+            "career": 5,
+            "happiness": -3,
+            "morality": -5
+          },
+          "consequences": {
+            "tag": "held-back-wisdom"
+          }
+        }
+      ]
+    },
+    {
+      "id": "speak-of-regrets",
+      "label": "Admit your regrets without sugarcoating",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You tell them about the promotion you chose not to fight for, the words you never said to someone now gone, the version of yourself you let others define. 'I'm still figuring it out,' you admit. 'Maybe we always are.' They leave with something rare: permission to be imperfect.",
+          "statChanges": {
+            "happiness": 8,
+            "morality": 10,
+            "empathy": 12,
+            "confidence": -5
+          },
+          "consequences": {
+            "tag": "confessed-regrets"
+          }
+        }
+      ]
+    },
+    {
+      "id": "encourage-boldness",
+      "label": "Tell them to be bolder than you were",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "'Take risks I was too afraid to take,' you say. 'Question authority I accepted too readily. Love more openly than I dared.' Your eyes water. They promise they will. Whether they keep that promise is beyond your control—but the telling mattered.",
+          "statChanges": {
+            "confidence": 10,
+            "happiness": 8,
+            "resilience": 7,
+            "independence": 8
+          },
+          "consequences": {
+            "tag": "encouraged-boldness"
+          }
+        }
+      ]
+    }
+  ]
+}

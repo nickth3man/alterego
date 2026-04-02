@@ -1,0 +1,49 @@
+{
+  "id": "infancy-first-light",
+  "category": "physical",
+  "lifeStages": ["infancy"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 0] },
+        { "<": [{ "var": "stats.age" }, 1] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "story",
+  "title": "First Light",
+  "description": "The world explodes into brightness. You feel air rush into lungs that have never tasted air before — a shock, a burn, a scream that tears from somewhere deeper than thought. Warm hands that were once your whole universe now feel distant, small, gone. You are here. You are alone. You are.",
+  "moods": [
+    { "id": "curious", "label": "Curious", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "brave", "label": "Brave", "emoji": "😤", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "cry-out",
+      "label": "Cry out",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "Your voice fills the cold bright space. For a moment — nothing. Then movement, warmth, the familiar rhythm of a heartbeat against your cheek. Someone has heard you. You are not alone.",
+          "statChanges": { "resilience": 2 },
+          "consequences": { "tag": "first-fear" }
+        }
+      ]
+    },
+    {
+      "id": "observe-silence",
+      "label": "Observe in silence",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "You watch the light shift and pool on surfaces you don't yet have names for. The cold is real. The brightness is real. Your silence is a small, strange defiance — a choice no one will ever know you made.",
+          "statChanges": { "independence": 3 },
+          "consequences": { "tag": "quiet-first-breath" }
+        }
+      ]
+    }
+  ]
+}

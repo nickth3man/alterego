@@ -1,0 +1,79 @@
+{
+  "id": "adolescence-crush-discovery",
+  "category": "emotional",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 20,
+  "priority": "weighted",
+  "title": "Butterflies",
+  "description": "You catch yourself staring at your phone waiting for a reply. You replay your last conversation in your head. When did this happen?",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "confess-crush",
+      "label": "Tell your friends about your crush",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Your friends tease you mercilessly but also help you plan. The gossip spreads faster than you expected. They find out from someone else.",
+          "statChanges": {
+            "social": 10,
+            "confidence": 8,
+            "happiness": 5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "keep-it-secret",
+      "label": "Keep it to yourself, savor the feeling privately",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You guard this feeling jealously. In your room at night, you let yourself dream. It's scary how much power this person has over you without even knowing.",
+          "statChanges": {
+            "empathy": 10,
+            "happiness": 10,
+            "confidence": -5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "act-casual",
+      "label": "Act extra casual around them to hide how you feel",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You overcompensate with indifference. You laugh too loud at their jokes. You cringe at yourself constantly. They seem confused by your behavior.",
+          "statChanges": {
+            "charm": -8,
+            "happiness": -5,
+            "social": -5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

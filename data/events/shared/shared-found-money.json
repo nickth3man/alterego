@@ -1,0 +1,91 @@
+{
+  "id": "shared-found-money",
+  "category": "emotional",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 5] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Folded Bill on the Sidewalk",
+  "description": "A crumpled twenty-dollar bill lies on the wet sidewalk, half-hidden under a leaf. Nobody seems to be looking for it. It could buy something nice—a snack, a small toy, a coffee. But someone might be frantically searching for it right now.",
+  "moods": [
+    { "id": "tempted", "label": "Tempted", "emoji": "💰", "color": "#f59e0b" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#6b7280" }
+  ],
+  "choices": [
+    {
+      "id": "keep-it",
+      "label": "Pick it up and keep it",
+      "compatibleMoods": ["tempted"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You pocket the bill quickly and walk on. You buy a small treat and enjoy it—but the guilty feeling lingers. What if it was someone's bus fare home? What if they were hungry? The money buys less than the weight it adds to your conscience.",
+          "statChanges": {
+            "morality": -8,
+            "happiness": 4,
+            "wealth": 3
+          },
+          "consequences": {
+            "tag": "kept-found-money"
+          }
+        }
+      ]
+    },
+    {
+      "id": "look-for-owner",
+      "label": "Look around for someone searching",
+      "compatibleMoods": ["thoughtful", "anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You wait nearby, watching faces. An older man with a cane comes shuffling back, patting his pockets desperately. You approach him. 'Is this yours?' His face floods with relief. 'Oh, bless you, child. I was so afraid to tell my wife I lost it.' He thanks you profusely.",
+          "statChanges": {
+            "morality": 15,
+            "empathy": 8,
+            "happiness": 10
+          },
+          "consequences": {
+            "tag": "returned-found-money",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "donate-it",
+      "label": "Leave it at a nearby charity box",
+      "compatibleMoods": ["thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You fold the bill neatly and drop it in a charity donation box nearby. Someone will benefit from it, even if you'll never know who. It feels like the right thing to do—even if a tiny part of you wanted that ice cream.",
+          "statChanges": {
+            "morality": 12,
+            "happiness": 6,
+            "discipline": 5
+          },
+          "consequences": {
+            "tag": "donated-found-money"
+          }
+        }
+      ]
+    }
+  ]
+}

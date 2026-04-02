@@ -1,0 +1,137 @@
+{
+  "id": "young-adult-college-choice",
+  "category": "vocational",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 17] },
+        { "<=": [{ "var": "stats.age" }, 20] }
+      ]
+    }
+  },
+  "weight": 5,
+  "priority": "story",
+  "title": "The Crossroads of Futures",
+  "description": "Acceptance letters arrive. You got into your dream school—an arts program in another state—but it's expensive. You also got a full scholarship to the state university, close to home and practical. Your mother wants you nearby. Your heart wants to fly.",
+  "moods": [
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "follow-passion",
+      "label": "Choose the dream school and take loans",
+      "compatibleMoods": ["hopeful", "ambitious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.riskTolerance" }, 55] }
+          },
+          "narration": "You choose the arts school. Student loans pile up. Your mother cries at the goodbye. But in that new city, something blooms. You find your people—misfits and dreamers. The work is hard but alive. Four years later, you're broke but becoming who you were meant to be.",
+          "statChanges": {
+            "creativity": 20,
+            "independence": 18,
+            "confidence": 15,
+            "intellectual": 10,
+            "happiness": 12,
+            "wealth": -20,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "chose-passion-over-security"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.riskTolerance" }, 55] }
+          },
+          "narration": "You choose passion but doubt creeps in. The loans are crushing. The program is harder than you imagined. You second-guess daily. By sophomore year, you're considering dropping out. The dream school didn't fix you, and now you're in debt.",
+          "statChanges": {
+            "creativity": 8,
+            "independence": 10,
+            "happiness": -12,
+            "confidence": -10,
+            "wealth": -18,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "passion-turned-regret"
+          }
+        }
+      ]
+    },
+    {
+      "id": "choose-practical",
+      "label": "Take the practical route—state school",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You enroll at state, commute from home, declare a 'useful' major. It's not passionate, but it's stable. You make the dean's list. You save money. At graduation, you have a job lined up. Your mother is proud. You're... fine. Content, maybe. But a small part of you mourns the road not taken.",
+          "statChanges": {
+            "wealth": 15,
+            "discipline": 12,
+            "intellectual": 10,
+            "career": 12,
+            "happiness": 5,
+            "creativity": -10,
+            "independence": -8
+          },
+          "consequences": {
+            "tag": "chose-security-over-passion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "defer-decision",
+      "label": "Defer a year to work and think",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.discipline" }, 50] }
+          },
+          "narration": "You tell both schools you need a year. You get a job, save money, travel briefly. By the end, clarity comes: you choose the state school after all, but with purpose this time. You're older, sharper, ready. The gap year wasn't wasted—it's when you found your direction.",
+          "statChanges": {
+            "discipline": 12,
+            "wealth": 10,
+            "independence": 10,
+            "intellectual": 8,
+            "happiness": 8,
+            "resilience": 8,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "gap-year-clarity"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.discipline" }, 50] }
+          },
+          "narration": "The gap year becomes a gap decade. You drift between jobs, never enrolling anywhere. The momentum fades. Eventually, you stop thinking about college altogether. It's not tragic, just... ordinary.",
+          "statChanges": {
+            "independence": 5,
+            "happiness": -5,
+            "discipline": -10,
+            "confidence": -8,
+            "creativity": -5
+          },
+          "consequences": {
+            "tag": "drifted-after-high-school"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "middle-adulthood-mirror",
+  "category": "emotional",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "story",
+  "title": "The Portrait of a Life",
+  "description": "You stand before your old photograph from decades ago—fresh-faced, ambitious, certain the world would bend to your will. The mirror shows someone else now. Lines map the years, victories, and losses. Who do you see looking back?",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "accept-who-you-became",
+      "label": "Accept the person you've become",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You smile at the reflection. The young idealist would be proud of some choices, disappointed by others—but they're all yours. You've lived a life that, on balance, you're not ashamed of. That acceptance feels like a gift.",
+          "statChanges": {
+            "happiness": 12,
+            "confidence": 8,
+            "resilience": 10
+          },
+          "consequences": {
+            "tag": "found-self-acceptance"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grieve-the-dreams-lost",
+      "label": "Grieve for the dreams you didn't achieve",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Tears come unbidden. The writer you never became. The travels you postponed until 'someday.' The relationship you let slip away. You mourn those ghosts honestly, giving them the attention you denied them for years.",
+          "statChanges": {
+            "happiness": -8,
+            "morality": 7,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "grieved-unfinished-dreams"
+          }
+        }
+      ]
+    },
+    {
+      "id": "resolve-to-change",
+      "label": "Resolve to make these final chapters count",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "The mirror becomes a challenge. You may be past your prime in some ways, but you're still here. Still breathing. Still capable of change. You make a list of three things you can still become or do before it's too late.",
+          "statChanges": {
+            "resilience": 10,
+            "confidence": 8,
+            "independence": 12,
+            "riskTolerance": 5
+          },
+          "consequences": {
+            "tag": "resolved-final-chapters"
+          }
+        }
+      ]
+    }
+  ]
+}

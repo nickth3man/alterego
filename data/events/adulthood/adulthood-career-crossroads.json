@@ -1,0 +1,100 @@
+{
+  "id": "adulthood-career-crossroads",
+  "category": "vocational",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "in": ["career-focused", { "var": "stats.narrativeTags" }] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "story",
+  "title": "The Corner Office",
+  "description": "After two decades of climbing the ladder, a promotion to executive leadership sits before you—but it demands relocating across the country, away from your family. Your spouse has built a life here. Your children are settled in school. The corner office gleams, but at what cost?",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "accept-promotion",
+      "label": "Accept the promotion and relocate",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You take the leap. The new city is unfamiliar, the pace relentless. But your career reaches heights you'd never imagined. Some nights you wonder if you made the right choice for your family.",
+          "statChanges": {
+            "careerLevel": 2,
+            "wealth": 20,
+            "happiness": -8,
+            "confidence": 10,
+            "family": -12,
+            "isMarried": false
+          },
+          "consequences": {
+            "tag": "sacrificed-family-for-career",
+            "relationshipChanges": [
+              { "npcId": "spouse", "delta": -30 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "decline-stay",
+      "label": "Decline and stay close to family",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You turn down the promotion. Your spouse squeezes your hand, tears in their eyes. The children celebrate with ice cream. That night, you feel a quiet peace settle in your chest—alongside a whisper of 'what if?'",
+          "statChanges": {
+            "careerLevel": -1,
+            "happiness": 10,
+            "family": 15,
+            "resilience": 5,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "chose-family-over-career"
+          }
+        }
+      ]
+    },
+    {
+      "id": "negotiate-remote",
+      "label": "Propose a remote leadership arrangement",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 60] } },
+          "narration": "Your employer agrees to a hybrid arrangement. You'll travel quarterly but remain present for the daily rhythms of your family's life. It's exhausting, juggling planes and school plays—but you make it work.",
+          "statChanges": {
+            "careerLevel": 1,
+            "wealth": 10,
+            "happiness": 5,
+            "physical": -8,
+            "discipline": 8
+          },
+          "consequences": {
+            "tag": "negotiated-balance"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 60] } },
+          "narration": "The company rejects your proposal. You must choose: the corner office or the kitchen table. The answer, somehow, becomes clear.",
+          "statChanges": {
+            "happiness": -5,
+            "confidence": -5
+          },
+          "consequences": {}
+        }
+      ]
+    }
+  ]
+}

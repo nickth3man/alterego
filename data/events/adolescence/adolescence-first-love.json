@@ -1,0 +1,81 @@
+{
+  "id": "adolescence-first-love",
+  "category": "social",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 15] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "story",
+  "title": "First Love",
+  "description": "Someone new transfers to your school. When your eyes meet in the hallway, everything else fades away. This is what the songs meant.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "confess-feelings",
+      "label": "Tell them how you feel",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Your hands shake as you write the note. You slip it into their locker and wait, sick with nerves. Their reply: 'Meet me after school?'",
+          "statChanges": {
+            "confidence": 15,
+            "happiness": 18,
+            "charm": 5
+          },
+          "consequences": {
+            "tag": "first-love",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "be-friends-first",
+      "label": "Get to know them as a friend first",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You strike up a conversation at the library. They laugh at your joke. Over weeks, you become close—and the friendship becomes something more.",
+          "statChanges": {
+            "empathy": 12,
+            "social": 10,
+            "happiness": 12
+          },
+          "consequences": {
+            "tag": "first-love",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "admire-from-afar",
+      "label": "Admire them from afar, too scared to act",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You watch them from across the cafeteria. They never notice you. You convince yourself that's fine, but the what-ifs haunt you.",
+          "statChanges": {
+            "happiness": -8,
+            "confidence": -10,
+            "resilience": 5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

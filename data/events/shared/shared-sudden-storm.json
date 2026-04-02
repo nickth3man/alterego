@@ -1,0 +1,110 @@
+{
+  "id": "shared-sudden-storm",
+  "category": "physical",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "weighted",
+  "title": "Sudden Summer Storm",
+  "description": "The sky turns black in minutes. Thunder cracks so loud it rattles the windows. Rain hammers down sideways, and the power flickers. Everyone scrambles—but there's something almost beautiful about the raw power of nature unleashing itself.",
+  "moods": [
+    { "id": "fearful", "label": "Fearful", "emoji": "😨", "color": "#6366f1" },
+    { "id": "awed", "label": "awed", "emoji": "🌊", "color": "#0ea5e9" },
+    { "id": "content", "label": "Content", "emoji": "😊", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "watch-storm",
+      "label": "Watch the storm from the window",
+      "compatibleMoods": ["awed", "content"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You press your face to the cold glass, watching lightning fracture the sky. The world feels vast and wild. When it's over, everything smells clean and new, and the sunset that emerges is the most vivid you've ever seen.",
+          "statChanges": {
+            "creativity": 8,
+            "happiness": 7,
+            "resilience": 4
+          },
+          "consequences": {
+            "tag": "witnessed-great-storm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "huddle-with-family",
+      "label": "Huddle with family for comfort",
+      "compatibleMoods": ["fearful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You curl up on the couch between your parents, the warmth of their presence more comforting than any blanket. The storm rages outside but inside, everything feels safe. These are the moments you didn't know you'd remember forever.",
+          "statChanges": {
+            "empathy": 6,
+            "happiness": 8,
+            "confidence": 3
+          },
+          "consequences": {
+            "relationshipChanges": [
+              { "npcId": "parent", "delta": 5 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "brave-the-storm",
+      "label": "Go outside and dance in the rain",
+      "compatibleMoods": ["awed", "content"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              ">=": [{ "var": "stats.riskTolerance" }, 40]
+            }
+          },
+          "narration": "You throw open the door and let the rain soak you instantly. You spin and laugh under the downpour while your neighbor stares at you from their porch. When you go back inside, soaked to the bone, you've never felt more alive.",
+          "statChanges": {
+            "riskTolerance": 10,
+            "happiness": 12,
+            "physical": 6
+          },
+          "consequences": {
+            "tag": "danced-in-rain"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              "<": [{ "var": "stats.riskTolerance" }, 40]
+            }
+          },
+          "narration": "You step outside and immediately regret it—hail stings your skin and lightning strikes too close. You scramble back inside, soaked and shivering. The storm wasn't worth the risk after all.",
+          "statChanges": {
+            "resilience": 3,
+            "happiness": -5
+          },
+          "consequences": {
+            "tag": "caught-in-storm"
+          }
+        }
+      ]
+    }
+  ]
+}

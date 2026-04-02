@@ -1,0 +1,103 @@
+{
+  "id": "childhood-treehouse",
+  "category": "physical",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 12] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "The Tree House",
+  "description": "Your older cousin Tyler has built a tree house in the old oak tree. Today, he's going to show you how to climb up—and maybe let you help with the next plank.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "climb-boldly",
+      "label": "Climb as fast as you can",
+      "compatibleMoods": ["excited"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.physical" }, 40] }
+          },
+          "narration": "Hand over hand, you haul yourself up the rough bark. Tyler whoops as you beat him to the top. From up here, the neighborhood looks different—smaller, like you could step over the rooftops. You feel like a conqueror.",
+          "statChanges": {
+            "physical": 10,
+            "confidence": 8,
+            "happiness": 6
+          },
+          "consequences": {
+            "tag": "conquered-the-tree"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.physical" }, 40] }
+          },
+          "narration": "You scramble up fast but your arms give out halfway. You dangle helplessly until Tyler boosts you the rest of the way, laughing good-naturedly. Still—you made it, and the view is worth it.",
+          "statChanges": {
+            "physical": 6,
+            "confidence": 4,
+            "happiness": 3
+          },
+          "consequences": {
+            "tag": "conquered-the-tree"
+          }
+        }
+      ]
+    },
+    {
+      "id": "climb-carefully",
+      "label": "Take your time and test each branch",
+      "compatibleMoods": ["thoughtful", "scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "Slowly, carefully, you make your way up. Tyler appreciates your caution—'Smart,' he says. 'My friend Danny fell last year.' The tree house is cozy, scattered with old cushions and a tin can for 'messages.' It feels like your own secret world.",
+          "statChanges": {
+            "discipline": 8,
+            "intellectual": 5,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "earned-trust-treehouse"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-ground",
+      "label": "Stay on the ground and watch",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You watch from below as Tyler climbs effortlessly. He waves from the top, but there's pity in his eyes. The other kids play without you, and you spend the afternoon feeling left out and small.",
+          "statChanges": {
+            "confidence": -5,
+            "happiness": -4,
+            "independence": -3
+          },
+          "consequences": {}
+        }
+      ]
+    }
+  ]
+}

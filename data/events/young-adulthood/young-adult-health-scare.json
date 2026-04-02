@@ -1,0 +1,96 @@
+{
+  "id": "young-adult-health-scare",
+  "category": "physical",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 25] },
+        { "<=": [{ "var": "stats.age" }, 35] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "story",
+  "title": "The Wake-Up Call",
+  "description": "You're at the doctor for a routine check-up when the atmosphere shifts. Blood pressure is dangerously high—for someone your age. The doctor frowns at the readings. 'This isn't normal. You need to change something, or you're looking at serious problems.'",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "overhaul-lifestyle",
+      "label": "Commit to a complete lifestyle overhaul",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You join a gym, hire a nutritionist, cut out processed foods, start meditation. The first month is brutal—cravings, soreness, doubt. But slowly, habits form. At your next check-up, numbers improve. You feel alive again.",
+          "statChanges": {
+            "physical": 18,
+            "resilience": 12,
+            "happiness": 10,
+            "discipline": 15,
+            "independence": 8,
+            "wealth": -10
+          },
+          "consequences": {
+            "tag": "transformed-health"
+          }
+        }
+      ]
+    },
+    {
+      "id": "small-changes",
+      "label": "Make minor adjustments",
+      "compatibleMoods": ["hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You try to moderate—walk more, eat a bit better, stress less. Some habits stick. Others don't. The numbers stabilize slightly but remain concerning. A step forward, but not enough.",
+          "statChanges": {
+            "physical": 8,
+            "resilience": 5,
+            "happiness": 4,
+            "discipline": 5,
+            "independence": 3
+          },
+          "consequences": {
+            "tag": "half-measures-health"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ignore-warning",
+      "label": "Ignore the warning",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You chalk it up to stress, bad luck, or inaccurate readings. 'I'm young,' you tell yourself. You continue as before—fast food, sedentary life, no sleep. The next year, symptoms appear. By then, the problem is harder to fix.",
+          "statChanges": {
+            "physical": -20,
+            "happiness": -15,
+            "resilience": -10,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "ignored-health-warning"
+          }
+        }
+      ]
+    }
+  ]
+}

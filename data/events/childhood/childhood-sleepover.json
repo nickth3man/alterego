@@ -1,0 +1,92 @@
+{
+  "id": "childhood-sleepover",
+  "category": "social",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 7] },
+        { "<=": [{ "var": "stats.age" }, 12] },
+        { "in": ["made-first-friend", { "var": "stats.narrativeTags" }] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Sleepover",
+  "description": "Your best friend Josh invited you to his birthday sleepover. His parents have a pool, a gaming room, and a dog named Biscuit. But it's also your first night away from home.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "go-all-in",
+      "label": "Throw yourself into everything",
+      "compatibleMoods": ["excited"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You cannonball into the pool, stay up late playing video games, and even sleep on the floor in a blanket fort with Josh and his cousins. At 2am, homesick thoughts creep in, but you push through. By morning, you feel like you conquered something.",
+          "statChanges": {
+            "independence": 12,
+            "confidence": 8,
+            "happiness": 10,
+            "physical": 5
+          },
+          "consequences": {
+            "tag": "survived-first-sleepover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-mom",
+      "label": "Ask to call Mom before bed",
+      "compatibleMoods": ["scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "Josh's mom lets you call home. Your mom's voice is warm and steady. 'You're going to have so much fun,' she says. 'I love you.' After you hang up, you feel ready to rejoin the group. Josh even saves you a spot in the blanket fort.",
+          "statChanges": {
+            "happiness": 6,
+            "empathy": 4,
+            "independence": 3
+          },
+          "consequences": {
+            "tag": "called-mom-for-comfort"
+          }
+        }
+      ]
+    },
+    {
+      "id": "slip-away",
+      "label": "Sneak off to a quiet corner alone",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You find a quiet spot in the hallway and just sit for a while. Josh's dad finds you. Instead of telling you to go back, he sits with you and talks about his own childhood fears. 'Being brave doesn't mean not being scared,' he says. 'It means doing things anyway.'",
+          "statChanges": {
+            "resilience": 10,
+            "morality": 5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "wisdom-from-mentor"
+          }
+        }
+      ]
+    }
+  ]
+}

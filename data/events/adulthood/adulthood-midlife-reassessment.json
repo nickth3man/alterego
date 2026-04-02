@@ -1,0 +1,114 @@
+{
+  "id": "adulthood-midlife-reassessment",
+  "category": "emotional",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 40] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "<": [{ "var": "stats.happiness" }, 45] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Long Road Home",
+  "description": "You wake at 3 AM, heart pounding. The question surfaces unbidden: 'Is this all there is?' Two decades of mortgages, school runs, career climbs—and yet a hollowness persists. You've done everything right. Why does fulfillment feel like a train you've been chasing but never boarding?",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "seek-therapy",
+      "label": "Start therapy to explore what's missing",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.intellectual" }, 50] } },
+          "narration": "A therapist helps you excavate. The hollowness has a name: deferred dreams, old griefs, a version of yourself you buried under responsibility. You start small—a painting class, a conversation with an old friend. The emptiness doesn't vanish, but it becomes less like a void and more like a question waiting to be answered.",
+          "statChanges": {
+            "happiness": 15,
+            "intellectual": 8,
+            "empathy": 10,
+            "resilience": 8,
+            "creativity": 8,
+            "wealth": -5
+          },
+          "consequences": {
+            "tag": "began-inner-work"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.intellectual" }, 50] } },
+          "narration": "The therapist's questions feel abstract, disconnected from your life. 'What do you really want?' you wonder. The sessions help a little—sleep improves, the panic attacks fade—but the fundamental question remains unanswered.",
+          "statChanges": {
+            "happiness": 8,
+            "resilience": 5,
+            "intellectual": 3,
+            "wealth": -5
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "make-radical-change",
+      "label": "Make a radical change—quit, travel, start over",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.riskTolerance" }, 60] } },
+          "narration": "You book a flight to a country you've always wanted to see. Your spouse stares at you. Your colleagues think you've lost your mind. But for the first time in years, you feel alive. The trip becomes a sabbatical. The sabbatical becomes a new career. It's terrifying. It's worth it.",
+          "statChanges": {
+            "happiness": 20,
+            "creativity": 15,
+            "independence": 15,
+            "confidence": 12,
+            "riskTolerance": 8,
+            "wealth": -15,
+            "family": -10,
+            "careerLevel": -2
+          },
+          "consequences": {
+            "tag": "radical-life-change"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.riskTolerance" }, 60] } },
+          "narration": "You book the trip, but the night before departure, you cancel. The fear of the unknown outweighs the fear of stagnation. You return to routine, but the 3 AM thoughts persist. Change, it seems, requires a courage you're still building.",
+          "statChanges": {
+            "happiness": -5,
+            "confidence": -10,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "contemplated-change-but-didnt-act"
+          }
+        }
+      ]
+    },
+    {
+      "id": "double-down-family",
+      "label": "Find meaning in deepening family bonds",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You host a family dinner every Sunday. You learn your children's favorite songs. You ask your spouse about their dreams—the real ones, not just the logistics. Slowly, meaning seeps back in through the cracks of ordinary life. The hollowness doesn't disappear, but it becomes less lonely.",
+          "statChanges": {
+            "happiness": 12,
+            "family": 15,
+            "empathy": 10,
+            "independence": -8,
+            "charm": 5
+          },
+          "consequences": {
+            "tag": "found-meaning-in-ordinary-life"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "young-adult-therapy-decision",
+  "category": "emotional",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 20] },
+        { "<=": [{ "var": "stats.age" }, 35] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "weighted",
+  "title": "The Price of Peace",
+  "description": "You've been struggling—anhedonia, anxiety, racing thoughts that keep you up until 4 AM. A friend suggests therapy. You've heard good things, but there's a cost: $150/session, not covered by your insurance. Your savings are thin. You could make it work with a second job, or you could white-knuckle through alone.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "find-a-way",
+      "label": "Make therapy happen no matter the cost",
+      "compatibleMoods": ["resolute", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You pick up weekend shifts, cut discretionary spending, dip into savings. For six months, you sit on a couch talking about your childhood, your fears, your patterns. It's expensive and sometimes painful. But something shifts. You sleep. You breathe. You feel like yourself again.",
+          "statChanges": {
+            "resilience": 18,
+            "happiness": 15,
+            "intellectual": 10,
+            "empathy": 12,
+            "morality": 8,
+            "wealth": -15,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "invested-in-mental-health"
+          }
+        }
+      ]
+    },
+    {
+      "id": "group-therapy",
+      "label": "Try free group therapy instead",
+      "compatibleMoods": ["anxious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You find a weekly support group at the community center. It's not the same as one-on-one, but hearing others' struggles puts yours in perspective. You share, hesitantly at first. The facilitator is kind. It's not a cure, but it's something.",
+          "statChanges": {
+            "resilience": 10,
+            "empathy": 12,
+            "happiness": 8,
+            "morality": 6,
+            "wealth": -3,
+            "independence": 3
+          },
+          "consequences": {
+            "tag": "found-community-support"
+          }
+        }
+      ]
+    },
+    {
+      "id": "power-through-alone",
+      "label": "Decide to handle it yourself",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You download meditation apps, buy self-help books, try to fix yourself with discipline. Some days are better. Most aren't. You learn to perform 'okay' convincingly while drowning quietly. Years pass. The anxiety never fully leaves, but you get better at pretending.",
+          "statChanges": {
+            "discipline": 10,
+            "independence": 12,
+            "happiness": -10,
+            "resilience": 5,
+            "morality": -5,
+            "confidence": -8
+          },
+          "consequences": {
+            "tag": "white-knuckled-mental-health"
+          }
+        }
+      ]
+    }
+  ]
+}

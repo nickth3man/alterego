@@ -1,0 +1,135 @@
+{
+  "id": "young-adult-family-expectations",
+  "category": "family",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 28] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "The Path They Wanted",
+  "description": "At Thanksgiving, your father corners you. 'So? Medical school?' He expects the MD, the prestige, the grandchildren who become doctors. You've been accepted to an MFA program for creative writing. The words stick in your throat as you look at his hopeful, expectant face.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "choose-passion",
+      "label": "Tell them about the MFA",
+      "compatibleMoods": ["resolute", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.confidence" }, 60] }
+          },
+          "narration": "You take a breath and tell them. Silence. Then your mother's face crumples; your father goes red. Hours of argument follow. But you hold firm. Eventually, your mother cries; your father storms off. Days later, your mother texts: 'Your father will come around. He always does.' Something broke, but something also began.",
+          "statChanges": {
+            "creativity": 18,
+            "confidence": 15,
+            "independence": 15,
+            "happiness": 10,
+            "morality": 10,
+            "familyBonds": -15
+          },
+          "consequences": {
+            "tag": "chose-passion-over-expectations"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.confidence" }, 60] }
+          },
+          "narration": "You try to explain, but your voice shakes. Your father dismisses it as 'a phase.' You retreat, defeated. That night, you delete the acceptance email. You'll apply again next year. Or maybe not.",
+          "statChanges": {
+            "creativity": -12,
+            "confidence": -15,
+            "happiness": -12,
+            "independence": -10,
+            "morality": -8,
+            "familyBonds": 5
+          },
+          "consequences": {
+            "tag": "compromised-dream-for-family"
+          }
+        }
+      ]
+    },
+    {
+      "id": "defer-to-family",
+      "label": "Agree to medical school to please them",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You enroll in pre-med. Organic chemistry makes you want to die. Every lecture feels like a sentence. But your father beams at you. 'That's my kid.' You become a doctor someday, miserable and wealthy. The MFA acceptance expires. You'll never know what could have been.",
+          "statChanges": {
+            "career": 18,
+            "wealth": 15,
+            "intellectual": 10,
+            "confidence": -8,
+            "happiness": -15,
+            "creativity": -20,
+            "familyBonds": 12
+          },
+          "consequences": {
+            "tag": "sacrificed-passion-for-family"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-middle-ground",
+      "label": "Find a compromise path",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.intellectual" }, 60] }
+          },
+          "narration": "You propose a gap year—'to figure things out.' Inside, you use the time to intern at a healthcare nonprofit and write on the side. Eventually, you find a career that bridges both worlds: health communications. Your parents aren't thrilled, but they respect the logic.",
+          "statChanges": {
+            "intellectual": 12,
+            "creativity": 10,
+            "confidence": 8,
+            "happiness": 8,
+            "discipline": 8,
+            "independence": 8,
+            "familyBonds": 5
+          },
+          "consequences": {
+            "tag": "found-middle-path"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.intellectual" }, 60] }
+          },
+          "narration": "The compromise falls apart. Your parents see through the 'gap year' as stalling. They push harder for med school. You give in, again. The cycle continues.",
+          "statChanges": {
+            "confidence": -10,
+            "happiness": -10,
+            "independence": -8,
+            "familyBonds": -5
+          },
+          "consequences": {
+            "tag": "failed-compromise"
+          }
+        }
+      ]
+    }
+  ]
+}

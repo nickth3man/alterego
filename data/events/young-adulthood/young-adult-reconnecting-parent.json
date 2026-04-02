@@ -1,0 +1,115 @@
+{
+  "id": "young-adult-reconnecting-parent",
+  "category": "family",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 24] },
+        { "<=": [{ "var": "stats.age" }, 35] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "fill",
+  "title": "Coffee with Dad",
+  "description": "Your father reaches out after two years of silence. The relationship fractured after you left for college and never quite mended. His text is brief: 'Coffee this Saturday? I miss you.' You haven't spoken meaningfully since your graduation. His apology, if it comes, is long overdue.",
+  "moods": [
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "accept-meeting",
+      "label": "Meet him with openness",
+      "compatibleMoods": ["hopeful", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.empathy" }, 55] }
+          },
+          "narration": "You meet at a diner—the same one where he taught you to play chess as a kid. He starts with an apology, halting and awkward. He didn't know how to be a father when you needed one. You listen, really listen, and then share your side. Tears come. Somehow, laughter follows. It's a beginning.",
+          "statChanges": {
+            "empathy": 15,
+            "morality": 12,
+            "happiness": 12,
+            "confidence": 8,
+            "resilience": 8,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "reconciled-with-father"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.empathy" }, 55] }
+          },
+          "narration": "You meet, but you keep your guard up. Your father tries—mentions chess, your childhood, things that made you smile once. You nod politely, offer monosyllables. He sees through it. The coffee ends early. 'I tried,' he says, and you believe him. But trying wasn't enough.",
+          "statChanges": {
+            "happiness": -8,
+            "confidence": -5,
+            "morality": 5,
+            "familyBonds": -8
+          },
+          "consequences": {
+            "tag": "failed-reconciliation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "set-terms",
+      "label": "Set firm boundaries before meeting",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You text back: 'I'll meet you, but we need to talk about what happened.' He agrees. The conversation is hard but structured. You tell him what you need—consistency, respect, presence. He agrees, uncertainly. Progress is slow, but real. A bridge is being rebuilt, one conversation at a time.",
+          "statChanges": {
+            "confidence": 12,
+            "morality": 10,
+            "empathy": 8,
+            "happiness": 8,
+            "independence": 5,
+            "familyBonds": 8
+          },
+          "consequences": {
+            "tag": "healthy-boundaries-reconciliation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "decline",
+      "label": "Decline the invitation",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You don't respond for three days, then text: 'Not ready yet.' He replies with understanding, or at least the appearance of it. The door stays ajar, but unvisited. You wonder if you made the right choice. Some wounds heal better with distance.",
+          "statChanges": {
+            "independence": 10,
+            "happiness": -10,
+            "morality": 3,
+            "confidence": -5,
+            "resilience": 5,
+            "familyBonds": -12
+          },
+          "consequences": {
+            "tag": "maintained-distance"
+          }
+        }
+      ]
+    }
+  ]
+}

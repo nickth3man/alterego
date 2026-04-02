@@ -1,0 +1,96 @@
+{
+  "id": "old-age-final-reconciliation",
+  "category": "social",
+  "lifeStages": ["old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 76] },
+        { "<=": [{ "var": "stats.age" }, 100] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "story",
+  "title": "One Last Chance",
+  "description": "The estranged child stands at your bedside—or sends an email, or calls after years of silence. Time has stripped away the anger, leaving only the ache of absence. This may be the final chapter of your story. How do you want it to end?",
+  "moods": [
+    { "id": "wise", "label": "Wise", "emoji": "🦉", "color": "#8b5cf6" },
+    { "id": "regretful", "label": "Regretful", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "grateful", "label": "Grateful", "emoji": "🙏", "color": "#f59e0b" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "forgive-freely",
+      "label": "Forgive without conditions",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "'I forgave you long ago,' you say. 'I was waiting for you to be ready.' Tears fall on both sides. The distance of decades dissolves in moments. Whatever time remains, it will be different. Better. You've chosen love over the safety of resentment.",
+          "statChanges": {
+            "happiness": 12,
+            "empathy": 10,
+            "morality": 10,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "forgave-estranged-child"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You struggle to find the words. Forgiveness doesn't come easily—old wounds ache even when we want to heal them. But you try. 'I'm not perfect,' you say. 'Neither are you. Let's just try.' It's not everything, but it's a start.",
+          "statChanges": {
+            "happiness": 5,
+            "empathy": 8,
+            "morality": 5,
+            "resilience": 3
+          },
+          "consequences": {
+            "tag": "tentative-forgiveness"
+          }
+        }
+      ]
+    },
+    {
+      "id": "explain-your-side",
+      "label": "First explain your side—be understood",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You speak for an hour—your struggles, your limitations, the things you did wrong and the reasons you couldn't see them then. Some words land; others don't. But the attempt matters. 'I needed you to know,' you say. They nod slowly. Understanding isn't the same as forgiveness, but it's not nothing either.",
+          "statChanges": {
+            "confidence": 8,
+            "happiness": 5,
+            "morality": 5,
+            "empathy": 3
+          },
+          "consequences": {
+            "tag": "explained-past-actions"
+          }
+        }
+      ]
+    },
+    {
+      "id": "accept-nothing-changes",
+      "label": "Accept that some distances can't be closed",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You speak briefly, kindly. 'I wish it could have been different.' And you leave it there. Some rifts are too wide, some wounds too deep. You've made your peace with that. Love doesn't require reconciliation—it can exist at a distance, even across silence.",
+          "statChanges": {
+            "happiness": 3,
+            "resilience": 8,
+            "independence": 7,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "accepted-irreconcilable"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "young-adult-relationship-define",
+  "category": "social",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 28] }
+      ]
+    }
+  },
+  "weight": 20,
+  "priority": "story",
+  "title": "Defining the Relationship",
+  "description": "After months of dating, your partner Riley sits you down at a coffee shop. 'Where is this going?' they ask. Your heart races. You've been avoiding this conversation, telling yourself the status quo works. But Riley wants clarity—a future together or a clean break.",
+  "moods": [
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "commit-fully",
+      "label": "Commit to a serious relationship",
+      "compatibleMoods": ["hopeful", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You take Riley's hand. 'I want this. Us. A real future.' Tears well in their eyes—relief, joy, love. You talk until the coffee shop closes, making plans, dreaming out loud. Something real begins.",
+          "statChanges": {
+            "happiness": 18,
+            "confidence": 10,
+            "empathy": 8,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "found-true-love"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-casual",
+      "label": "Admit you're not ready",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You explain your hesitation—career instability, fear of losing yourself, the weight of commitment. Riley listens, nods slowly. 'I understand. But I can't wait forever.' They leave kindly, and you spend the night wondering if you just let something precious slip away.",
+          "statChanges": {
+            "happiness": -10,
+            "independence": 12,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "chose-freedom-over-love"
+          }
+        }
+      ]
+    },
+    {
+      "id": "end-it",
+      "label": "End things honestly",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You explain that you care for Riley but can't see a future. The words hurt both of you. Riley cries, you cry, and you walk home alone through cold autumn air. It feels like grief—but also like clarity.",
+          "statChanges": {
+            "morality": 8,
+            "happiness": -8,
+            "confidence": 5,
+            "independence": 10
+          },
+          "consequences": {
+            "tag": "ended-relationship-honestly"
+          }
+        }
+      ]
+    }
+  ]
+}

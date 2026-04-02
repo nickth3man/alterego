@@ -1,0 +1,93 @@
+{
+  "id": "shared-helping-stranger",
+  "category": "social",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 5] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Person Who Needed Help",
+  "description": "Someone near you is struggling—a person with too many bags, a elderly person crossing the street, a child looking lost, someone crying quietly. You could help. Or you could look away.",
+  "moods": [
+    { "id": "compassionate", "label": "Compassionate", "emoji": "💜", "color": "#ec4899" },
+    { "id": "cautious", "label": "Cautious", "emoji": "😐", "color": "#6b7280" },
+    { "id": "hurried", "label": "Hurried", "emoji": "⏰", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "help-them",
+      "label": "Stop and help",
+      "compatibleMoods": ["compassionate"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You approach and offer your help. For a moment they look suspicious—fair enough. But when they accept, genuine relief floods their face. 'Thank you,' they say, 'I really needed this.' You walk away feeling like you've done something that actually matters.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 10,
+            "morality": 8,
+            "charm": 5
+          },
+          "consequences": {
+            "tag": "helped-stranger",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "help-discreetly",
+      "label": "Help in a way that preserves their dignity",
+      "compatibleMoods": ["compassionate", "cautious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You find a way to help that doesn't draw attention—a quietly opened door, a 'mistaken' extra coffee you hand them, a donation you make in their name without saying a word. The kindest help is the one nobody sees.",
+          "statChanges": {
+            "empathy": 10,
+            "morality": 10,
+            "happiness": 8,
+            "creativity": 6
+          },
+          "consequences": {
+            "tag": "discreet-kindness"
+          }
+        }
+      ]
+    },
+    {
+      "id": "keep-walking",
+      "label": "You're too busy—keep walking",
+      "compatibleMoods": ["hurried", "cautious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You tell yourself someone else will help. Or that they didn't really need it. You keep walking, and the feeling follows you all day—a small weight you can't quite shake. Maybe tomorrow you'll be braver.",
+          "statChanges": {
+            "morality": -8,
+            "independence": 5,
+            "happiness": -5
+          },
+          "consequences": {
+            "tag": "ignored-someone-in-need"
+          }
+        }
+      ]
+    }
+  ]
+}

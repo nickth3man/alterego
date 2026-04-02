@@ -1,0 +1,80 @@
+{
+  "id": "adolescence-future-anxiety",
+  "category": "vocational",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 15] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "fill",
+  "title": "What Comes Next",
+  "description": "Everyone keeps asking what you want to be. College applications loom. Your parents have opinions. The future feels impossibly large and terrifyingly undefined.",
+  "moods": [
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "follow-parents",
+      "label": "Pick what your parents want for you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You fill in the application for the major they chose. It feels safe. It also feels like you're slowly disappearing.",
+          "statChanges": {
+            "family": 10,
+            "independence": -12,
+            "happiness": -8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "follow-passion",
+      "label": "Follow what actually excites you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You write about what you love, even if it's unconventional. Your parents are skeptical. But when you talk about it, your eyes light up in a way they haven't before.",
+          "statChanges": {
+            "independence": 18,
+            "creativity": 15,
+            "happiness": 12
+          },
+          "consequences": {
+            "tag": "found-passion",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "take-gap-year",
+      "label": "Propose taking time off to figure it out",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You sit your parents down and explain your idea—travel, work, learn outside classrooms. They're not thrilled, but they don't say no.",
+          "statChanges": {
+            "riskTolerance": 15,
+            "independence": 15,
+            "discipline": -8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

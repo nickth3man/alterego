@@ -1,0 +1,68 @@
+{
+  "id": "infancy-the-fall",
+  "category": "physical",
+  "lifeStages": ["infancy"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 1] },
+        { "<": [{ "var": "stats.age" }, 3] }
+      ]
+    }
+  },
+  "weight": 11,
+  "priority": "story",
+  "title": "The Fall",
+  "description": "The edge of the table was closer than you thought. You reached for the bright red thing and the world tilted — slowly, then all at once. The floor hits your forehead with a sound you don't understand yet. Everything is still. Everything is very loud.",
+  "moods": [
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "brave", "label": "Brave", "emoji": "😤", "color": "#ef4444" },
+    { "id": "comforted", "label": "Comforted", "emoji": "🤗", "color": "#10b981" },
+    { "id": "curious", "label": "Curious", "emoji": "😊", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "wail-for-comfort",
+      "label": "Wail until someone comes",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "The sound that comes out of you is the loudest thing you've ever made. It fills the room, fills the house, fills the sky outside. Within seconds arms are around you, rocking, shushing, promising that the world is safe and you are safe and this will never happen again. You believe them completely.",
+          "statChanges": { "empathy": 3, "confidence": -2 },
+          "consequences": { "tag": "first-fear", "relationshipChanges": [{ "npcId": "caregiver", "delta": 5 }] }
+        }
+      ]
+    },
+    {
+      "id": "inspect-the-pain",
+      "label": "Inspect the pain quietly",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.intellectual" }, 40] } },
+          "narration": "You touch your forehead with one careful finger. It comes back damp. You study the red smear on your skin with intense focus. You've discovered something — blood, warmth, the interesting fact that your body can leak and still keep working. This changes nothing about the bright red thing on the table.",
+          "statChanges": { "intellectual": 5, "resilience": 3 },
+          "consequences": { "tag": "clinical-first-injury" }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.intellectual" }, 40] } },
+          "narration": "You touch your forehead and find it wet. Something has happened to you. You don't understand it, but it feels important. For now, you file it under 'things that happen in this world' and return your attention to the bright red thing, slightly more wary.",
+          "statChanges": { "resilience": 2, "independence": 3 },
+          "consequences": { "tag": "wary-first-fall" }
+        }
+      ]
+    },
+    {
+      "id": "get-up-immediately",
+      "label": "Get up and try again",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "The floor is just the floor. You push yourself up, testing your legs, brushing off your knees with exaggerated dignity. Someone says 'careful' but you are past careful — you are interested. The bright red thing is still there, and now you know the cost of reaching for it. You reach again anyway.",
+          "statChanges": { "resilience": 4, "riskTolerance": 3, "physical": 2 },
+          "consequences": { "tag": "brave-fall" }
+        }
+      ]
+    }
+  ]
+}

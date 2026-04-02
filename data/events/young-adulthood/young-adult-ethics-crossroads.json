@@ -1,0 +1,138 @@
+{
+  "id": "young-adult-ethics-crossroads",
+  "category": "vocational",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 25] },
+        { "<=": [{ "var": "stats.age" }, 35] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "weighted",
+  "title": "The Compromise",
+  "description": "You're up for partner. The managing partner pulls you aside: 'We need to classify these interns as contractors to stay under the budget cap. It's a gray area legally, but everyone does it. You were never here.' If you speak up, your promotion dies. If you stay quiet, you compromise everything you studied ethics for.",
+  "moods": [
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "whistleblow",
+      "label": "Report the issue and risk everything",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.morality" }, 70] }
+          },
+          "narration": "You report it to compliance. Investigations follow. The company scrambles, but you have documentation. The managing partner is fired. Others quietly quit. You become a pariah—or a hero, depending on who's talking. The promotion is gone. But you sleep at night. That's worth more than corner office.",
+          "statChanges": {
+            "morality": 25,
+            "confidence": 18,
+            "resilience": 15,
+            "independence": 15,
+            "happiness": 10,
+            "career": -18,
+            "wealth": -12,
+            "empathy": 8
+          },
+          "consequences": {
+            "tag": "burned-bridge-for-integrity"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.morality" }, 70] }
+          },
+          "narration": "You report it, but weakly. Anonymous tip. No follow-through. Nothing changes except now they suspect you. Your name appears on a list. You never make partner. The ethical stand cost you everything and changed nothing.",
+          "statChanges": {
+            "morality": 10,
+            "confidence": -12,
+            "happiness": -15,
+            "career": -15,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "failed-whistleblowing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "comply",
+      "label": "Stay quiet and get promoted",
+      "compatibleMoods": ["ambitious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You look the other way. The interns remain classified wrong. You get partner. The bonus is substantial. At the celebration dinner, champagne flows. You toast to success. But one intern—a kid who reminds you of yourself at that age—gets no benefits when she needs surgery. You read about it in the news. The guilt is a stone in your chest that never leaves.",
+          "statChanges": {
+            "career": 20,
+            "wealth": 22,
+            "confidence": 10,
+            "happiness": -12,
+            "morality": -20,
+            "independence": -10,
+            "empathy": -12
+          },
+          "consequences": {
+            "tag": "compromised-values-for-success"
+          }
+        }
+      ]
+    },
+    {
+      "id": "silent-escalation",
+      "label": "Quietly document and wait",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.intellectual" }, 65] }
+          },
+          "narration": "You document everything, carefully, without alerting anyone. Months pass. When a federal audit happens—unrelated to you—you hand over the records anonymously. The company faces fines, but not from you. You keep your job. The stone in your chest is smaller, but still there.",
+          "statChanges": {
+            "morality": 12,
+            "intellectual": 12,
+            "discipline": 8,
+            "career": 5,
+            "happiness": -5,
+            "confidence": 5,
+            "wealth": 8
+          },
+          "consequences": {
+            "tag": "strategic-integrity"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.intellectual" }, 65] }
+          },
+          "narration": "You try to document carefully but leave a digital trail that points back to you. When things go public, you're implicated—not as the mastermind, but as the enabler. Career over, reputation damaged, and the problem you tried to fix never gets addressed.",
+          "statChanges": {
+            "morality": 5,
+            "confidence": -15,
+            "career": -20,
+            "happiness": -15,
+            "resilience": -8
+          },
+          "consequences": {
+            "tag": "caught-trying"
+          }
+        }
+      ]
+    }
+  ]
+}

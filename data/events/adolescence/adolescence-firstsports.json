@@ -1,0 +1,79 @@
+{
+  "id": "adolescence-firstsports",
+  "category": "physical",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "fill",
+  "title": "Tryouts",
+  "description": "The coach says anyone can try out. You've never been athletic, but something pushes you to show up anyway.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "give-everything",
+      "label": "Give it everything you have",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You run until your lungs burn. You push past the pain. Coach nods at you—once, but it counts. You don't make the team, but you make yourself proud.",
+          "statChanges": {
+            "physical": 15,
+            "resilience": 12,
+            "confidence": 8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "find-your-niche",
+      "label": "Discover you're better at the mental game",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You can't sprint, but you can read the game. You can't lift weights, but you can motivate teammates. Coach sees your value in a different position.",
+          "statChanges": {
+            "intellectual": 12,
+            "empathy": 10,
+            "charm": 8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "quit-early",
+      "label": "Quit halfway through, it's not for you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You walk off the field mid-practice. Other kids stare. You feel like a failure, but at least you're honest with yourself about what you want.",
+          "statChanges": {
+            "independence": 10,
+            "resilience": -5,
+            "happiness": -8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

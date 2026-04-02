@@ -1,0 +1,92 @@
+{
+  "id": "middle-adulthood-reconciliation",
+  "category": "social",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "weighted",
+  "title": "The Letter Never Sent",
+  "description": "While sorting old papers, you find a letter you wrote to your estranged sibling thirty years ago—unsent, still sealed. The anger that drove you to start writing it has faded to something more complex. Time has given you both perspective. The question is: do you open old wounds or finally heal them?",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "reach-out-now",
+      "label": "Call them—thirty years is long enough",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "Your sibling answers on the third ring. There's a long silence, then: 'I wondered if you'd ever call.' You both cry. You both apologize. You make plans to meet. Some fences need decades to become bridges, but they can still be crossed.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 15,
+            "morality": 10
+          },
+          "consequences": {
+            "tag": "reconciled-with-sibling"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "They don't answer. You leave a voicemail, your voice shaking. Days pass. Finally, a text: 'Maybe we can try.' It's not forgiveness—not yet—but it's a door cracked open. You'll take it.",
+          "statChanges": {
+            "empathy": 8,
+            "happiness": 5,
+            "resilience": 7
+          },
+          "consequences": {
+            "tag": "tentative-reconciliation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "send-the-old-letter",
+      "label": "Send the original letter, unchanged",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You drop it in the mailbox as it is—tears stains still visible on the envelope. They call you that night, furious about contents you'd half-forgotten. Old wounds reopen. Some things are better left in the past, you realize too late.",
+          "statChanges": {
+            "happiness": -10,
+            "morality": -5,
+            "empathy": -3
+          },
+          "consequences": {
+            "tag": "reopened-old-wounds"
+          }
+        }
+      ]
+    },
+    {
+      "id": "write-new-letter",
+      "label": "Write a new letter with what you've learned",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "This time, you write without blame. You write about your regrets, your growth, your understanding of your shared history. 'I'm sorry for who I was,' you write. 'I hope we can try again.' They respond: 'Me too.'",
+          "statChanges": {
+            "empathy": 10,
+            "happiness": 12,
+            "morality": 8,
+            "creativity": 5
+          },
+          "consequences": {
+            "tag": "healed-through-honesty"
+          }
+        }
+      ]
+    }
+  ]
+}

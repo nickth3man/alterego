@@ -1,0 +1,98 @@
+{
+  "id": "adulthood-marriage-rekindle",
+  "category": "family",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "==": [{ "var": "stats.isMarried" }, true] },
+        { "<": [{ "var": "stats.happiness" }, 50] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "story",
+  "title": "Fifteen Years, One Roof",
+  "description": "You and your spouse have become roommates—efficient co-managers of a household. Last night, you both fell asleep on opposite ends of the couch, the television murmuring to no one. Somewhere along the way, you stopped asking each other 'how was your day?' The distance feels vast, yet here you are, still under the same roof.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "date-night-reset",
+      "label": "Plan a date night to reconnect",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You book a reservation at the restaurant where you first met. Your spouse is surprised, then smiles—a real smile, the kind you remember from years ago. Over pasta and old stories, you remember why you chose each other.",
+          "statChanges": {
+            "happiness": 12,
+            "empathy": 8,
+            "charm": 5,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "rekindled-romance",
+            "relationshipChanges": [
+              { "npcId": "spouse", "delta": 25 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "couples-therapy",
+      "label": "Suggest couples counseling",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "Your spouse hesitates, then nods. The therapist helps you both hear what you've stopped saying. It takes months, but slowly, the silence between you fills with words again.",
+          "statChanges": {
+            "happiness": 15,
+            "empathy": 10,
+            "resilience": 5,
+            "intellectual": 3
+          },
+          "consequences": {
+            "tag": "marriage-repaired-through-work"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "Your spouse refuses. 'We don't need a stranger telling us what to do.' The rejection stings, and the distance remains. Perhaps some things can't be fixed by talking—or perhaps you need to find another way.",
+          "statChanges": {
+            "happiness": -5,
+            "resilience": -3,
+            "confidence": -5
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "separate-paths",
+      "label": "Accept the quiet and focus on yourself",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You fill the silence with hobbies, friends, your own growth. The marriage doesn't improve, but your inner world expands. Sometimes peace comes not from fixing what's broken, but from growing around it.",
+          "statChanges": {
+            "happiness": 5,
+            "independence": 15,
+            "charm": 5,
+            "empathy": -8
+          },
+          "consequences": {
+            "tag": "grew-independently-in-marriage"
+          }
+        }
+      ]
+    }
+  ]
+}

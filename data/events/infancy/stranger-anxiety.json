@@ -1,0 +1,67 @@
+{
+  "id": "infancy-stranger-anxiety",
+  "category": "social",
+  "lifeStages": ["infancy"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 1] },
+        { "<": [{ "var": "stats.age" }, 3] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "Stranger Anxiety",
+  "description": "A face you've never seen before leans into your space. It smiles. It speaks in sounds you don't recognize. Every instinct in your small body screams retreat — this is wrong, this person is wrong, this cannot be safe. But the face keeps coming closer, and someone you trust is watching.",
+  "moods": [
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "curious", "label": "Curious", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "brave", "label": "Brave", "emoji": "😤", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "hide-and-seek",
+      "label": "Hide behind your caregiver",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "You press yourself against the familiar warmth of your caregiver's leg. The stranger waits, patient, unbothered. Eventually, your curiosity wins — you peek out, and the stranger makes a funny face. A small laugh escapes you.",
+          "statChanges": { "resilience": 3, "empathy": 2 },
+          "consequences": { "tag": "trusted-stranger" }
+        }
+      ]
+    },
+    {
+      "id": "stare-defiant",
+      "label": "Stare with wide, unblinking eyes",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "You refuse to look away. The stranger shifts, uncomfortable, unsure what to make of this tiny critic. Your silence is a verdict. Eventually the stranger steps back, uncertain. You've made your position clear.",
+          "statChanges": { "confidence": 4, "riskTolerance": 2 },
+          "consequences": { "tag": "first-judgment" }
+        }
+      ]
+    },
+    {
+      "id": "reach-out",
+      "label": "Reach out despite the fear",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 40] } },
+          "narration": "Your arm extends, trembling slightly. The stranger's eyes widen — then soften. Their hand meets yours, warm and unexpected. You chose the harder thing, and it did not destroy you.",
+          "statChanges": { "resilience": 5, "charm": 3 },
+          "consequences": { "tag": "brave-first-connection" }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 40] } },
+          "narration": "Your arm reaches out, but your body betrays you — a cry escapes before you can stop it. The stranger recoils, and your caregiver scoops you up quickly. The moment passes. Some doors close before you can walk through them.",
+          "statChanges": { "empathy": 2 },
+          "consequences": { "tag": "reached-too-soon" }
+        }
+      ]
+    }
+  ]
+}

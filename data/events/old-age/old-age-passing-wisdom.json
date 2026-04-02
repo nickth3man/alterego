@@ -1,0 +1,97 @@
+{
+  "id": "old-age-passing-wisdom",
+  "category": "family",
+  "lifeStages": ["old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 76] },
+        { "<=": [{ "var": "stats.age" }, 100] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "story",
+  "title": "The Last Lesson",
+  "description": "A grandchild asks to hear your story—not the curated version, but the real one. Why did you make the choices you made? What would you do differently? What matters in the end? They're at an age where they're making their own crossroads. Your answer might shape their path.",
+  "moods": [
+    { "id": "wise", "label": "Wise", "emoji": "🦉", "color": "#8b5cf6" },
+    { "id": "grateful", "label": "Grateful", "emoji": "🙏", "color": "#f59e0b" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "regretful", "label": "Regretful", "emoji": "😔", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "teach-what-matters",
+      "label": "Share what you've learned about what truly matters",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You tell them: 'Not the career, not the money. The moments you chose love over convenience. The times you were kind when you could have been right. The relationships you nurtured—or neglected. In the end, that's all anyone remembers. That's all you'll remember too.'",
+          "statChanges": {
+            "happiness": 10,
+            "morality": 10,
+            "empathy": 8,
+            "confidence": 5,
+            "wisdom": 5
+          },
+          "consequences": {
+            "tag": "passed-essential-wisdom"
+          }
+        }
+      ]
+    },
+    {
+      "id": "warn-of-regrets",
+      "label": "Warn them about the regrets that still haunt you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.morality" }, 50] } },
+          "narration": "You tell them about the friendship you let drift. The opportunity you were too afraid to take. The words you should have said and didn't. 'Don't make my mistakes,' you plead. 'Or do—but learn from them faster than I did.' They listen with wide eyes. Maybe they'll listen better than you did.",
+          "statChanges": {
+            "happiness": 5,
+            "morality": 8,
+            "empathy": 10,
+            "confidence": -3
+          },
+          "consequences": {
+            "tag": "shared-regrets-as-warning"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.morality" }, 50] } },
+          "narration": "You try to warn them, but your regrets feel like failures. 'I should have been braver,' you say. 'I should have tried harder.' They nod politely. You realize you're passing on your uncertainties, not your wisdom. Perhaps that's honest, but you're not sure it's helpful.",
+          "statChanges": {
+            "happiness": -5,
+            "confidence": -5,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "expressed-regrets"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tell-your-story",
+      "label": "Tell them your whole story—the triumph and the tragedy",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You speak for hours across multiple visits. The childhood, the mistakes, the loves, the losses, the slow accumulation of wisdom that only comes from surviving. You don't edit or sanitize. You give them the unvarnished truth. 'Make of it what you will,' you say. 'It's all I have to give.'",
+          "statChanges": {
+            "happiness": 12,
+            "confidence": 8,
+            "morality": 7,
+            "creativity": 5,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "gave-whole-truth"
+          }
+        }
+      ]
+    }
+  ]
+}

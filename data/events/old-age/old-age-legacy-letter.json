@@ -1,0 +1,95 @@
+{
+  "id": "old-age-legacy-letter",
+  "category": "emotional",
+  "lifeStages": ["old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 76] },
+        { "<=": [{ "var": "stats.age" }, 100] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "Letters to the Future",
+  "description": "You sit with paper and pen—or at a keyboard, if you've adapted. You've been thinking about what remains after you're gone. Not money or possessions, but something more important: who you were, what you learned, what you hoped for those who come after. Who should hear your voice, even when you're not there to speak?",
+  "moods": [
+    { "id": "wise", "label": "Wise", "emoji": "🦉", "color": "#8b5cf6" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "regretful", "label": "Regretful", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "grateful", "label": "Grateful", "emoji": "🙏", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "write-to-grandchildren",
+      "label": "Write letters to your grandchildren",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You write about your childhood, your mistakes, your hopes for them. You tell stories you've never told—about the grandparent who shaped you, the dreams you had at their age, the regrets you hope they won't share. Each letter takes hours, but time feels irrelevant now. These words will outlast you.",
+          "statChanges": {
+            "happiness": 10,
+            "morality": 8,
+            "empathy": 5,
+            "creativity": 5
+          },
+          "consequences": {
+            "tag": "wrote-letters-to-grandchildren"
+          }
+        }
+      ]
+    },
+    {
+      "id": "write-truth-to-family",
+      "label": "Write the honest truth about family history",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.morality" }, 60] } },
+          "narration": "You document what really happened—the affairs, the mistakes, the silences that shaped your family. It's risky, possibly hurtful. But lies outlive us; truth, even painful truth, can finally set free. You seal the letters with trembling hands.",
+          "statChanges": {
+            "morality": 10,
+            "confidence": 8,
+            "happiness": 5,
+            "empathy": -5
+          },
+          "consequences": {
+            "tag": "revealed-family-truths"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.morality" }, 60] } },
+          "narration": "You start to write the truth, then stop. Some secrets died with their keepers for a reason. Instead, you write about the good—stories worth preserving, love worth remembering. The partial truth is still a gift.",
+          "statChanges": {
+            "happiness": 8,
+            "morality": 5,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "curated-family-narrative"
+          }
+        }
+      ]
+    },
+    {
+      "id": "write-to-your-young-self",
+      "label": "Write a letter to the person you used to be",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "'Dear Me at 22,' you begin. You warn yourself about the mistakes coming, the heartbreaks to expect, the joys worth fighting for. You cry as you write. And then you smile. That young person survived everything you went through—and so did you.",
+          "statChanges": {
+            "happiness": 10,
+            "confidence": 8,
+            "resilience": 7,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "reconciled-with-past-self"
+          }
+        }
+      ]
+    }
+  ]
+}

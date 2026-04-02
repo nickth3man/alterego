@@ -1,0 +1,110 @@
+{
+  "id": "shared-minor-illness",
+  "category": "physical",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 2] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "fill",
+  "title": "Under the Weather",
+  "description": "You wake up feeling terrible—stuffy head, sore throat, maybe a slight fever. Nothing serious, just enough to ruin your day. Stay home and rest, or push through?",
+  "moods": [
+    { "id": "miserable", "label": "Miserable", "emoji": "😞", "color": "#9ca3af" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#f59e0b" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "rest",
+      "label": "Stay home and rest",
+      "compatibleMoods": ["miserable", "thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You call in sick and spend the day in bed, drinking fluids and sleeping. Your body thanks you for listening to it. By evening, you feel almost human again. Sometimes the bravest thing is admitting you need to stop.",
+          "statChanges": {
+            "physical": 5,
+            "resilience": 4,
+            "happiness": 3
+          },
+          "consequences": {
+            "tag": "self-care-sick-day"
+          }
+        }
+      ]
+    },
+    {
+      "id": "push-through",
+      "label": "Push through and carry on",
+      "compatibleMoods": ["determined"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              ">=": [{ "var": "stats.discipline" }, 50]
+            }
+          },
+          "narration": "You grit your teeth and go about your day. It takes twice the effort for half the results, but you refuse to let a cold defeat you. Your determination impresses others, even if internally you're counting the minutes until you can collapse.",
+          "statChanges": {
+            "discipline": 8,
+            "confidence": 5,
+            "physical": -5,
+            "happiness": -4
+          },
+          "consequences": {
+            "tag": "pushed-through-illness"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              "<": [{ "var": "stats.discipline" }, 50]
+            }
+          },
+          "narration": "You try to push through, but it's hopeless. Halfway through the morning, you admit defeat and go home. You've wasted energy and accomplished nothing. Rest it is.",
+          "statChanges": {
+            "physical": -3,
+            "happiness": -5,
+            "resilience": 2
+          },
+          "consequences": {
+            "tag": "sick-day-failure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "comfort-food",
+      "label": "Bundle up and enjoy comfort food at home",
+      "compatibleMoods": ["miserable"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You make soup, brew tea, and wrap yourself in the coziest blanket you own. A movie you've seen a hundred times plays in the background. Sometimes being sick isn't so bad when you lean into it.",
+          "statChanges": {
+            "happiness": 8,
+            "creativity": 3,
+            "physical": 4
+          },
+          "consequences": {
+            "tag": "sick-day-comfort"
+          }
+        }
+      ]
+    }
+  ]
+}

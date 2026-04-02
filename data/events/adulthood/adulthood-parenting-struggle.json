@@ -1,0 +1,110 @@
+{
+  "id": "adulthood-parenting-struggle",
+  "category": "family",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "==": [{ "var": "stats.hasChildren" }, true] }
+      ]
+    }
+  },
+  "weight": 16,
+  "priority": "weighted",
+  "title": "The Locked Door",
+  "description": "Your teenager hasn't emerged from their room in three days except for school. When you knock, you get monosyllables. When you try to talk, they snap: 'You wouldn't understand.' You've raised them with everything you have, and now the distance feels like a wall you built without knowing it.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "give-space",
+      "label": "Give them space and let them come to you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You back off. It feels wrong, but you keep the door open—literally and figuratively. A week later, they appear at dinner, quieter than before, but present. 'Can we talk?' They want to talk. The wall has a door again.",
+          "statChanges": {
+            "empathy": 10,
+            "happiness": 5,
+            "resilience": 5,
+            "confidence": -5
+          },
+          "consequences": {
+            "tag": "patient-parenting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-professional",
+      "label": "Arrange for family counseling",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "Your teenager resists at first, arms crossed. But the counselor finds the frequency that works, and slowly, painfully, the family learns to hear each other again. The fights don't stop, but the recovery gets faster.",
+          "statChanges": {
+            "empathy": 12,
+            "family": 10,
+            "happiness": 8,
+            "wealth": -6
+          },
+          "consequences": {
+            "tag": "family-healed-through-therapy"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "The counselor tries, but your teenager refuses to engage. 'Nothing's wrong with me.' The door stays closed more often than not. You're left wondering where you lost them—and whether you can find your way back.",
+          "statChanges": {
+            "family": -10,
+            "happiness": -8,
+            "confidence": -8
+          },
+          "consequences": {
+            "tag": "struggling-to-reach-child"
+          }
+        }
+      ]
+    },
+    {
+      "id": "firm-boundaries",
+      "label": "Establish firm boundaries and expectations",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "You lay down the law—respect, curfews, responsibilities. It's uncomfortable for everyone. But structure, it turns out, is its own form of love. Your teenager grumbles less. The house finds a new equilibrium.",
+          "statChanges": {
+            "discipline": 10,
+            "family": 8,
+            "confidence": 5,
+            "independence": -5,
+            "charm": -3
+          },
+          "consequences": {
+            "tag": "authoritative-parenting"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "Your teenager pushes back harder than you expected. The confrontation escalates. Voices are raised. Something is said that can't be unsaid. You sleep poorly for weeks, wondering if you went too far—or not far enough.",
+          "statChanges": {
+            "family": -12,
+            "happiness": -10,
+            "confidence": -8,
+            "resilience": 3
+          },
+          "consequences": {
+            "tag": "parenting-confrontation"
+          }
+        }
+      ]
+    }
+  ]
+}

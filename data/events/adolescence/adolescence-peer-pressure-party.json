@@ -1,0 +1,83 @@
+{
+  "id": "adolescence-peer-pressure-party",
+  "category": "social",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 14] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 20,
+  "priority": "weighted",
+  "title": "The Party",
+  "description": "Everyone from school will be there. Your friends are going. But your gut is screaming that something feels wrong.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "go-all-in",
+      "label": "Go and be part of it",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You go. The music is loud, the crowd is wild. For a few hours, you feel like you belong. But the night ends with something you regret.",
+          "statChanges": {
+            "social": 12,
+            "riskTolerance": 10,
+            "happiness": 5,
+            "morality": -8
+          },
+          "consequences": {
+            "tag": "rebelled",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "go-sneak-out",
+      "label": "Sneak out and go anyway",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You wait until your parents sleep, then slip out. The thrill of defying them almost makes up for the hollow feeling at the party.",
+          "statChanges": {
+            "independence": 15,
+            "riskTolerance": 12,
+            "discipline": -10
+          },
+          "consequences": {
+            "tag": "rebelled",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-home",
+      "label": "Stay home despite the pressure",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You text your friends that you're not going. They call you boring. But that night, you sleep soundly, knowing you made the right choice.",
+          "statChanges": {
+            "morality": 15,
+            "resilience": 10,
+            "social": -10
+          },
+          "consequences": {
+            "tag": "stood-alone",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "childhood-first-day",
+  "category": "vocational",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 5] },
+        { "<=": [{ "var": "stats.age" }, 7] }
+      ]
+    }
+  },
+  "weight": 20,
+  "priority": "story",
+  "title": "First Day of School",
+  "description": "The big yellow bus rumbles to a stop at the end of your driveway. Your backpack feels heavy, and the other kids on the bus look like they already know each other. The driver smiles in the mirror. 'Go on, sweetie, take a seat.'",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "sit-front",
+      "label": "Sit in the front, by the window",
+      "compatibleMoods": ["excited"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You claim the seat by the window and watch the world blur past. The bus driver, Mr. Lee, tells you about his granddaughter who goes to your school. By the time you arrive, you've made your first adult connection outside your family.",
+          "statChanges": {
+            "independence": 10,
+            "charm": 6,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "first-school-bus-friend"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sit-back",
+      "label": "Take a seat in the back",
+      "compatibleMoods": ["thoughtful", "scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.confidence" }, 40] }
+          },
+          "narration": "You find an empty seat near the back. A girl with braids smiles at you. 'I'm Sofia. Want to trade snacks?' You do. By the time the bus pulls up to school, you've got a potential friend and half a granola bar.",
+          "statChanges": {
+            "confidence": 5,
+            "empathy": 5,
+            "happiness": 8
+          },
+          "consequences": {
+            "tag": "made-school-friend"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.confidence" }, 40] }
+          },
+          "narration": "You slide into a back seat and stare at your shoes. No one talks to you. The morning passes in silence, and you spend the day wishing you were back home. But tomorrow, you tell yourself, tomorrow will be different.",
+          "statChanges": {
+            "confidence": -4,
+            "happiness": -5
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "freeze",
+      "label": "Freeze up and start crying",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You can't move. The bus driver gently scoops you up and calls your mom. A teacher's aide rides the bus home with you that day. By next week, you're ready—but today, you're just a scared kid who needs a little more time.",
+          "statChanges": {
+            "confidence": -6,
+            "happiness": -4,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "first-day-anxiety"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "childhood-imaginary-friend",
+  "category": "emotional",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 9] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "fill",
+  "title": "The Friend Only You Can See",
+  "description": "His name is Captain Whiskers, and he lives in the garden shed, and he tells you secrets about the world that no one else understands. Your parents think you've outgrown him, but you know he's more real than anything.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "introduce-him",
+      "label": "Try to introduce Captain Whiskers to Mom",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You tell Mom all about Captain Whiskers—how he helped you through your first day of school, how he listens when you're scared. Mom listens with a gentle smile. 'He sounds like a good friend,' she says. 'I'm glad you have him.' No judgment. Just kindness. It makes you love her more.",
+          "statChanges": {
+            "empathy": 8,
+            "happiness": 10,
+            "creativity": 6
+          },
+          "consequences": {
+            "tag": "imaginary-friend-accepted"
+          }
+        }
+      ]
+    },
+    {
+      "id": "keep-secret",
+      "label": "Keep Captain Whiskers a secret",
+      "compatibleMoods": ["thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You learn to keep your private world separate. At school, you're 'normal.' At home, Captain Whiskers is there, a silent companion. It's lonely sometimes, but also special—a world that belongs only to you.",
+          "statChanges": {
+            "independence": 10,
+            "creativity": 8,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "kept-imaginary-world-secret"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grow-up",
+      "label": "Decide it's time to say goodbye",
+      "compatibleMoods": ["thoughtful", "scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You sit in the garden shed one last time, talking to Captain Whiskers. 'I have to go now,' you whisper. 'But thank you for always being here.' When you walk out, you feel older somehow—like you've closed a door and opened another one at the same time.",
+          "statChanges": {
+            "independence": 12,
+            "morality": 6,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "said-goodbye-to-imaginary-friend"
+          }
+        }
+      ]
+    }
+  ]
+}

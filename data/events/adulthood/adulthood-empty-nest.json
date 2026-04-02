@@ -1,0 +1,101 @@
+{
+  "id": "adulthood-empty-nest",
+  "category": "emotional",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 45] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "==": [{ "var": "stats.hasChildren" }, true] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "The Quiet House",
+  "description": "Your youngest just moved into their college dorm. You stood at the curb as the car pulled away, waving until they turned the corner. Now you walk through the house and hear only your footsteps. Every room holds a ghost of small voices, scattered toys, the chaos of a life in motion. The house is clean. The house is silent.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "rediscover-spouse",
+      "label": "Rediscover who you are as a couple again",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You plan your first real vacation alone with your spouse in fifteen years. No kids, no interruptions. On the beach at sunset, your spouse takes your hand and says, 'I remember why I married you.' The silence in the house stops feeling like absence and starts feeling like space—for the two of you to fill again.",
+          "statChanges": {
+            "happiness": 15,
+            "family": 10,
+            "independence": 10,
+            "charm": 5,
+            "creativity": 5
+          },
+          "consequences": {
+            "tag": "reconnected-as-couple-after-children"
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-purpose",
+      "label": "Find new purpose—hobbies, volunteering, learning",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.creativity" }, 50] } },
+          "narration": "You take up woodworking. Then you volunteer at the local library. Then you audit a philosophy course at the community college. Your calendar fills not with carpooling and soccer practice but with the things you always said you'd do 'when you had time.' It turns out, you had time. You just didn't know it.",
+          "statChanges": {
+            "happiness": 18,
+            "creativity": 15,
+            "independence": 12,
+            "intellectual": 8,
+            "empathy": 5,
+            "physical": 5
+          },
+          "consequences": {
+            "tag": "found-new-purpose-post-parenting"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.creativity" }, 50] } },
+          "narration": "You try hobbies. They feel hollow. You volunteer, but the connection doesn't stick. The house stays too quiet. You keep buying groceries for two, then catching yourself throwing half away. The nest is empty, and you haven't learned to fly again yet.",
+          "statChanges": {
+            "happiness": -8,
+            "independence": 3,
+            "resilience": -5,
+            "family": -5
+          },
+          "consequences": {
+            "tag": "struggling-with-empty-nest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "coast-on memories",
+      "label": "Coast on memories—you raised them right",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You tell yourself you did good. You look at photos, listen to old voicemails, smile at the echo of laughter. The house is quiet, but your phone lights up with texts from your children. They call. They visit. They tell you they love you. That has to be enough. That is enough.",
+          "statChanges": {
+            "happiness": 10,
+            "family": 8,
+            "confidence": 5,
+            "independence": -3,
+            "resilience": 3
+          },
+          "consequences": {
+            "tag": "proud-of-parenting-legacy"
+          }
+        }
+      ]
+    }
+  ]
+}

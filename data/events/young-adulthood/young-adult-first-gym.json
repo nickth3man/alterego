@@ -1,0 +1,110 @@
+{
+  "id": "young-adult-first-gym",
+  "category": "physical",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 28] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "The First Gym Session",
+  "description": "You finally sign up at a gym. Walking in feels like entering a foreign country—everyone seems to know what they're doing. A ripped guy grunts on the leg press. Women in matching athleisure flow between machines. You stand near the cardio section, uncertain which machine to try first.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "figure-it-out",
+      "label": "Figure it out yourself",
+      "compatibleMoods": ["ambitious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.physical" }, 40] }
+          },
+          "narration": "You hop on a treadmill, start at a comfortable pace, then gradually increase. After 20 minutes, you venture to the weights—watching others first, then mimicking. By the end, you're sweating and feel accomplished. Not bad for day one.",
+          "statChanges": {
+            "physical": 12,
+            "confidence": 8,
+            "happiness": 6,
+            "discipline": 5
+          },
+          "consequences": {
+            "tag": "started-fitness-journey"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.physical" }, 40] }
+          },
+          "narration": "You attempt the leg press, set the weight too high, and when you try to push, something in your knee protests sharply. You end up stretching lightly on a mat, embarrassed, watching others. Not the start you wanted.",
+          "statChanges": {
+            "physical": -5,
+            "confidence": -8,
+            "happiness": -6,
+            "resilience": 3
+          },
+          "consequences": {
+            "tag": "gym-intimidation-won"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ask-for-help",
+      "label": "Ask a staff member for guidance",
+      "compatibleMoods": ["anxious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "A trainer named Marcus shows you the basics—proper form, beginner routines, realistic expectations. 'Everyone starts somewhere,' he says kindly. You leave with a plan and a coupon for a free session. For once, admitting you don't know something paid off.",
+          "statChanges": {
+            "physical": 8,
+            "intellectual": 8,
+            "confidence": 6,
+            "happiness": 5,
+            "discipline": 5
+          },
+          "consequences": {
+            "tag": "embraced-learning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "skip-gym",
+      "label": "Leave without exercising",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You walk around, feel overwhelmed, and leave before touching anything. The membership sits unused for weeks. You tell yourself you'll try again, but the intimidation has planted a seed of defeat.",
+          "statChanges": {
+            "confidence": -6,
+            "happiness": -5,
+            "independence": 5,
+            "resilience": -3
+          },
+          "consequences": {
+            "tag": "avoided-challenge"
+          }
+        }
+      ]
+    }
+  ]
+}

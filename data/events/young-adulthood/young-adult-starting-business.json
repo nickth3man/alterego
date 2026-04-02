@@ -1,0 +1,145 @@
+{
+  "id": "young-adult-starting-business",
+  "category": "vocational",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 22] },
+        { "<=": [{ "var": "stats.age" }, 35] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "weighted",
+  "title": "The Entrepreneurial Leap",
+  "description": "Your friend Casey has a business plan. A real one—market analysis, projected margins, a prototype. They want you to quit your job and join as co-founder. You'd be giving up a steady salary, benefits, and weekends. The startup could be worth millions—or fail spectacularly, leaving you with nothing but debt and a burned bridge back to corporate.",
+  "moods": [
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "take-the-leap",
+      "label": "Quit and co-found the startup",
+      "compatibleMoods": ["ambitious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "and": [{ ">=": [{ "var": "stats.riskTolerance" }, 65] }, { ">=": [{ "var": "stats.creativity" }, 60] }] }
+          },
+          "narration": "You take the leap. The first year is chaos—nights, weekends, instant ramen, pitch meetings where investors yawn. But your product finds users. Then investors. Then an acqui-hire. You sell for enough to be comfortable for years. You return to the workforce, but different—someone who built something real.",
+          "statChanges": {
+            "creativity": 18,
+            "confidence": 20,
+            "independence": 22,
+            "happiness": 18,
+            "resilience": 15,
+            "wealth": 25,
+            "career": 10,
+            "discipline": 12,
+            "riskTolerance": 10
+          },
+          "consequences": {
+            "tag": "successful-entrepreneur"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "or": [{ "<": [{ "var": "stats.riskTolerance" }, 65] }, { "<": [{ "var": "stats.creativity" }, 60] }] }
+          },
+          "narration": "You quit and build. The product doesn't find traction. The investors pass. Savings evaporate. After eighteen months, you close up shop and beg for your old job. They don't call back. You're older, wiser, and unemployed.",
+          "statChanges": {
+            "creativity": 5,
+            "independence": 10,
+            "confidence": -15,
+            "happiness": -18,
+            "resilience": 8,
+            "wealth": -20,
+            "career": -15,
+            "riskTolerance": 5
+          },
+          "consequences": {
+            "tag": "failed-startup"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-employee",
+      "label": "Stay in your corporate job",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You turn Casey down. They succeed wildly—read about it in TechCrunch six months later. You stay in your lane, climbing ladders, attending meetings. Your friends call you sensible. Your bank account agrees. But sometimes, late at night, you wonder what could have been.",
+          "statChanges": {
+            "wealth": 12,
+            "career": 10,
+            "discipline": 8,
+            "happiness": -5,
+            "confidence": -8,
+            "creativity": -10,
+            "independence": -12
+          },
+          "consequences": {
+            "tag": "played-it-safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "side-hustle",
+      "label": "Start it as a side project first",
+      "compatibleMoods": ["ambitious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.discipline" }, 70] }
+          },
+          "narration": "You keep your job and build on nights and weekends. It's exhausting—sleep becomes a luxury, hobbies disappear. But slowly, the side project gains traction. After a year, it's generating enough to match your salary. You take the leap then—confident, prepared, certain. Casey admires your patience.",
+          "statChanges": {
+            "discipline": 20,
+            "creativity": 12,
+            "confidence": 12,
+            "independence": 15,
+            "happiness": 8,
+            "wealth": 8,
+            "career": 5,
+            "physical": -10,
+            "resilience": 8
+          },
+          "consequences": {
+            "tag": "side-hustle-to-success"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.discipline" }, 70] }
+          },
+          "narration": "You try the side hustle but can't sustain it. Your job demands more. The side project stagnates. Casey builds it without you and succeeds. You remain an employee, exhausted by the attempt and haunted by the 'so close.'",
+          "statChanges": {
+            "discipline": 8,
+            "confidence": -10,
+            "happiness": -12,
+            "creativity": 3,
+            "independence": 5,
+            "physical": -8
+          },
+          "consequences": {
+            "tag": "half-attempt-regret"
+          }
+        }
+      ]
+    }
+  ]
+}

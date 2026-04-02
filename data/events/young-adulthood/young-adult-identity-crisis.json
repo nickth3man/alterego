@@ -1,0 +1,115 @@
+{
+  "id": "young-adult-identity-crisis",
+  "category": "emotional",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 22] },
+        { "<=": [{ "var": "stats.age" }, 32] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "story",
+  "title": "Who Am I Actually?",
+  "description": "You have the job, the apartment, the aesthetic. But at 2 AM, staring at the ceiling, the question crashes in: Is this who I am, or just who I'm supposed to be? Your parents wanted a doctor. You became a marketing analyst. Your friends think you're confident. Inside, you're unraveling. Something needs to change—but what?",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "redefine-yourself",
+      "label": "Make a drastic change",
+      "compatibleMoods": ["hopeful", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.riskTolerance" }, 60] }
+          },
+          "narration": "You quit your job, buy a one-way ticket somewhere new, and give yourself six months to figure it out. It's terrifying. It's exhilarating. Somewhere between the uncertainty and the horizon, you start meeting the real you—the one hiding under expectations.",
+          "statChanges": {
+            "independence": 20,
+            "confidence": 15,
+            "resilience": 12,
+            "happiness": 10,
+            "wealth": -15,
+            "career": -10
+          },
+          "consequences": {
+            "tag": "chose-passion-over-security"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.riskTolerance" }, 60] }
+          },
+          "narration": "You try to 'find yourself' by making impulsive changes—a drastic haircut, a dating spree, picking fights. None of it fits. You're just performing, and everyone can see through it. The crisis deepens.",
+          "statChanges": {
+            "confidence": -12,
+            "happiness": -15,
+            "independence": 5,
+            "charm": -8
+          },
+          "consequences": {
+            "tag": "identity-performance"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-therapy",
+      "label": "Start therapy to work through it",
+      "compatibleMoods": ["anxious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You find a therapist. First sessions are awkward—talking to a stranger about your feelings? But slowly, patterns emerge. Childhood expectations. Fear of disappointing people. The weight you've been carrying. Therapy won't fix everything, but it gives you tools.",
+          "statChanges": {
+            "empathy": 12,
+            "intellectual": 10,
+            "resilience": 12,
+            "happiness": 10,
+            "morality": 5,
+            "wealth": -8
+          },
+          "consequences": {
+            "tag": "started-therapy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-the-course",
+      "label": "Push through and stay the course",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You ignore the whispers. 'Everyone feels this way,' you tell yourself. You double down on the plan—climb the ladder, save money, have a five-year plan. The existential dread fades... or maybe you just get too busy to notice it.",
+          "statChanges": {
+            "career": 12,
+            "wealth": 10,
+            "discipline": 8,
+            "happiness": -8,
+            "independence": -5,
+            "creativity": -10
+          },
+          "consequences": {
+            "tag": "suppressed-doubt"
+          }
+        }
+      ]
+    }
+  ]
+}

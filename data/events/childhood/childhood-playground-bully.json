@@ -1,0 +1,105 @@
+{
+  "id": "childhood-playground-bully",
+  "category": "social",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 12] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Bully on the Playground",
+  "description": "A bigger kid named Marcus blocks your path at recess, demanding your lunch money. He's done this to others before, and everyone watches to see what you'll do.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "angry", "label": "Angry", "emoji": "😠", "color": "#ef4444" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "stand-up",
+      "label": "Stand your ground and refuse",
+      "compatibleMoods": ["excited", "angry"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.confidence" }, 50] }
+          },
+          "narration": "You plant your feet and shout 'No!' Marcus hesitates, surprised by your defiance. The other kids start cheering. Marcus backs down, muttering threats, but you feel something shift inside you—a new sense of your own strength.",
+          "statChanges": {
+            "confidence": 12,
+            "happiness": 8,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "stood-up-to-bully"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.confidence" }, 50] }
+          },
+          "narration": "You try to stand firm, but your voice trembles. Marcus pushes you, and you stumble. Tears burn in your eyes as the other kids laugh. The shame stays with you all day, but so does a quiet promise that next time will be different.",
+          "statChanges": {
+            "confidence": -8,
+            "happiness": -5,
+            "resilience": 3
+          },
+          "consequences": {
+            "tag": "stood-up-to-bully"
+          }
+        }
+      ]
+    },
+    {
+      "id": "run-tell",
+      "label": "Run and tell a teacher",
+      "compatibleMoods": ["scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You sprint to Mrs. Patterson, gasping out the story. She walks Marcus to the principal's office. Some kids call you a tattletale, but you don't care—you're safe, and that's what matters.",
+          "statChanges": {
+            "confidence": -3,
+            "morality": 5,
+            "happiness": -2
+          },
+          "consequences": {
+            "tag": "told-on-bully"
+          }
+        }
+      ]
+    },
+    {
+      "id": "give-money",
+      "label": "Give him the money to avoid trouble",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You hand over the coins, avoiding everyone's eyes. Marcus smirks and walks away. You eat lunch alone that day, feeling small and defeated. A part of you wonders what kind of person you're becoming.",
+          "statChanges": {
+            "happiness": -6,
+            "morality": -4,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "gave-in-to-bully"
+          }
+        }
+      ]
+    }
+  ]
+}

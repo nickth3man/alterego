@@ -1,0 +1,125 @@
+{
+  "id": "adulthood-aging-parents-care",
+  "category": "social",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "in": ["aging-parents-need-help", { "var": "stats.narrativeTags" }] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "The Falling Phone",
+  "description": "Your mother's hands trembled, and her phone slipped, shattering on the kitchen floor. She's 71 now. Your father uses a cane more often than not. They've been independent for so long, but lately, the calls have grown more frequent—small emergencies, minor scares, the quiet admission that some tasks are getting harder.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "move-parents-nearby",
+      "label": "Help them relocate closer to you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.wealth" }, 50] } },
+          "narration": "You find a nice assisted living community nearby. It's expensive, but you can make it work. Your parents resist at first, then grudgingly admit it's nice to have company. Sunday dinners become a tradition again.",
+          "statChanges": {
+            "wealth": -15,
+            "happiness": 10,
+            "family": 12,
+            "confidence": 5,
+            "independence": -8
+          },
+          "consequences": {
+            "tag": "parents-moved-nearby"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.wealth" }, 50] } },
+          "narration": "The assisted living is beyond your means. You help them find a modest apartment in your neighborhood instead, closer but still separate. It's not ideal, but it's what you can offer. The guilt lingers.",
+          "statChanges": {
+            "happiness": 3,
+            "family": 8,
+            "wealth": -5,
+            "guilt": 8,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "doing-best-for-parents-with-limits"
+          }
+        }
+      ]
+    },
+    {
+      "id": "coordinate-siblings",
+      "label": "Coordinate care with siblings",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "Family meetings. Shared calendars.轮流. It's not perfect, but everyone contributes what they can. Your parents stay independent longer with a village around them. The sibling relationships strain, then settle into something sustainable.",
+          "statChanges": {
+            "family": 10,
+            "empathy": 8,
+            "happiness": 5,
+            "stress": 5
+          },
+          "consequences": {
+            "tag": "family-coordinated-care"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "The family meeting devolves into arguments about who's doing more. Your siblings have grievances. Your parents pretend not to notice the tension. In the end, you shoulder more than your share because someone has to.",
+          "statChanges": {
+            "family": -8,
+            "happiness": -10,
+            "resilience": 5,
+            "wealth": -5
+          },
+          "consequences": {
+            "tag": "sibling-conflict-over-parents"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hire-in-home-care",
+      "label": "Hire in-home caregivers while maintaining independence",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.wealth" }, 60] } },
+          "narration": "Professional caregivers visit daily. Your parents keep their routines, their home, their dignity. You check in regularly, a son or daughter again rather than a nurse. It's the right balance—or so it seems from the outside.",
+          "statChanges": {
+            "wealth": -18,
+            "happiness": 8,
+            "family": 8,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "parents-maintained-independence"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.wealth" }, 60] } },
+          "narration": "The caregivers are a godsend, but the bills pile up faster than expected. You start a second job, telling yourself it's temporary. Your parents feel like guests in their own home, watched by strangers. The strain shows.",
+          "statChanges": {
+            "wealth": -12,
+            "happiness": -5,
+            "physical": -8,
+            "family": 5
+          },
+          "consequences": {
+            "tag": "parents-care-financial-strain"
+          }
+        }
+      ]
+    }
+  ]
+}

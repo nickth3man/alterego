@@ -1,0 +1,95 @@
+{
+  "id": "middle-adulthood-mortality-check",
+  "category": "physical",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "story",
+  "title": "The Diagnostic",
+  "description": "The doctor's office is too quiet. You sit in the paper gown, waiting for results that will determine how you spend whatever time remains. The word 'possible' hangs in the air. More tests needed. More waiting. Your body has become foreign territory—could fail you at any moment.",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "face-it-bravely",
+      "label": "Face whatever comes with courage",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 60] } },
+          "narration": "You breathe. You accept. Whatever the diagnosis, you will meet it. This body has carried you through decades—it's earned your patience now. The tests come back negative. The scare changes you anyway: you stop taking time for granted.",
+          "statChanges": {
+            "resilience": 15,
+            "happiness": 10,
+            "confidence": 8,
+            "physical": 5
+          },
+          "consequences": {
+            "tag": "survived-mortality-scare"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 60] } },
+          "narration": "You crumble in the waiting room, then pull yourself together. Fear doesn't change the results—only how you face them. The scare turns out to be minor. You promise yourself you'll live differently, but old habits return like tides.",
+          "statChanges": {
+            "resilience": 8,
+            "happiness": -5,
+            "physical": -3
+          },
+          "consequences": {
+            "tag": "frightened-by-mortality"
+          }
+        }
+      ]
+    },
+    {
+      "id": "focus-on-what-matters",
+      "label": "Immediately reorganize your priorities",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You call your children. You apologize to old friends. You book the trip you've deferred for years. If time is shorter than you thought, then wasting it is unforgivable. The test results arrive: nothing serious. You don't regret the rush.",
+          "statChanges": {
+            "happiness": 12,
+            "independence": 10,
+            "empathy": 8,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "seized-the-day"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-alternative-medicine",
+      "label": "Pursue every alternative treatment available",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You overhaul your diet, try meditation retreats, visit healers others recommend. Some methods help, some are placebo. You feel more in control of your body, regardless. The conventional tests turn out fine. You've learned to listen to your body differently.",
+          "statChanges": {
+            "physical": 10,
+            "happiness": 8,
+            "resilience": 5,
+            "independence": 7
+          },
+          "consequences": {
+            "tag": "holistic-health-journey"
+          }
+        }
+      ]
+    }
+  ]
+}

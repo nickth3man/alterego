@@ -1,0 +1,79 @@
+{
+  "id": "adolescence-sibling-rivalry",
+  "category": "family",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "fill",
+  "title": "The Golden Child",
+  "description": "Your sibling gets praised for the same things you get criticized for. Tonight at dinner, it happens again. Your parents don't even notice.",
+  "moods": [
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "explode",
+      "label": "Explode at the dinner table",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You throw down your fork and shout everything you've been holding in. The food goes cold. Your sibling looks stunned. Your parents look bewildered.",
+          "statChanges": {
+            "family": -15,
+            "confidence": 10,
+            "happiness": -10
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "talk-privately",
+      "label": "Pull your parent aside later and talk privately",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Your parent listens. They seem surprised. 'I didn't realize,' they say. It doesn't fix everything, but it's a start.",
+          "statChanges": {
+            "empathy": 12,
+            "family": 10,
+            "confidence": 5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "connect-with-sibling",
+      "label": "Talk to your sibling instead",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You find your sibling in their room later. 'I'm not mad at you,' you say. They look relieved. 'I'm tired of being compared too.' You actually bond over this.",
+          "statChanges": {
+            "empathy": 15,
+            "family": 12,
+            "happiness": 8
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

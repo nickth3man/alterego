@@ -1,0 +1,115 @@
+{
+  "id": "young-adult-first-heartbreak",
+  "category": "emotional",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 28] }
+      ]
+    }
+  },
+  "weight": 20,
+  "priority": "weighted",
+  "title": "The Breakup",
+  "description": "It's 11 PM when Jordan texts: 'We need to talk.' Your stomach drops. They come over, and the words tumble out—'It's not you, it's me,' 'I need to find myself,' 'Let's stay friends.' Each cliché is a knife. You watch them gather their things. When the door closes, you're alone with the wreckage of a future you'd already built in your head.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "throw-yourself-into-work",
+      "label": "Channel grief into career",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You pour everything into work. Late nights, weekends, promotions. The pain doesn't disappear, but it gets buried under spreadsheets and deadlines. Eventually, you realize you're successful—and empty. The grief finds you years later, at 3 AM, when success can't fill the void.",
+          "statChanges": {
+            "career": 18,
+            "wealth": 12,
+            "discipline": 10,
+            "happiness": -8,
+            "empathy": -8,
+            "morality": -5
+          },
+          "consequences": {
+            "tag": "buried-grief-in-work"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heal-properly",
+      "label": "Grieve properly and heal",
+      "compatibleMoods": ["anxious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.resilience" }, 50] }
+          },
+          "narration": "You let yourself feel it—all of it. Sorrow, anger, denial. You call friends. You cry. You block Jordan on social media. Slowly, the knife dulls. Weeks later, you emerge softer, wiser, knowing you survived something that could have broken you.",
+          "statChanges": {
+            "resilience": 15,
+            "empathy": 12,
+            "happiness": 10,
+            "morality": 8,
+            "confidence": 5,
+            "independence": 8
+          },
+          "consequences": {
+            "tag": "healed-from-heartbreak"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.resilience" }, 50] }
+          },
+          "narration": "The grief overwhelms you. You can't eat, can't sleep, can't function. It takes months—maybe longer—to claw back to baseline. But you do. And when you finally surface, you vow never to love that openly again.",
+          "statChanges": {
+            "resilience": -5,
+            "happiness": -12,
+            "confidence": -8,
+            "empathy": 5,
+            "independence": 3
+          },
+          "consequences": {
+            "tag": "heartbroken-badly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rebound-quickly",
+      "label": "Rebound into a new relationship immediately",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "Within weeks, you're dating someone new—Jamie, who's everything Jordan wasn't. Or so you think. Three months in, the cracks show. You're not over Jordan; you're just using Jamie as a bandage. Eventually, Jamie notices and ends it. Two heartbreaks for the price of one.",
+          "statChanges": {
+            "happiness": -15,
+            "charm": 8,
+            "confidence": -10,
+            "morality": -12,
+            "empathy": -8
+          },
+          "consequences": {
+            "tag": "hurt-someone-in-rebound"
+          }
+        }
+      ]
+    }
+  ]
+}

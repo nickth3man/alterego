@@ -1,0 +1,115 @@
+{
+  "id": "adulthood-financial-crossroads",
+  "category": "emotional",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "<": [{ "var": "stats.wealth" }, 40] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Envelope",
+  "description": "The bank letter sits unopened on the kitchen counter for three days. Your spouse found it first, then handed it to you like a grenade. Foreclosure notice. The numbers don't lie: the medical bills, the job loss two years ago, the credit cards in the drawer. You've been running on fumes, and now the fumes have run out.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "declare-bankruptcy",
+      "label": "Declare bankruptcy for a fresh start",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "The process is humiliating. You lose the house, the car, the dream of financial security. But you also lose the crushing weight of debt. You rebuild—modestly, carefully. Your spouse holds your hand through it all. 'We'll be okay,' they say, and you believe them.",
+          "statChanges": {
+            "wealth": 15,
+            "happiness": 8,
+            "resilience": 12,
+            "confidence": 5,
+            "morality": -5,
+            "family": 5
+          },
+          "consequences": {
+            "tag": "bankruptcy-fresh-start"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "The bankruptcy tears something in you. The shame is suffocating. Your spouse grows distant. Friends you've borrowed from won't meet your eyes. You survive the legal process but struggle to survive the emotional one.",
+          "statChanges": {
+            "wealth": 10,
+            "happiness": -15,
+            "family": -12,
+            "confidence": -15,
+            "resilience": -5
+          },
+          "consequences": {
+            "tag": "bankruptcy-aftermath-struggle"
+          }
+        }
+      ]
+    },
+    {
+      "id": "work-extra-jobs",
+      "label": "Take on extra work to dig out",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "You get a second job. Then a third. Sleep becomes a luxury. Your body protests, but the numbers slowly improve. Your spouse covers things at home. The family tightens rather than fractures under the pressure. It takes three years, but you see light at the end.",
+          "statChanges": {
+            "wealth": 20,
+            "discipline": 15,
+            "physical": -12,
+            "happiness": -8,
+            "family": -5
+          },
+          "consequences": {
+            "tag": "worked-hard-to-recover"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "The extra work exhausts you, but the gigs dry up. You overextend yourself, take jobs you can't deliver on. The financial situation improves marginally while everything else deteriorates.",
+          "statChanges": {
+            "wealth": 8,
+            "physical": -10,
+            "happiness": -10,
+            "confidence": -8,
+            "morality": -5
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "downsize-everything",
+      "label": "Sell everything and start over, minimalist",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You sell the house, the second car, the furniture you never used. You move into a modest apartment. The kids share a room. Your spouse looks at the stack of moving boxes and says, 'Is this really our life now?' And then, slowly, 'Actually, I think I like it.' You discover that less can be more.",
+          "statChanges": {
+            "wealth": 18,
+            "happiness": 10,
+            "independence": 15,
+            "family": 5,
+            "creativity": 8,
+            "physical": 5
+          },
+          "consequences": {
+            "tag": "minimalist-life-reboot"
+          }
+        }
+      ]
+    }
+  ]
+}

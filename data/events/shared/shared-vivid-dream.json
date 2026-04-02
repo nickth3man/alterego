@@ -1,0 +1,86 @@
+{
+  "id": "shared-vivid-dream",
+  "category": "emotional",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 5] }
+      ]
+    }
+  },
+  "weight": 13,
+  "priority": "fill",
+  "title": "A Dream That Stayed",
+  "description": "You wake suddenly, heart racing. The dream is already fading, but its emotional imprint remains—a feeling of falling, of being lost, of finding something precious, of being chased. Your pillow is damp. Was it tears?",
+  "moods": [
+    { "id": "disturbed", "label": "Disturbed", "emoji": "😰", "color": "#6366f1" },
+    { "id": "haunted", "label": "Haunted", "emoji": "👻", "color": "#8b5cf6" },
+    { "id": "wondering", "label": "Wondering", "emoji": "✨", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "try-to-remember",
+      "label": "Try to hold onto the dream",
+      "compatibleMoods": ["wondering"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You close your eyes and chase the fragments. Slowly, pieces coalesce—a house you've never seen, a face you almost recognize, words you can't quite hear. It's nonsense, probably. But it felt important. When morning comes, you sketch what you remember before it dissolves entirely.",
+          "statChanges": {
+            "creativity": 12,
+            "intellectual": 6,
+            "happiness": 4
+          },
+          "consequences": {
+            "tag": "dream-remembered"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shake-it-off",
+      "label": "Shake it off and go back to sleep",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You take a deep breath and pull the covers tighter. It's just a dream. The brain playing tricks. Eventually, sleep comes again—and when it does, there are no more dreams, just rest.",
+          "statChanges": {
+            "resilience": 5,
+            "happiness": 2
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "analyze-dream",
+      "label": "Lie awake analyzing what it might mean",
+      "compatibleMoods": ["disturbed", "haunted"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "What did it mean? You run through interpretations: falling means insecurity, being chased means avoidance. By the time dawn arrives, you've talked yourself into and out of a dozen theories. Sleep eluded you—but insight, perhaps, did not.",
+          "statChanges": {
+            "intellectual": 8,
+            "resilience": -3,
+            "happiness": -4
+          },
+          "consequences": {
+            "tag": "overanalyzed-dream"
+          }
+        }
+      ]
+    }
+  ]
+}

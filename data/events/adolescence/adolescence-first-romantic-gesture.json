@@ -1,0 +1,83 @@
+{
+  "id": "adolescence-first-romantic-gesture",
+  "category": "social",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 14] },
+        { "<=": [{ "var": "stats.age" }, 17] },
+        { ">=": [{ "var": "stats.confidence" }, 40] }
+      ]
+    }
+  },
+  "weight": 16,
+  "priority": "weighted",
+  "title": "The Grand Gesture",
+  "description": "You've liked them for months. Today feels like the day. Your heart is in your throat and your palms are sweating.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "big-public-moment",
+      "label": "Make a big public declaration",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You stand up in the cafeteria and call their name. The room goes quiet. They walk over, blushing. Either it's the most romantic moment of your life, or the most embarrassing.",
+          "statChanges": {
+            "confidence": 18,
+            "social": -10,
+            "happiness": 15
+          },
+          "consequences": {
+            "tag": "first-love",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "quiet-note",
+      "label": "Slip a heartfelt note into their bag",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You write three drafts before settling on the words. You slip it into their locker before the bell. You spend all day waiting. Their smile when they find it is worth the anxiety.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 15,
+            "charm": 8
+          },
+          "consequences": {
+            "tag": "first-love",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ask-them-alone",
+      "label": "Ask to talk to them alone after school",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You meet by the bleachers. Your voice shakes but you say exactly how you feel. They don't answer right away. Then they take your hand. No words needed.",
+          "statChanges": {
+            "confidence": 15,
+            "empathy": 10,
+            "happiness": 18
+          },
+          "consequences": {
+            "tag": "first-love",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

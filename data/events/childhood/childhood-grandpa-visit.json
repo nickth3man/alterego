@@ -1,0 +1,105 @@
+{
+  "id": "childhood-grandpa-visit",
+  "category": "emotional",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 12] },
+        { "in": ["first-fear", { "var": "stats.narrativeTags" }] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "When Grandpa Came to Visit",
+  "description": "Your grandpa hasn't been himself lately. He lives in a quiet room at the nursing home now, and when you visit, he sometimes calls you by your mother's name. Today, he grabs your hand and says he has something important to tell you.",
+  "moods": [
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "angry", "label": "Angry", "emoji": "😠", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "listen-close",
+      "label": "Lean in and listen carefully",
+      "compatibleMoods": ["thoughtful", "scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.empathy" }, 40] }
+          },
+          "narration": "You hold his thin hand and listen. He tells you about when he was a boy, how he once ran away from home and found his way back. 'The important thing,' he says, 'is you always find your way back to the people who love you.' You don't fully understand, but you feel the weight of his words.",
+          "statChanges": {
+            "empathy": 10,
+            "morality": 6,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "received-grandpa-wisdom"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.empathy" }, 40] }
+          },
+          "narration": "You fidget as Grandpa talks about the past. His stories feel long and confusing. But when he squeezes your hand and smiles, something warm passes between you—a connection that doesn't need words.",
+          "statChanges": {
+            "empathy": 5,
+            "happiness": 3
+          },
+          "consequences": {
+            "tag": "received-grandpa-wisdom"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pull-away",
+      "label": "Pull away, it's too strange",
+      "compatibleMoods": ["angry", "scared"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You pull your hand away when he calls you by the wrong name again. Your mom gently takes you out of the room. Later, you feel guilty—especially when you see your mom crying in the kitchen.",
+          "statChanges": {
+            "empathy": -5,
+            "happiness": -6,
+            "morality": -3
+          },
+          "consequences": {
+            "tag": "pulled-away-from-grandpa"
+          }
+        }
+      ]
+    },
+    {
+      "id": "distract-him",
+      "label": "Ask him to play cards instead",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You suggest the card game you used to play together. Grandpa's face lights up. For an hour, you play go-fish, and he remembers every card, every rule. The fog seems to lift, just for a moment. 'You always were my favorite,' he whispers.",
+          "statChanges": {
+            "empathy": 7,
+            "happiness": 8,
+            "charm": 5
+          },
+          "consequences": {
+            "tag": "brought-joy-to-grandpa"
+          }
+        }
+      ]
+    }
+  ]
+}

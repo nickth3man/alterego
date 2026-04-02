@@ -1,0 +1,110 @@
+{
+  "id": "middle-adulthood-course-correction",
+  "category": "emotional",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "fill",
+  "title": "The U-Turn",
+  "description": "You've built a life on certain foundations. But standing here now, at this age, you see clearly that some of those foundations are cracked. Your career no longer fulfills. Your relationships feel hollow. Your daily rhythms are comfortable but empty. The question isn't whether to change—it's whether you have the courage.",
+  "moods": [
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "make-the-break",
+      "label": "Make the break—radically change course",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.riskTolerance" }, 50] } },
+          "narration": "You quit the job that drains you. You leave the marriage that's been over for years. You move to a smaller place, simpler life. People call you reckless, but for the first time in decades, you feel alive. The uncertainty is terrifying. It's also freedom.",
+          "statChanges": {
+            "independence": 15,
+            "happiness": 15,
+            "confidence": 12,
+            "riskTolerance": 10,
+            "wealth": -10,
+            "resilience": 8
+          },
+          "consequences": {
+            "tag": "radical-life-change"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.riskTolerance" }, 50] } },
+          "narration": "You try to make changes but the fear is paralyzing. You return to your old life, tail between your legs. The misery feels worse knowing you almost escaped. But almost isn't nothing—you know what's possible now.",
+          "statChanges": {
+            "happiness": -12,
+            "confidence": -10,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "failed-escape"
+          }
+        }
+      ]
+    },
+    {
+      "id": "incremental-changes",
+      "label": "Make smaller, sustainable changes",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 50] } },
+          "narration": "You begin with small adjustments. A new hobby on weekends. Softer words with your spouse. Networking in a field that interests you. The changes compound. You don't feel like a different person—but you're becoming one, slowly, sustainably.",
+          "statChanges": {
+            "happiness": 12,
+            "discipline": 10,
+            "confidence": 8,
+            "empathy": 5,
+            "resilience": 7
+          },
+          "consequences": {
+            "tag": "slow-transformation"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 50] } },
+          "narration": "Your good intentions fade within weeks. Old patterns reassert themselves. You realize that some people can change, and some people can't—not won't, can't. Maybe acceptance is the only path left.",
+          "statChanges": {
+            "happiness": -5,
+            "discipline": 3,
+            "resilience": -3
+          },
+          "consequences": {
+            "tag": "change-attempted-failed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "find-meaning-within",
+      "label": "Find meaning within your current circumstances",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You can't change everything—but you can change how you see it. You begin volunteering. You fix the relationship with your adult child. You discover that fulfillment was always possible; you were just looking in the wrong places. Home was always here.",
+          "statChanges": {
+            "happiness": 10,
+            "empathy": 12,
+            "morality": 10,
+            "resilience": 8,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "found-meaning-within"
+          }
+        }
+      ]
+    }
+  ]
+}

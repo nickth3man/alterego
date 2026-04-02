@@ -1,0 +1,105 @@
+{
+  "id": "adulthood-reunion-old-friend",
+  "category": "social",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "The Facebook Message",
+  "description": "A message from someone you haven't thought about in fifteen years: 'Hey stranger. I know it's been forever, but I saw your name come up and I had to reach out. It's me, Marcus. From the band? From the apartment on 5th? I looked you up and—man, you ended up doing some incredible stuff. Can we grab coffee? I promise I won't ask for anything. Just want to catch up.'",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "meet-and-reconnect",
+      "label": "Meet for coffee—reconnect with the past",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You meet at a cafe downtown. Marcus has gray at his temples now, laugh lines carved deep. The years fall away as you talk—about the stupid stuff, about the hard stuff, about where you went wrong and somehow found your way right. He doesn't want anything. He just missed you. You realize you missed yourself, too.",
+          "statChanges": {
+            "happiness": 12,
+            "empathy": 8,
+            "charm": 5,
+            "independence": 5,
+            "creativity": 5
+          },
+          "consequences": {
+            "tag": "reconnected-old-friend",
+            "relationshipChanges": [
+              { "npcId": "marcus", "delta": 25 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "polite-decline",
+      "label": "Send a polite reply but don't follow through",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You type three drafts before settling on something friendly but noncommittal. 'So great to hear from you! Let's definitely catch up soon.' You never schedule. He stops messaging after a month. Some doors close quietly.",
+          "statChanges": {
+            "happiness": -3,
+            "confidence": -5,
+            "independence": 3,
+            "social": -5
+          },
+          "consequences": {
+            "tag": "old-friend-faded"
+          }
+        }
+      ]
+    },
+    {
+      "id": "embrace-new-friendship",
+      "label": "Welcome him fully back into your life",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 55] } },
+          "narration": "You don't just meet once—you start meeting regularly. Sunday mornings, bad coffee, better conversation. Marcus becomes part of your present, not just a relic of your past. He introduces you to his kids. You introduce him to your spouse. A friendship picked up where it left off finds new roots.",
+          "statChanges": {
+            "happiness": 18,
+            "empathy": 12,
+            "charm": 8,
+            "independence": 8,
+            "family": 5,
+            "social": 10
+          },
+          "consequences": {
+            "tag": "reconnected-old-friend-deeply",
+            "relationshipChanges": [
+              { "npcId": "marcus", "delta": 40 }
+            ]
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 55] } },
+          "narration": "You try. But the friendship that felt effortless twenty years ago now requires effort you're not sure you have. He's changed; so have you. The visits grow further apart until they stop. Some things, it turns out, belong in the past.",
+          "statChanges": {
+            "happiness": 5,
+            "empathy": 3,
+            "confidence": -3,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "friendship-attempted-but-faded"
+          }
+        }
+      ]
+    }
+  ]
+}

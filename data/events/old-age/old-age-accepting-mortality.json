@@ -1,0 +1,99 @@
+{
+  "id": "old-age-accepting-mortality",
+  "category": "emotional",
+  "lifeStages": ["old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 76] },
+        { "<=": [{ "var": "stats.age" }, 100] }
+      ]
+    }
+  },
+  "weight": 6,
+  "priority": "fill",
+  "title": "The Final Door",
+  "description": "You stand at the window watching the seasons change—leaves falling, snow coming, then green again. You've witnessed so many cycles. The question settles quietly now, not with fear but with curiosity: when your time comes, how will you meet it? What do you want your final chapter to say?",
+  "moods": [
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "wise", "label": "Wise", "emoji": "🦉", "color": "#8b5cf6" },
+    { "id": "grateful", "label": "Grateful", "emoji": "🙏", "color": "#f59e0b" },
+    { "id": "regretful", "label": "Regretful", "emoji": "😔", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "embrace-completion",
+      "label": "See death as completion, not ending",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "You've lived a full life—more than many. You've loved, lost, learned, grown. The idea of death no longer frightens you; it's simply the final page of a story you've done your best to write well. You make final arrangements with calm. You write goodbye letters. You find peace.",
+          "statChanges": {
+            "happiness": 10,
+            "resilience": 10,
+            "confidence": 8,
+            "independence": 5,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "found-peace-with-death"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 50] } },
+          "narration": "You try to accept it, but fear lingers. Not of death itself, but of leaving things unsaid, undone. You make calls. You write letters. You clear debts. The acceptance comes slowly, but it comes. 'I'm not ready,' you admit, 'but I'm less afraid than I was.'",
+          "statChanges": {
+            "happiness": 5,
+            "resilience": 8,
+            "empathy": 5,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "working-toward-acceptance"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cherish-each-day",
+      "label": "Focus on squeezing every drop from remaining days",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You stop planning for distant futures. Every morning is a gift. You call friends you've neglected. You eat dessert first. You watch sunsets without checking the time. The days feel longer, richer. You've learned to live in the present tense—truly present—for perhaps the first time.",
+          "statChanges": {
+            "happiness": 12,
+            "independence": 8,
+            "confidence": 5,
+            "empathy": 5,
+            "physical": -3
+          },
+          "consequences": {
+            "tag": "living-fully-until-end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reflect-on-meaning",
+      "label": "Spend time in quiet reflection on what it all meant",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You sit in silence, reviewing the film of your life. The early struggles, the middle achievements, the late wisdom. You weren't always good, but you tried. You weren't always happy, but you persisted. The meaning you find isn't grand—it's simple. You did your best. That has to be enough. And somehow, it is.",
+          "statChanges": {
+            "happiness": 8,
+            "morality": 8,
+            "resilience": 7,
+            "intellectual": 5,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "found-meaning-in-life-review"
+          }
+        }
+      ]
+    }
+  ]
+}

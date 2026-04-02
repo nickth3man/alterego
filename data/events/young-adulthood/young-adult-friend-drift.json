@@ -1,0 +1,107 @@
+{
+  "id": "young-adult-friend-drift",
+  "category": "social",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 22] },
+        { "<=": [{ "var": "stats.age" }, 32] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "Growing in Different Directions",
+  "description": "Your best friend Jamie from college calls. 'We should hang soon,' they say, but the conversation feels hollow. Jamie is married, has a stable career, talks about mortgages and baby names. You're still figuring things out—dating around, switching jobs, exploring. You used to finish each other's sentences. Now you're strangers.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "fight-for-friendship",
+      "label": "Make an effort to reconnect",
+      "compatibleMoods": ["hopeful", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.empathy" }, 50] }
+          },
+          "narration": "You invite Jamie for a weekend hike—just like old times. At first it's awkward, but as you climb and talk, something clicks. You learn about their fears of being trapped by responsibility. They learn about your fears of being left behind. By the summit, you're laughing again. Different lives, but still connected.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 10,
+            "confidence": 6,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "rekindled-friendship"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.empathy" }, 50] }
+          },
+          "narration": "You try to reconnect, but the conversation stalls. You don't understand Jamie's concerns about work-life balance. Jamie doesn't get your career anxiety. After coffee, you part with hugs that feel obligatory. Maybe some drifts are inevitable.",
+          "statChanges": {
+            "happiness": -6,
+            "empathy": 5,
+            "confidence": 3
+          },
+          "consequences": {
+            "tag": "drifted-apart"
+          }
+        }
+      ]
+    },
+    {
+      "id": "let-go-gracefully",
+      "label": "Accept the drift and wish them well",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You text Jamie: 'Life takes us different places. I'm glad we had our time. I hope you're happy.' They reply with a heart emoji. It hurts—mourning someone still alive—but you make peace with chapter endings.",
+          "statChanges": {
+            "morality": 8,
+            "resilience": 10,
+            "happiness": -5,
+            "independence": 8
+          },
+          "consequences": {
+            "tag": "accepted-friendship-fade"
+          }
+        }
+      ]
+    },
+    {
+      "id": "force-connection",
+      "label": "Force regular hangouts despite incompatibility",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You schedule monthly dinners, but they feel like obligations. Jamie talks about parent-teacher conferences while you're dying inside. You start canceling last minute. They stop asking. Another slow death.",
+          "statChanges": {
+            "happiness": -10,
+            "confidence": -5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "forced-friendship-faded"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "adulthood-family-tradition",
+  "category": "family",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "==": [{ "var": "stats.hasChildren" }, true] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "weighted",
+  "title": "The Sunday Ritual",
+  "description": "Every Sunday for fifteen years, your family has gathered for dinner. The ritual started when the children were small—spaghetti Sunday, you called it. Now the children are teenagers who roll their eyes at the idea. Your spouse suggests skipping it this week. 'They'll appreciate it when they're older,' you say, but even you wonder if the tradition has run its course.",
+  "moods": [
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "keep-tradition",
+      "label": "Keep the tradition—nostalgia is its own gift",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You insist. The teenagers sulk. The pasta is slightly overcooked. But halfway through the meal, your oldest starts telling a story from childhood. Then your spouse adds to it. Then even the sulkiest teenager laughs. The food was just an excuse. The point was always showing up.",
+          "statChanges": {
+            "family": 12,
+            "happiness": 10,
+            "confidence": 5,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "family-tradition-sustained"
+          }
+        }
+      ]
+    },
+    {
+      "id": "evolve-tradition",
+      "label": "Evolve the tradition—let the kids choose",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You pass the torch. 'You pick the restaurant. You pick the activity. This is your family now.' The first month, they choose pizza and a movie. The second month, they cook something ambitious and burn half of it. By the third month, they're fighting over whose turn it is to host. It's chaotic. It's alive.",
+          "statChanges": {
+            "family": 15,
+            "empathy": 10,
+            "independence": 8,
+            "creativity": 8,
+            "happiness": 8
+          },
+          "consequences": {
+            "tag": "family-tradition-evolved"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You hand over control, but the suggestions fall flat. Your teenager chooses something you'd never enjoy. The restaurant is too loud. The movie is too long. 'Maybe next time we can—' you start, but they hear the resignation. The tradition doesn't die, exactly. It just becomes another thing you do because you always have.",
+          "statChanges": {
+            "family": 3,
+            "happiness": -3,
+            "empathy": 3,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "family-tradition-strained"
+          }
+        }
+      ]
+    },
+    {
+      "id": "let-it-go",
+      "label": "Let it go—family will find its own way",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You stop pushing. Sundays become individual—everyone scattered to their own devices, their own friends. It's peaceful. It's lonely. Years later, your children don't remember the Sunday dinners with any particular fondness. They remember the Sunday they learned to make their own traditions.",
+          "statChanges": {
+            "family": -8,
+            "independence": 15,
+            "happiness": 5,
+            "confidence": 5
+          },
+          "consequences": {
+            "tag": "family-tradition-ended"
+          }
+        }
+      ]
+    }
+  ]
+}

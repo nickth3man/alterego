@@ -1,0 +1,82 @@
+{
+  "id": "adolescence-friendship-betrayal",
+  "category": "social",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 14] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 22,
+  "priority": "weighted",
+  "title": "The Whisper",
+  "description": "A secret you told your best friend spreads through the school like wildfire. Everyone knows. Everyone laughs.",
+  "moods": [
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "confront-friend",
+      "label": "Confront your best friend",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You find them at their locker. Your voice shakes. They deny it at first, then finally say 'I didn't think it was a big deal.' It was to you.",
+          "statChanges": {
+            "confidence": 12,
+            "empathy": -5,
+            "happiness": -10
+          },
+          "consequences": {
+            "tag": "betrayed-friend",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "make-new-friends",
+      "label": "Walk away and find new people",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You stop sitting with them at lunch. You find others who appreciate you. It hurts, but you realize you were giving too much to people who didn't deserve it.",
+          "statChanges": {
+            "social": -8,
+            "resilience": 15,
+            "confidence": 10
+          },
+          "consequences": {
+            "tag": "betrayed-friend",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "forgive-them",
+      "label": "Try to forgive them",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You tell them you want to move past it. They seem genuinely sorry. But something is broken—you can't quite be yourself around them anymore.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": -5,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "betrayed-friend",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

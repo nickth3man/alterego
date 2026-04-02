@@ -1,0 +1,99 @@
+{
+  "id": "adulthood-health-wake-up",
+  "category": "physical",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "<": [{ "var": "stats.physical" }, 60] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Doctor's Office",
+  "description": "The blood pressure cuff tightens. Your doctor's expression is unreadable. 'We need to talk about your lifestyle,' she says. High blood pressure. Elevated cholesterol. The words blur together. You're 42. You always thought you'd have more time.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "overhaul-lifestyle",
+      "label": "Commit to a complete lifestyle overhaul",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "You join a gym, hire a trainer, change your diet. The first months are brutal. But slowly, the numbers improve. Your doctor raises an eyebrow—'Keep this up.' You feel the fog of mortality lift, replaced by something like vitality.",
+          "statChanges": {
+            "physical": 20,
+            "discipline": 12,
+            "happiness": 8,
+            "wealth": -8,
+            "confidence": 8
+          },
+          "consequences": {
+            "tag": "chose-health-over-comfort"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 55] } },
+          "narration": "You try. You really do. But the gym memberships pile up, unused. The diet lasts three weeks before the stress eating returns. The numbers don't improve. The doctor schedules a follow-up. You promise to do better.",
+          "statChanges": {
+            "physical": 5,
+            "happiness": -5,
+            "resilience": -5,
+            "discipline": 3
+          },
+          "consequences": {
+            "tag": "tried-but-failed-health-overhaul"
+          }
+        }
+      ]
+    },
+    {
+      "id": "take-medication",
+      "label": "Manage it with medication and smaller changes",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "A daily pill becomes part of your routine. You make modest changes—no more fast food for lunch, more evening walks. The crisis is quietly managed. The scare fades into memory, but the prescription remains.",
+          "statChanges": {
+            "physical": 8,
+            "happiness": 3,
+            "wealth": -5,
+            "confidence": -3
+          },
+          "consequences": {
+            "tag": "managed-health-with-medicine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ignore-warning",
+      "label": "Ignore the warning—you feel fine",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You file away the doctor's words and continue as before. You feel okay. Everyone has warnings at this age. The body keeps score, though, and someday—perhaps not today, but someday—it may present the bill.",
+          "statChanges": {
+            "physical": -10,
+            "happiness": 5,
+            "riskTolerance": 8,
+            "confidence": -5
+          },
+          "consequences": {
+            "tag": "chose-career-over-health",
+            "unlockEvents": ["adulthood-health-crisis"]
+          }
+        }
+      ]
+    }
+  ]
+}

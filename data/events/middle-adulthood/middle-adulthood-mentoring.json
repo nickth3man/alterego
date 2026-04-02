@@ -1,0 +1,94 @@
+{
+  "id": "middle-adulthood-mentoring",
+  "category": "social",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Apprentice",
+  "description": "A young person seeks you out—someone who heard you gave advice, who admires what you've built. They want guidance. They're making the same mistakes you once made, standing at crossroads you remember well. Do you have the energy to guide them? Do you have the wisdom they need?",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "mentor-fully",
+      "label": "Commit to guiding them fully",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 45] } },
+          "narration": "You meet weekly. You share successes and failures. You critique without crushing. In watching them grow, you relive your own journey—but this time, you get to see the path clearly. They call you their mentor. The word means more than you expected.",
+          "statChanges": {
+            "happiness": 15,
+            "confidence": 10,
+            "empathy": 12,
+            "morality": 8
+          },
+          "consequences": {
+            "tag": "became-mentor"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 45] } },
+          "narration": "Your advice is practical but cold. You give them tactics without heart. They eventually find another mentor—one who leads with warmth. You taught them skills, but missed an opportunity to teach them what matters most.",
+          "statChanges": {
+            "confidence": 8,
+            "career": 5,
+            "happiness": -5,
+            "empathy": -8
+          },
+          "consequences": {
+            "tag": "distant-mentor"
+          }
+        }
+      ]
+    },
+    {
+      "id": "share-conditional",
+      "label": "Share your story, but let them find their own way",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You tell them your story—successes, failures, the choices you'd make differently. 'But your path is yours,' you conclude. They leave thoughtful, perhaps better equipped to forge their own way. Teaching by example, even ambiguous example, has its own power.",
+          "statChanges": {
+            "happiness": 10,
+            "confidence": 7,
+            "independence": 8,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "shared-wisdom-carefully"
+          }
+        }
+      ]
+    },
+    {
+      "id": "decline-mentorship",
+      "label": "You're too tired—politely decline",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You explain you're not the person they think you are. 'I've made as many mistakes as successes,' you say. They leave disappointed. You wonder, later, if you should have tried. Some wisdom dies with us unless we choose to pass it on.",
+          "statChanges": {
+            "happiness": -6,
+            "independence": 5,
+            "resilience": -3
+          },
+          "consequences": {
+            "tag": "declined-mentorship"
+          }
+        }
+      ]
+    }
+  ]
+}

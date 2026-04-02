@@ -1,0 +1,112 @@
+{
+  "id": "young-adult-social-pressure",
+  "category": "social",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 24] }
+      ]
+    }
+  },
+  "weight": 22,
+  "priority": "weighted",
+  "title": "The Party You Don't Want To Attend",
+  "description": "Your coworker group is heading to an exclusive party—a networking event for people 'who matter.' Attendance is practically mandatory for advancement. But you've heard it's superficial, drinks are expensive, and you're exhausted from the week. Plus, you have a paper due and need rest. Your phone buzzes: 'You coming? Everyone's gonna be there.'",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "attend-and-network",
+      "label": "Go and work the room",
+      "compatibleMoods": ["ambitious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You put on your best suit and work the room. Shaking hands, making small talk, dropping your name strategically. You connect with a senior manager who mentions an upcoming position. Worth it—you return home at 2 AM, tired but triumphant.",
+          "statChanges": {
+            "confidence": 12,
+            "career": 10,
+            "wealth": 8,
+            "happiness": 5,
+            "independence": -8
+          },
+          "consequences": {
+            "tag": "played-the-game"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You go but feel like a fish out of water. Your conversations stumble. The senior manager you approached looks at their watch mid-sentence. By midnight, you're hiding in a corner, nursing a drink, wishing you'd stayed home.",
+          "statChanges": {
+            "confidence": -8,
+            "happiness": -10,
+            "career": 3,
+            "independence": -5
+          },
+          "consequences": {
+            "tag": "fumbled-networking"
+          }
+        }
+      ]
+    },
+    {
+      "id": "skip-for-self-care",
+      "label": "Skip the party for rest and priorities",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You text: 'Can't make it, sorry!' then silence your phone. You finish your paper, sleep deep, and wake refreshed. Monday, people ask where you were. You shrug. 'Had priorities.' Some respect it. Others don't.",
+          "statChanges": {
+            "independence": 12,
+            "discipline": 10,
+            "happiness": 8,
+            "career": -5,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "chose-self-over-career"
+          }
+        }
+      ]
+    },
+    {
+      "id": "half-attend",
+      "label": "Show up briefly then leave",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You arrive, take a few photos for social proof, shake a few hands, then slip out after 45 minutes. Back home by 10 PM. It's the worst of both worlds—you expended energy AND missed the full opportunity.",
+          "statChanges": {
+            "confidence": -5,
+            "happiness": -6,
+            "independence": 5,
+            "career": 2
+          },
+          "consequences": {
+            "tag": "half-committed"
+          }
+        }
+      ]
+    }
+  ]
+}

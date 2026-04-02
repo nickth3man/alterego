@@ -1,0 +1,82 @@
+{
+  "id": "adolescence-first-heartbreak",
+  "category": "emotional",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 14] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "story",
+  "title": "First Heartbreak",
+  "description": "You walk home in the rain after the person you trusted most tells you they never felt the same way. The ache in your chest feels like it might never end.",
+  "moods": [
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "push-it-down",
+      "label": "Push it down and keep walking",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You don't let them see you cry. You hold your head high and pretend it doesn't hurt. Inside, something hardens—a wall you didn't mean to build.",
+          "statChanges": {
+            "resilience": 10,
+            "happiness": -12,
+            "empathy": -5
+          },
+          "consequences": {
+            "tag": "first-heartbreak",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "let-it-hurt",
+      "label": "Let yourself feel it",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You sit on a bench and let the tears come. It feels endless, but eventually the rain and tears wash something away—leaving space for something new.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": -8,
+            "resilience": 8
+          },
+          "consequences": {
+            "tag": "first-heartbreak",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "confront-them",
+      "label": "Go back and demand answers",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You turn around and find them. Your voice shakes but you don't back down. They look uncomfortable but honest. The closure is messy, but it's yours.",
+          "statChanges": {
+            "confidence": 15,
+            "charm": -5,
+            "happiness": -5
+          },
+          "consequences": {
+            "tag": "first-heartbreak",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

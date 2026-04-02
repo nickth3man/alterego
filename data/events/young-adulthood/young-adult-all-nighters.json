@@ -1,0 +1,128 @@
+{
+  "id": "young-adult-all-nighters",
+  "category": "physical",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 30] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "Burning the Midnight Oil",
+  "description": "Deadline: 8 AM. It's midnight. Your project is due in hours and you're nowhere near done. Coffee dregs sit cold on your desk. Your eyes burn. You've been staring at the screen for six hours. You could push through and finish, or admit you need rest and submit what you have.",
+  "moods": [
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "power-through",
+      "label": "Push through until it's done",
+      "compatibleMoods": ["ambitious", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.discipline" }, 60] }
+          },
+          "narration": "You crack your knuckles and dive back in. The hours blur. At 6:47 AM, you hit submit with trembling hands. It's not your best work, but it's done. You collapse into bed as the sun rises, victorious.",
+          "statChanges": {
+            "discipline": 12,
+            "intellectual": 8,
+            "happiness": 6,
+            "physical": -10,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "proved-determination"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.discipline" }, 60] }
+          },
+          "narration": "You try to push through but keep drifting. Text blurs. Ideas scatter. You submit at 7:58 AM—a mess of half-formed arguments and typos. The grade reflects your exhaustion. The next day, you're useless.",
+          "statChanges": {
+            "intellectual": -8,
+            "happiness": -10,
+            "physical": -12,
+            "confidence": -5
+          },
+          "consequences": {
+            "tag": "burned-out-failed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sleep-and-submit-early",
+      "label": "Get some sleep and submit partial work",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You set an alarm for 5 AM, crash for four hours, then finish what you can. It's not complete, but it's decent. The professor deducts for missing parts but acknowledges the quality of what was submitted. You learn an important lesson about sustainable pace.",
+          "statChanges": {
+            "physical": 5,
+            "intellectual": 5,
+            "resilience": 6,
+            "happiness": -3,
+            "discipline": -5
+          },
+          "consequences": {
+            "tag": "prioritized-health"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ask-extension",
+      "label": "Ask for an extension",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You email the professor honestly—family emergency, working on it, requesting 48 hours. To your surprise, they grant it. You submit quality work two days later. Sometimes vulnerability is strength.",
+          "statChanges": {
+            "charm": 10,
+            "morality": 8,
+            "happiness": 6,
+            "independence": -5,
+            "intellectual": 3
+          },
+          "consequences": {
+            "tag": "advocated-for-self"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You ask for an extension but stumble over your words, sounding like an excuse. The professor says no—rules are rules. You submit mediocre work on time, resentful and exhausted.",
+          "statChanges": {
+            "happiness": -12,
+            "confidence": -8,
+            "morality": -5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "extension-denied"
+          }
+        }
+      ]
+    }
+  ]
+}

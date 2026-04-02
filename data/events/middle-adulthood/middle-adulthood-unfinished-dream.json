@@ -1,0 +1,92 @@
+{
+  "id": "middle-adulthood-unfinished-dream",
+  "category": "vocational",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "weighted",
+  "title": "The Book in the Drawer",
+  "description": "You find it while cleaning—the manuscript you started twenty years ago, yellowed now, pages brittle. The characters you'd created still wait in their frozen moments. The dream you shelved for 'when the time is right' is asking one last time: is it too late?",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "resolute", "label": "Resolute", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "write-finish-it",
+      "label": "Sit down and finish what you started",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.creativity" }, 50] } },
+          "narration": "Your fingers remember. The words flow—haltingly at first, then stronger. Months later, you type 'The End.' It's not perfect, but it's finished. You did something just for you, not for survival or family. That matters.",
+          "statChanges": {
+            "creativity": 15,
+            "happiness": 12,
+            "confidence": 10
+          },
+          "consequences": {
+            "tag": "completed-unfinished-dream"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.creativity" }, 50] } },
+          "narration": "You try, but the words won't come the way they used to. Frustrated, you put it away again—but this time, the decision feels final. You find other ways to express yourself: photography, cooking, woodworking. Creation takes many forms.",
+          "statChanges": {
+            "happiness": 5,
+            "creativity": 8,
+            "resilience": 5
+          },
+          "consequences": {
+            "tag": "pursued-alternative-creativity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "let-it-go",
+      "label": "Let the dream go gracefully",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You burn the manuscript in the backyard. It feels like sacrilege and liberation at once. The smoke carries away decades of 'what if.' You realize you don't need to finish every dream—some dreams exist to remind us who we once wanted to be.",
+          "statChanges": {
+            "happiness": 8,
+            "resilience": 10,
+            "independence": 7
+          },
+          "consequences": {
+            "tag": "released-old-dreams"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pass-it-on",
+      "label": "Pass the dream to someone who can fulfill it",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Your grandchild's eyes light up when you show them the old manuscript. 'Can you teach me?' they ask. In teaching the craft you once loved, you find new joy. Perhaps the dream was never about the book itself, but the act of creating.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 15,
+            "creativity": 5,
+            "morality": 8
+          },
+          "consequences": {
+            "tag": "passed-creative-legacy"
+          }
+        }
+      ]
+    }
+  ]
+}

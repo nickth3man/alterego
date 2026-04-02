@@ -1,0 +1,127 @@
+{
+  "id": "adulthood-health-commitment",
+  "category": "physical",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "<": [{ "var": "stats.physical" }, 70] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "fill",
+  "title": "The 5 AM Alarm",
+  "description": "Your friend trains for marathons. Your coworker does CrossFit. Your spouse takes yoga on Sundays. You've been saying 'I should start exercising' for years. Last week, you couldn't carry the groceries up a flight of stairs without pausing. Something shifted. This morning, you set an alarm for 5 AM.",
+  "moods": [
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "commit-morning-routine",
+      "label": "Commit to a consistent morning routine",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.discipline" }, 50] } },
+          "narration": "The first week is brutal. Your body screams. Your bed calls. But you show up, every single day, 5 AM sharp. Slowly, the body adapts. The energy returns. Your doctor raises an eyebrow at your next checkup. 'Whatever you're doing, keep doing it.'",
+          "statChanges": {
+            "physical": 20,
+            "discipline": 15,
+            "happiness": 12,
+            "confidence": 8,
+            "wealth": -5
+          },
+          "consequences": {
+            "tag": "built-fitness-habit"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.discipline" }, 50] } },
+          "narration": "You make it four days before skipping. Then three. Then you silence the alarm entirely. The intention was there. The follow-through wasn't. The 5 AM alarm becomes a symbol of another failed start.",
+          "statChanges": {
+            "discipline": 3,
+            "happiness": -5,
+            "confidence": -8
+          },
+          "consequences": {
+            "tag": "started-fitness-but-quit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "find-accountability",
+      "label": "Find a workout partner for accountability",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 45] } },
+          "narration": "You convince your spouse to join you. What starts as obligation becomes ritual, then habit, then quality time. You compete on Strava. You argue about protein shakes. The weight comes off, but more importantly, you do it together.",
+          "statChanges": {
+            "physical": 18,
+            "family": 12,
+            "discipline": 10,
+            "happiness": 10,
+            "wealth": -8
+          },
+          "consequences": {
+            "tag": "fitness-with-spouse",
+            "relationshipChanges": [
+              { "npcId": "spouse", "delta": 15 }
+            ]
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 45] } },
+          "narration": "You find a gym buddy online. For a month, it's great. Then they cancel. Then you cancel. Then you both stop responding. The solitary path proves lonelier than expected.",
+          "statChanges": {
+            "physical": 8,
+            "discipline": 5,
+            "happiness": -3,
+            "social": -5
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "join-classes",
+      "label": "Join group fitness classes",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.social" }, 50] } },
+          "narration": "Spin class on Tuesdays. Yoga on Thursdays. The community pulls you in. You know the regulars, trade tips, celebrate each other's PRs. The exercise has become secondary to the belonging. You look forward to 5 AM for the first time in your life.",
+          "statChanges": {
+            "physical": 15,
+            "social": 15,
+            "happiness": 12,
+            "confidence": 8,
+            "discipline": 5,
+            "wealth": -8
+          },
+          "consequences": {
+            "tag": "found-fitness-community"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.social" }, 50] } },
+          "narration": "The gym feels like a foreign country. Everyone seems to know each other. You slink in, work out alone, slink out. The classes intimidate more than inspire. You switch gyms twice. Nothing sticks.",
+          "statChanges": {
+            "physical": 8,
+            "happiness": -3,
+            "confidence": -5,
+            "social": -3
+          },
+          "consequences": {
+            "tag": "couldnt-find-fitness-community"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "id": "young-adult-roommate-conflict",
+  "category": "social",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 25] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Roommate Agreement",
+  "description": "Your roommate Alex hasn't done dishes in three weeks. The sink is full. Mold is forming. You've talked to them twice already, but they deflect with jokes or 'I'll do it tomorrow.' Tonight, you come home to find your favorite cereal box emptied and not replaced.",
+  "moods": [
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "confront-hard",
+      "label": "Have a serious confrontation",
+      "compatibleMoods": ["resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.confidence" }, 50] }
+          },
+          "narration": "You lay down the law—clean up or move out. Alex stares, stunned by your fire. For a moment, tension crackles. Then they sigh, nod, and start washing dishes. 'Fair enough,' they mutter. The apartment stays clean after that, and something shifts between you—respect.",
+          "statChanges": {
+            "confidence": 12,
+            "resilience": 8,
+            "happiness": 6,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "set-boundaries-cleanly"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.confidence" }, 50] }
+          },
+          "narration": "You try to be firm, but your voice shakes. Alex rolls their eyes and says you're 'overreacting.' The fight fizzles into cold silence. You spend the next month dodging each other in the kitchen, tension poisoning the air of your own home.",
+          "statChanges": {
+            "confidence": -8,
+            "happiness": -10,
+            "independence": 3
+          },
+          "consequences": {
+            "tag": "failed-to-set-boundaries"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-mediation",
+      "label": "Suggest a formal roommate agreement",
+      "compatibleMoods": ["anxious", "hopeful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You draft a chore schedule, set rules for shared items, and propose a 'dishes within 24 hours' policy. Alex eyes it skeptically at first, then laughs. 'You're serious.' But they sign it anyway. Having clear expectations transforms the dynamic—accountability replaces resentment.",
+          "statChanges": {
+            "intellectual": 10,
+            "discipline": 8,
+            "happiness": 5,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "resolved-conflict-maturity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "avoid-and-suffer",
+      "label": "Avoid the conflict and cope poorly",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You buy paper plates, hide your food in your room, and avoid common spaces. Passive-aggressive notes appear. Then silent treatments. By the lease end, you and Alex haven't spoken in two months. Moving out feels like escaping a prison.",
+          "statChanges": {
+            "happiness": -12,
+            "independence": 8,
+            "resilience": -5,
+            "morality": -4
+          },
+          "consequences": {
+            "tag": "avoided-conflict-unhealthy"
+          }
+        }
+      ]
+    }
+  ]
+}

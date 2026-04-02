@@ -1,0 +1,96 @@
+{
+  "id": "old-age-letting-go",
+  "category": "emotional",
+  "lifeStages": ["old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 76] },
+        { "<=": [{ "var": "stats.age" }, 100] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "The Last Garage Sale",
+  "description": "You stand in the driveway surrounded by the artifacts of a life. The antique clock from your father. The painting you couldn't afford but bought anyway. Boxes of letters, old clothes, trophies from accomplishments that feel distant now. Who should have these things? Does it matter?",
+  "moods": [
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "wise", "label": "Wise", "emoji": "🦉", "color": "#8b5cf6" },
+    { "id": "grateful", "label": "Grateful", "emoji": "🙏", "color": "#f59e0b" },
+    { "id": "regretful", "label": "Regretful", "emoji": "😔", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "give-everything-away",
+      "label": "Give it all away to those who will use it",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You label everything: 'For Sarah—she always admired it.' 'For the neighbor kids.' 'Free to anyone who promises to actually use it.' The letting go feels lighter than you expected. Objects were never yours—they were just passing through, like you.",
+          "statChanges": {
+            "happiness": 10,
+            "morality": 8,
+            "independence": 8,
+            "empathy": 5
+          },
+          "consequences": {
+            "tag": "gave-away-possessions"
+          }
+        }
+      ]
+    },
+    {
+      "id": "keep-only-essentials",
+      "label": "Keep only what fits in one box",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "One box. You allow yourself one box of things that truly matter. Everything else goes—sold, donated, discarded. The exercise is clarifying: none of it was essential. What remains is a few photographs, letters, a ring. These are enough. These were always enough.",
+          "statChanges": {
+            "happiness": 12,
+            "independence": 10,
+            "resilience": 7,
+            "confidence": 5
+          },
+          "consequences": {
+            "tag": "distilled-to-essentials"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hold-on-to-memories",
+      "label": "Keep the memories, not the objects",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.intellectual" }, 50] } },
+          "narration": "You photograph everything. You write descriptions, provenance, stories. The objects go, but the record remains—for your children, for archives, for anyone who wants to know. Memory preserved in different form. You've become your own archivist.",
+          "statChanges": {
+            "intellectual": 10,
+            "happiness": 8,
+            "creativity": 7,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "documented-legacy"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.intellectual" }, 50] } },
+          "narration": "You can't bear to photograph and catalog everything. Instead, you hold each object one last time, remember its story, then release it. The stories stay; the things don't. A different kind of preservation—one that doesn't require archives.",
+          "statChanges": {
+            "happiness": 10,
+            "empathy": 8,
+            "resilience": 5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "released-with-remembrance"
+          }
+        }
+      ]
+    }
+  ]
+}

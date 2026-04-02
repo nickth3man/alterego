@@ -1,0 +1,92 @@
+{
+  "id": "shared-quiet-night",
+  "category": "emotional",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 6] }
+      ]
+    }
+  },
+  "weight": 9,
+  "priority": "fill",
+  "title": "The Quiet Night",
+  "description": "The house is still. Everyone else is asleep. You sit alone in the darkness—on a rooftop, by a window, at the kitchen table—and feel the strange weight of the world at 3 a.m. Thoughts you've been avoiding bubble up.",
+  "moods": [
+    { "id": "melancholy", "label": "Melancholy", "emoji": "😔", "color": "#6366f1" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "😌", "color": "#10b981" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#6b7280" }
+  ],
+  "choices": [
+    {
+      "id": "embrace-silence",
+      "label": "Embrace the silence and think",
+      "compatibleMoods": ["melancholy", "peaceful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You let your thoughts wander. About who you were, who you're becoming, what matters. No answers come, but that's okay. The questions themselves feel important. When dawn breaks, you feel strangely lighter.",
+          "statChanges": {
+            "intellectual": 10,
+            "creativity": 8,
+            "resilience": 5,
+            "happiness": 4
+          },
+          "consequences": {
+            "tag": "midnight-reflection"
+          }
+        }
+      ]
+    },
+    {
+      "id": "write-journal",
+      "label": "Write in a journal",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You write down everything: fears, hopes, things you can't say out loud. The act of externalizing your thoughts makes them feel manageable. By the time you close the notebook, the anxiety has loosened its grip.",
+          "statChanges": {
+            "intellectual": 8,
+            "discipline": 6,
+            "resilience": 7,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "journaled-at-night"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seek-comfort",
+      "label": "Find comfort in a small ritual",
+      "compatibleMoods": ["anxious", "melancholy"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You make a cup of tea, wrap yourself in a blanket, and watch the stars through the window. A small, deliberate act of self-care. Sometimes survival is as simple as being gentle with yourself.",
+          "statChanges": {
+            "happiness": 8,
+            "resilience": 6,
+            "empathy": 4
+          },
+          "consequences": {
+            "tag": "nighttime-self-care"
+          }
+        }
+      ]
+    }
+  ]
+}

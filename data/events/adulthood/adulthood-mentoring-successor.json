@@ -1,0 +1,101 @@
+{
+  "id": "adulthood-mentoring-successor",
+  "category": "vocational",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { ">=": [{ "var": "stats.careerLevel" }, 3] }
+      ]
+    }
+  },
+  "weight": 11,
+  "priority": "weighted",
+  "title": "Passing the Torch",
+  "description": "A young professional joins your team—eager, brilliant, hungry. She reminds you of yourself at that age, before experience taught you caution. The senior leadership wants your guidance to shape her. Will you invest the hours, knowing she's likely to surpass you someday?",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "mentor-fully",
+      "label": "Invest fully in her development",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You share everything—the wins, the failures, the lessons carved into bone. She absorbs it all with fierce gratitude. Two years later, she's promoted. At the celebration, she raises a glass to you. 'I wouldn't be here without you.' The torch, it turns out, lights a new fire.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 15,
+            "confidence": 8,
+            "charm": 5,
+            "careerLevel": 1
+          },
+          "consequences": {
+            "tag": "mentored-successor",
+            "relationshipChanges": [
+              { "npcId": "protégé", "delta": 30 }
+            ]
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You try to mentor, but your emotional intelligence isn't quite there. The guidance comes across as condescending. She learns despite you, not because of you. You see the distance in her eyes when you speak.",
+          "statChanges": {
+            "empathy": 5,
+            "happiness": -5,
+            "confidence": -5,
+            "careerLevel": 0
+          },
+          "consequences": {
+            "tag": "failed-mentorship"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mentor-sparingly",
+      "label": "Help, but keep your distance",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You give her the technical knowledge she needs but hold back the rest. Boundaries maintained. Your expertise stays yours alone. She develops fine, but there was something more she needed—wisdom about the soul of the work.",
+          "statChanges": {
+            "independence": 8,
+            "confidence": 5,
+            "happiness": 3,
+            "empathy": -8
+          },
+          "consequences": {
+            "tag": "held-back-knowledge"
+          }
+        }
+      ]
+    },
+    {
+      "id": "compete-with-successor",
+      "label": "See her as competition, not a successor",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You hold back key insights. Play politics to dim her shine. It works—for a while. But she notices. Everyone notices. Your reputation suffers. In protecting your position, you've diminished yourself.",
+          "statChanges": {
+            "morality": -15,
+            "happiness": -12,
+            "confidence": -10,
+            "charm": -8
+          },
+          "consequences": {
+            "tag": "saw-protégé-as-rival"
+          }
+        }
+      ]
+    }
+  ]
+}

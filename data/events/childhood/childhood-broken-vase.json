@@ -1,0 +1,99 @@
+{
+  "id": "childhood-broken-vase",
+  "category": "family",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 12] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Broken Vase",
+  "description": "You're playing indoor soccer with your brother in the living room when you collide near the antique cabinet. The vase—your grandmother's special vase—shatters on the floor. Your mom's coming home in ten minutes.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "angry", "label": "Angry", "emoji": "😠", "color": "#ef4444" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "blame-brother",
+      "label": "Blame your brother",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "When Mom comes home, you point at your brother. 'He did it!' Your brother stares at you, betrayal in his eyes. Mom scolds him, grounds him for a week. The guilt sits heavy in your stomach, but you're not the one in trouble.",
+          "statChanges": {
+            "morality": -10,
+            "happiness": -5,
+            "charm": -3
+          },
+          "consequences": {
+            "tag": "lied-to-parents",
+            "relationshipChanges": [
+              { "npcId": "sibling", "delta": -20 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tell-truth",
+      "label": "Tell the truth together",
+      "compatibleMoods": ["thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "Side by side, you and your brother confess. Mom is upset about the vase, but her eyes soften when she sees you both taking responsibility. 'Brave kids,' she says quietly. She doesn't ground either of you—just makes you save up to replace it together.",
+          "statChanges": {
+            "morality": 12,
+            "happiness": 5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "honest-to-parents",
+            "relationshipChanges": [
+              { "npcId": "sibling", "delta": 10 },
+              { "npcId": "parent", "delta": 8 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hide-evidence",
+      "label": "Hide the pieces before Mom gets home",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You quickly sweep the pieces into a bag and stuff them behind the garbage cans outside. For weeks, you jump every time Mom mentions the vase. One day, she finds the bag while gardening. The truth comes out—and now it looks worse.",
+          "statChanges": {
+            "morality": -12,
+            "happiness": -8,
+            "resilience": -3
+          },
+          "consequences": {
+            "tag": "lied-to-parents",
+            "relationshipChanges": [
+              { "npcId": "parent", "delta": -15 }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

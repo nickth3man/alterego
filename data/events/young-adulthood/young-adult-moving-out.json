@@ -1,0 +1,135 @@
+{
+  "id": "young-adult-moving-out",
+  "category": "family",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 18] },
+        { "<=": [{ "var": "stats.age" }, 26] }
+      ]
+    }
+  },
+  "weight": 12,
+  "priority": "story",
+  "title": "The First Place",
+  "description": "You've found it—a cramped studio apartment with water stains on the ceiling and a radiator that clanks like a dying robot. But it's yours. Rent is due in a week. Your parents expect you home for Sunday dinners. Your bank account is lighter than you'd like. Freedom has a price tag.",
+  "moods": [
+    { "id": "hopeful", "label": "Hopeful", "emoji": "🌟", "color": "#f59e0b" },
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "take-the-leap",
+      "label": "Sign the lease and embrace independence",
+      "compatibleMoods": ["hopeful", "ambitious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.wealth" }, 40] }
+          },
+          "narration": "You sign with confidence. Moving in is chaotic—furniture from IKEA, boxes everywhere, instant ramen for a week. But there's pride in it. You paint the walls, invite friends over, and build a life on your own terms. The radiator still clanks, but you barely notice anymore.",
+          "statChanges": {
+            "independence": 20,
+            "confidence": 15,
+            "happiness": 12,
+            "discipline": 10,
+            "wealth": -12,
+            "morality": 5
+          },
+          "consequences": {
+            "tag": "became-independent"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.wealth" }, 40] }
+          },
+          "narration": "You sign anyway—maybe too hastily. The first month, you're broke. Ramen every day. Can't afford laundry. Your parents wire you money 'as a loan' but you know you'll never pay it back. The freedom feels less like victory and more like survival.",
+          "statChanges": {
+            "independence": 12,
+            "confidence": 5,
+            "happiness": -8,
+            "wealth": -15,
+            "morality": -8,
+            "resilience": 8
+          },
+          "consequences": {
+            "tag": "struggled-independence"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay-home-longer",
+      "label": "Stay with parents and save money",
+      "compatibleMoods": ["anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You delay moving out. Mom still does laundry. Dad still cooks. Your bank account grows, but something else shrinks—the sense that you're becoming your own person. Friends ask if you're ever going to 'grow up.' You deflect, but the question stings.",
+          "statChanges": {
+            "wealth": 18,
+            "independence": -12,
+            "happiness": -8,
+            "confidence": -5,
+            "discipline": 5,
+            "familyBonds": 8
+          },
+          "consequences": {
+            "tag": "delayed-independence"
+          }
+        }
+      ]
+    },
+    {
+      "id": "negotiate-support",
+      "label": "Negotiate shared costs with parents",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You propose a deal: Parents help with first month's rent and security deposit. In exchange, you handle groceries and utilities. Everyone wins. The apartment feels earned rather than gifted, and the relationship with your parents stays healthy.",
+          "statChanges": {
+            "independence": 12,
+            "confidence": 10,
+            "happiness": 10,
+            "wealth": 5,
+            "charm": 8,
+            "morality": 6,
+            "familyBonds": 5
+          },
+          "consequences": {
+            "tag": "negotiated-transition"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.charm" }, 50] }
+          },
+          "narration": "You ask for help, but your parents see it as weakness. 'We moved out at your age with nothing,' they say. They give you a lecture instead of support. You move out anyway, resentful and underfunded.",
+          "statChanges": {
+            "independence": 10,
+            "confidence": -8,
+            "happiness": -10,
+            "wealth": -8,
+            "familyBonds": -12
+          },
+          "consequences": {
+            "tag": "family-conflict-independence"
+          }
+        }
+      ]
+    }
+  ]
+}

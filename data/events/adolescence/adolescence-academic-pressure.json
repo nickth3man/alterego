@@ -1,0 +1,79 @@
+{
+  "id": "adolescence-academic-pressure",
+  "category": "vocational",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 14] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 22,
+  "priority": "weighted",
+  "title": "The Deadline",
+  "description": "Finals are in two weeks. You haven't studied. Your parents expect perfect grades. The anxiety is becoming physical—you can't sleep, can't focus.",
+  "moods": [
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "all-nighter",
+      "label": "Pull an all-nighter, study until you pass out",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Coffee and determination see you through. You write the exam on fumes. The grade is decent but you spend the next week sick.",
+          "statChanges": {
+            "intellectual": 12,
+            "discipline": 10,
+            "physical": -12
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "cheat",
+      "label": "Use a cheatsheet you found online",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "Your heart pounds as you slip the paper out. You get caught. The principal calls your parents. The shame is worse than any grade.",
+          "statChanges": {
+            "morality": -15,
+            "intellectual": 5,
+            "happiness": -15
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "accept-failure",
+      "label": "Accept you can't win them all, study what you can",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You do your best with what time you have. The grades aren't perfect, but you sleep at night. Your parents are disappointed but you know you tried.",
+          "statChanges": {
+            "resilience": 15,
+            "morality": 12,
+            "intellectual": 5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

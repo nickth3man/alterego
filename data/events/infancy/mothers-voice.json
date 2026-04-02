@@ -1,0 +1,55 @@
+{
+  "id": "infancy-mothers-voice",
+  "category": "social",
+  "lifeStages": ["infancy"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 0] },
+        { "<": [{ "var": "stats.age" }, 2] }
+      ]
+    }
+  },
+  "weight": 15,
+  "priority": "weighted",
+  "title": "Mother's Voice",
+  "description": "A sound rises from somewhere beyond your limited sight — low, melodic, achingly familiar. You've heard it before, in the warm dark, in the rhythm of your own pulse. It means something. It means safe. It means home. You want it to stop, or you want it to never stop.",
+  "moods": [
+    { "id": "comforted", "label": "Comforted", "emoji": "🤗", "color": "#10b981" },
+    { "id": "curious", "label": "Curious", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "reach-toward-sound",
+      "label": "Reach toward the sound",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 30] } },
+          "narration": "Your arm moves before you decide to move it — an instinct you don't have words for yet. The voice grows closer. A face appears, soft and round and real. You have found something.",
+          "statChanges": { "empathy": 4, "charm": 2 },
+          "consequences": { "tag": "first-bond" }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 30] } },
+          "narration": "Your arm reaches, but uncertainly. The voice comes closer and you see the shape of a face — but something in you holds back, still processing this strange sensation of recognition without understanding.",
+          "statChanges": { "independence": 3 },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "stay-still",
+      "label": "Stay perfectly still",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "You hold your breath without knowing why. The voice slows, hesitates — and then resumes, softer now, a question without words. It is searching for you. You let it search.",
+          "statChanges": { "resilience": 2, "intellectual": 2 },
+          "consequences": { "tag": "patient-observer" }
+        }
+      ]
+    }
+  ]
+}

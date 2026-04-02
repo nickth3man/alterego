@@ -1,0 +1,67 @@
+{
+  "id": "infancy-first-steps",
+  "category": "physical",
+  "lifeStages": ["infancy"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 1] },
+        { "<": [{ "var": "stats.age" }, 3] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "story",
+  "title": "First Steps",
+  "description": "The floor is no longer enough. Standing between you and the warm light across the room is only the distance of your own two feet — and that distance feels infinite, terrifying, exhilarating. Someone is calling your name. You want to go to them. You are not sure your legs know how.",
+  "moods": [
+    { "id": "brave", "label": "Brave", "emoji": "😤", "color": "#ef4444" },
+    { "id": "curious", "label": "Curious", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "scared", "label": "Scared", "emoji": "😰", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "run-full-speed",
+      "label": "Run full speed",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.physical" }, 50] } },
+          "narration": "Your legs remember what your mind forgot — they know movement, they know urgency. The world blurs. Three steps, four, five — and then ground meets your knees, but you've laughing before the sting arrives. You've flown and landed and lived to laugh about it.",
+          "statChanges": { "physical": 5, "confidence": 4, "riskTolerance": 3 },
+          "consequences": { "tag": "fearless-first-flight" }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.physical" }, 50] } },
+          "narration": "You launch forward with all your intent — and immediately everything is too fast. Your feet tangle, the floor rises to meet you, and the laugh becomes a cry. Someone runs to you. The light across the room can wait.",
+          "statChanges": { "physical": 3, "resilience": 2 },
+          "consequences": { "tag": "graceful-failure" }
+        }
+      ]
+    },
+    {
+      "id": "shuffle-cautiously",
+      "label": "Shuffle one careful step at a time",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "Left foot. Right foot. Left foot again. Each step is a small triumph, each balance point a tiny meditation. You cross the room in what feels like an hour but couldn't have been more than a minute. Someone claps. You did it slowly, and that is its own kind of brave.",
+          "statChanges": { "discipline": 4, "independence": 3, "confidence": 2 },
+          "consequences": { "tag": "methodical-first-steps" }
+        }
+      ]
+    },
+    {
+      "id": "refuse-and-sit",
+      "label": "Sit down and refuse",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "var": "stats.age" } },
+          "narration": "You lower yourself to the floor with great dignity. Standing is a trap. Running is a trap. You will observe from here, thank you. The person calling your name laughs, and something about that laugh makes you reconsider — but not today.",
+          "statChanges": { "independence": 4, "intellectual": 2 },
+          "consequences": { "tag": "strategic-patience" }
+        }
+      ]
+    }
+  ]
+}

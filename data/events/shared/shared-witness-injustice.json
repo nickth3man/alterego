@@ -1,0 +1,118 @@
+{
+  "id": "shared-witness-injustice",
+  "category": "emotional",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 8] }
+      ]
+    }
+  },
+  "weight": 11,
+  "priority": "weighted",
+  "title": "The Unfair Blame",
+  "description": "In a crowded store, you see it clearly: a child takes a candy bar and slips it into their pocket. But the security guard grabs a different child—the one standing nearby, wearing a similar jacket. The real thief watches with hidden satisfaction while the innocent child is accused.",
+  "moods": [
+    { "id": "indignant", "label": "Indignant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "fearful", "label": "Fearful", "emoji": "😨", "color": "#6366f1" },
+    { "id": "paralyzed", "label": "Paralyzed", "emoji": "😶", "color": "#6b7280" }
+  ],
+  "choices": [
+    {
+      "id": "speak-up",
+      "label": "Tell the truth about what you saw",
+      "compatibleMoods": ["indignant"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              "or": [
+                { ">=": [{ "var": "stats.confidence" }, 50] },
+                { ">=": [{ "var": "stats.morality" }, 60] }
+              ]
+            }
+          },
+          "narration": "'Wait! That child didn't take anything. I saw the real thief—over there!' You point. The guard hesitates, looks where you indicate, and spots the actual candy bar falling from the real thief's pocket. The accused child's eyes fill with tears of relief. Their mother hurries over to thank you, voice shaking.",
+          "statChanges": {
+            "morality": 18,
+            "confidence": 12,
+            "empathy": 8
+          },
+          "consequences": {
+            "tag": "stood-up-for-innocent",
+            "relationshipChanges": [
+              { "npcId": "stranger", "delta": 15 }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": {
+              "and": [
+                { "<": [{ "var": "stats.confidence" }, 50] },
+                { "<": [{ "var": "stats.morality" }, 60] }
+              ]
+            }
+          },
+          "narration": "You try to speak up, but your voice comes out as barely a whisper. The guard doesn't hear you. The accused child is led away in tears, and the real thief slips out another exit. You watch them go, knowing you could have stopped it.",
+          "statChanges": {
+            "morality": -5,
+            "confidence": -8,
+            "happiness": -10
+          },
+          "consequences": {
+            "tag": "failed-to-speak-up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "get-authority",
+      "label": "Alert another adult or employee",
+      "compatibleMoods": ["fearful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You find a manager and whisper what you saw. She listens, nods seriously, and quietly intercepts the real thief at the exit. The wrong child is released with an apology. You don't get a thank-you—nobody knows what you did—but you know.",
+          "statChanges": {
+            "morality": 14,
+            "intellectual": 8,
+            "happiness": 7
+          },
+          "consequences": {
+            "tag": "quietly-did-right-thing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "do-nothing",
+      "label": "Stay silent and leave quickly",
+      "compatibleMoods": ["paralyzed"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You back away and leave the store as fast as you can. The image of the falsely accused child's tearful face stays with you. You tell yourself there was nothing you could do. Maybe that's true. Maybe it isn't.",
+          "statChanges": {
+            "morality": -12,
+            "resilience": -4,
+            "happiness": -8
+          },
+          "consequences": {
+            "tag": "looked-away-from-injustice"
+          }
+        }
+      ]
+    }
+  ]
+}

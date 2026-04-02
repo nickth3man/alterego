@@ -1,0 +1,114 @@
+{
+  "id": "adulthood-social-network-strain",
+  "category": "social",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { ">=": [{ "var": "stats.happiness" }, 50] }
+      ]
+    }
+  },
+  "weight": 8,
+  "priority": "fill",
+  "title": "The Birthday Paradox",
+  "description": "It's your turn to host the annual friend reunion. Eight adults, four children, one backyard. You spent three weeks planning the menu, coordinating schedules, sending reminders. But as the date approaches, the group chat grows quieter. Three people have 'something come up.' One couple can't afford the drive. Your best friend says she's 'just not feeling it this year.' You stand in your empty backyard, chairs set for twelve, wondering when friendship became optional.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "host-anyway",
+      "label": "Host whoever shows up—make it meaningful",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.happiness" }, 60] } },
+          "narration": "Five people show. It's smaller, more intimate. The conversations go deeper without the pressure of a crowd. You laugh harder than you have in years. 'We should do this every month,' someone says. Maybe smaller isn't failure. Maybe smaller is just different.",
+          "statChanges": {
+            "happiness": 12,
+            "empathy": 8,
+            "social": 10,
+            "charm": 5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "found-quality-over-quantity"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.happiness" }, 60] } },
+          "narration": "Only three people show. The party feels like a funeral. You try to enjoy it, but the empty chairs keep pulling your attention. Everyone tries to be cheerful, but you can feel the disappointment underneath.",
+          "statChanges": {
+            "happiness": -8,
+            "confidence": -5,
+            "social": -3
+          },
+          "consequences": {
+            "tag": "disappointing-reunion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "skip-year",
+      "label": "Skip the reunion this year—rest and reset",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You send a group text: 'Taking a year off. Love you all. See you when I see you.' No one objects. Some friendships drift into dormancy. Others surprise you with a check-in call the following month. Not everyone is meant to be forever.",
+          "statChanges": {
+            "happiness": 8,
+            "independence": 10,
+            "physical": 5,
+            "social": -5,
+            "family": 3
+          },
+          "consequences": {
+            "tag": "let-friendships-dormant"
+          }
+        }
+      ]
+    },
+    {
+      "id": "invest-deeper",
+      "label": "Focus energy on the two or three closest friendships",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You let the large group fade and invest in the ones who show up. Monthly dinners with your best friend. Sunday hikes with the couple who made it this year. The network shrinks but deepens. Real friendship, it turns out, doesn't scale.",
+          "statChanges": {
+            "happiness": 15,
+            "empathy": 12,
+            "social": 8,
+            "confidence": 5,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "invested-in-deep-friendships",
+            "relationshipChanges": [
+              { "npcId": "best-friend", "delta": 20 }
+            ]
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.empathy" }, 50] } },
+          "narration": "You retreat. The group chat goes silent. Some friendships simply fade with disuse. You find yourself lonelier than expected—the few close connections weren't enough to fill the gap left by the many.",
+          "statChanges": {
+            "happiness": -5,
+            "social": -10,
+            "independence": 8
+          },
+          "consequences": {
+            "tag": "lost-network-without-replacement"
+          }
+        }
+      ]
+    }
+  ]
+}

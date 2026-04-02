@@ -1,0 +1,249 @@
+[
+  {
+    "id": "elena-mother",
+    "name": "Elena",
+    "role": "mother",
+    "activeStages": ["infancy", "childhood", "adolescence", "adulthood"],
+    "personality": {
+      "warmth": 65,
+      "dominance": -15,
+      "empathy": 80,
+      "stability": 70,
+      "charm": 45,
+      "intellect": 40,
+      "creativity": 30,
+      "discipline": 55
+    },
+    "initialTrust": 60,
+    "initialAffection": 80,
+    "description": "Your devoted mother who raised you through every stage. Supportive but not overbearing, she maintains close ties into your adult life."
+  },
+  {
+    "id": "robert-father",
+    "name": "Robert",
+    "role": "father",
+    "activeStages": ["infancy", "childhood", "adolescence"],
+    "personality": {
+      "warmth": 25,
+      "dominance": 45,
+      "empathy": 20,
+      "stability": 85,
+      "charm": 15,
+      "intellect": 50,
+      "creativity": 10,
+      "discipline": 75
+    },
+    "initialTrust": 40,
+    "initialAffection": 50,
+    "description": "Your traditional father who表达感情不善言辞 but shows care through his actions and high standards. Present in your formative years."
+  },
+  {
+    "id": "victoria-sister",
+    "name": "Victoria",
+    "role": "sibling",
+    "activeStages": ["childhood", "adolescence", "young-adulthood"],
+    "personality": {
+      "warmth": 50,
+      "dominance": 30,
+      "empathy": 55,
+      "stability": 40,
+      "charm": 60,
+      "intellect": 65,
+      "creativity": 45,
+      "discipline": 35
+    },
+    "initialTrust": 35,
+    "initialAffection": 55,
+    "description": "Your older sister who was your first playmate and occasional rival. She charted her own path and occasionally reappears in your adult life."
+  },
+  {
+    "id": "marcus-jones",
+    "name": "Marcus Jones",
+    "role": "childhood-friend",
+    "activeStages": ["childhood", "adolescence", "adulthood"],
+    "personality": {
+      "warmth": 75,
+      "dominance": 10,
+      "empathy": 70,
+      "stability": 50,
+      "charm": 65,
+      "intellect": 45,
+      "creativity": 55,
+      "discipline": 25
+    },
+    "initialTrust": 50,
+    "initialAffection": 65,
+    "description": "Your childhood best friend who shared countless adventures. You drifted apart after high school but reconnect in adulthood with shared nostalgia."
+  },
+  {
+    "id": "sofia-reyes",
+    "name": "Sofia Reyes",
+    "role": "childhood-friend",
+    "activeStages": ["childhood", "adolescence"],
+    "personality": {
+      "warmth": 60,
+      "dominance": 5,
+      "empathy": 65,
+      "stability": 35,
+      "charm": 70,
+      "intellect": 55,
+      "creativity": 75,
+      "discipline": 20
+    },
+    "initialTrust": 45,
+    "initialAffection": 55,
+    "description": "Your creative classmate who introduced you to art and imagination. You lost touch after school but her influence stayed with you."
+  },
+  {
+    "id": "coach-thompson",
+    "name": "Coach Thompson",
+    "role": "mentor",
+    "activeStages": ["adolescence", "young-adulthood"],
+    "personality": {
+      "warmth": 20,
+      "dominance": 80,
+      "empathy": 25,
+      "stability": 70,
+      "charm": 15,
+      "intellect": 40,
+      "creativity": 5,
+      "discipline": 90
+    },
+    "initialTrust": 25,
+    "initialAffection": 20,
+    "description": "The demanding coach who pushed you beyond your limits. Harsh but fair, he saw potential in you others missed and taught you perseverance."
+  },
+  {
+    "id": "jasmine-torres",
+    "name": "Jasmine Torres",
+    "role": "first-love",
+    "activeStages": ["adolescence", "young-adulthood"],
+    "personality": {
+      "warmth": 55,
+      "dominance": 15,
+      "empathy": 60,
+      "stability": 30,
+      "charm": 80,
+      "intellect": 50,
+      "creativity": 65,
+      "discipline": 25
+    },
+    "initialTrust": 15,
+    "initialAffection": 45,
+    "description": "Your unforgettable first love from high school. A summer romance that burned bright but faded as life took you in different directions."
+  },
+  {
+    "id": "derek-chen",
+    "name": "Derek Chen",
+    "role": "rival",
+    "activeStages": ["adolescence", "young-adulthood", "adulthood"],
+    "personality": {
+      "warmth": -10,
+      "dominance": 85,
+      "empathy": -5,
+      "stability": 55,
+      "charm": 40,
+      "intellect": 70,
+      "creativity": 35,
+      "discipline": 75
+    },
+    "initialTrust": -30,
+    "initialAffection": -20,
+    "description": "The competitor who pushed you to be better. Whether in academics, career, or romance, Derek was always a shadow you were trying to escape or surpass."
+  },
+  {
+    "id": "alex-kim",
+    "name": "Alex Kim",
+    "role": "colleague",
+    "activeStages": ["young-adulthood", "adulthood", "middle-adulthood"],
+    "personality": {
+      "warmth": 55,
+      "dominance": 20,
+      "empathy": 50,
+      "stability": 60,
+      "charm": 50,
+      "intellect": 65,
+      "creativity": 40,
+      "discipline": 55
+    },
+    "initialTrust": 30,
+    "initialAffection": 40,
+    "description": "Your college friend who became a professional colleague. Shared office struggles and career ambitions kept your bond strong into middle age."
+  },
+  {
+    "id": "maya-park",
+    "name": "Maya Park",
+    "role": "spouse",
+    "activeStages": ["young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+    "personality": {
+      "warmth": 70,
+      "dominance": 10,
+      "empathy": 75,
+      "stability": 80,
+      "charm": 65,
+      "intellect": 60,
+      "creativity": 50,
+      "discipline": 60
+    },
+    "initialTrust": 20,
+    "initialAffection": 35,
+    "description": "The love of your adult life who became your partner through decades of ups and downs. You built a home and family together, growing closer with time."
+  },
+  {
+    "id": "lucas-child",
+    "name": "Lucas",
+    "role": "child",
+    "activeStages": ["adulthood", "middle-adulthood", "old-age"],
+    "personality": {
+      "warmth": 60,
+      "dominance": 20,
+      "empathy": 55,
+      "stability": 45,
+      "charm": 50,
+      "intellect": 50,
+      "creativity": 60,
+      "discipline": 35
+    },
+    "initialTrust": 70,
+    "initialAffection": 85,
+    "description": "Your firstborn child who brings both joy and challenge to parenthood. Watching them grow into their own person is your greatest achievement."
+  },
+  {
+    "id": "emma-child",
+    "name": "Emma",
+    "role": "child",
+    "activeStages": ["adulthood", "middle-adulthood", "old-age"],
+    "personality": {
+      "warmth": 75,
+      "dominance": -5,
+      "empathy": 80,
+      "stability": 50,
+      "charm": 70,
+      "intellect": 55,
+      "creativity": 70,
+      "discipline": 40
+    },
+    "initialTrust": 70,
+    "initialAffection": 85,
+    "description": "Your younger child with a gentle spirit. Her compassion and artistic nature remind you of the innocence you sometimes miss."
+  },
+  {
+    "id": "jordan-morgan",
+    "name": "Jordan Morgan",
+    "role": "romantic-interest",
+    "activeStages": ["adolescence", "young-adulthood", "adulthood"],
+    "personality": {
+      "warmth": 45,
+      "dominance": 35,
+      "empathy": 40,
+      "stability": 45,
+      "charm": 75,
+      "intellect": 60,
+      "creativity": 50,
+      "discipline": 45
+    },
+    "initialTrust": 5,
+    "initialAffection": 30,
+    "description": "A romantic interest from your later years who challenged you intellectually and emotionally. The path not taken, living on in what-ifs."
+  }
+]

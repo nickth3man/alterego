@@ -1,0 +1,80 @@
+{
+  "id": "adolescence-social-media-storm",
+  "category": "social",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "Going Viral",
+  "description": "You posted something without thinking—a joke, a moment, an opinion. Now thousands of strangers are commenting, and it's not going the way you hoped.",
+  "moods": [
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "delete-it",
+      "label": "Delete it and pretend it never happened",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You delete the post but screenshots exist forever. Your friends tease you about it for weeks. You learn that the internet never forgets.",
+          "statChanges": {
+            "happiness": -10,
+            "discipline": 8,
+            "social": -5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "lean-into-it",
+      "label": "Lean into it, double down",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You double down, posting more, standing by your words. Some people respect your boldness. Others call you a troll. Either way, you've made your mark.",
+          "statChanges": {
+            "confidence": 15,
+            "riskTolerance": 12,
+            "morality": -8
+          },
+          "consequences": {
+            "tag": "rebelled",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "apologize",
+      "label": "Issue a genuine apology",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You write a sincere post acknowledging your mistake. Some accept it. Others don't. But you learn that taking responsibility is harder than being reckless.",
+          "statChanges": {
+            "morality": 15,
+            "empathy": 10,
+            "confidence": -5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

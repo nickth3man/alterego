@@ -1,0 +1,79 @@
+{
+  "id": "adolescence-body-image",
+  "category": "physical",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 25,
+  "priority": "weighted",
+  "title": "The Weighing Scale",
+  "description": "The number on the scale defines you today. Or does it? The mirror shows someone you're not sure you know.",
+  "moods": [
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" },
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" }
+  ],
+  "choices": [
+    {
+      "id": "restrict",
+      "label": "Skip meals, control what you can",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You stop eating breakfast. Then lunch. The weight drops but so does everything else. Your grades slip. Your friends notice you seem pale.",
+          "statChanges": {
+            "physical": -15,
+            "discipline": 10,
+            "happiness": -12
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "exercise-excess",
+      "label": "Run it off, every day, harder",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You push yourself until your body aches. The endorphins help, but it's never enough. You're exhausted but still dissatisfied.",
+          "statChanges": {
+            "physical": 8,
+            "resilience": 5,
+            "happiness": -5
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "reject-the-scale",
+      "label": "Reject the scale's power over you",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You put the scale away. You start eating to fuel your body instead of punish it. It's a long journey, but you feel stronger—inside and out.",
+          "statChanges": {
+            "confidence": 15,
+            "physical": 5,
+            "happiness": 10
+          },
+          "consequences": {
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

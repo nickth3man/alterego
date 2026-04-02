@@ -1,0 +1,118 @@
+{
+  "id": "adulthood-work-life-imbalance",
+  "category": "vocational",
+  "lifeStages": ["adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 36] },
+        { "<=": [{ "var": "stats.age" }, 55] },
+        { "==": [{ "var": "stats.careerLevel" }, 2] }
+      ]
+    }
+  },
+  "weight": 13,
+  "priority": "weighted",
+  "title": "The 10 PM Conference Call",
+  "description": "It's 10 PM. Your laptop glows in the dim kitchen. Your spouse and children are asleep upstairs. Another call with the overseas team, another deadline, another promise that 'this is temporary.' The coffee has gone cold for hours. Your body aches for rest. The job you've built demands more than you've already given.",
+  "moods": [
+    { "id": "weary", "label": "Weary", "emoji": "😔", "color": "#3b82f6" },
+    { "id": "determined", "label": "Determined", "emoji": "💪", "color": "#ef4444" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" },
+    { "id": "content", "label": "Content", "emoji": "😌", "color": "#10b981" }
+  ],
+  "choices": [
+    {
+      "id": "push-through",
+      "label": "Push through—one more quarter",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.resilience" }, 60] } },
+          "narration": "You close the laptop at 1 AM. The next morning, you're at it again. The project launches. The bonuses arrive. Your family has learned to expect your absence. You've built something impressive, and you're too tired to feel proud.",
+          "statChanges": {
+            "wealth": 15,
+            "careerLevel": 1,
+            "physical": -12,
+            "happiness": -10,
+            "family": -8
+          },
+          "consequences": {
+            "tag": "sacrificed-for-career"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.resilience" }, 60] } },
+          "narration": "You push, but your body starts keeping score. The headaches multiply. The fatigue becomes a companion. One morning, you simply don't get up. The email can wait. You need a break more than your career needs you.",
+          "statChanges": {
+            "physical": -15,
+            "happiness": -8,
+            "confidence": -10,
+            "family": -5
+          },
+          "consequences": {
+            "tag": "burned-out",
+            "unlockEvents": ["adulthood-health-wake-up"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "set-boundaries",
+      "label": "Set firm boundaries with your employer",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [true, true] } },
+          "narration": "You send an email—respectful but clear. No calls after 7 PM. Weekends protected. The CEO raises an eyebrow, but your mental health isn't negotiable. Some colleagues smirk; others quietly thank you. Your family notices when you walk through the door before dark.",
+          "statChanges": {
+            "happiness": 15,
+            "family": 12,
+            "physical": 8,
+            "confidence": 8,
+            "careerLevel": -1,
+            "wealth": -8
+          },
+          "consequences": {
+            "tag": "set-healthy-work-boundaries"
+          }
+        }
+      ]
+    },
+    {
+      "id": "find-new-job",
+      "label": "Start looking for a less demanding role",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { ">=": [{ "var": "stats.confidence" }, 55] } },
+          "narration": "You update your resume. A recruiter reaches out—a smaller company, saner hours, less prestige but more life. The interview feels like a first date: hopeful and uncertain. When the offer comes, it's less money but more mornings with your family.",
+          "statChanges": {
+            "wealth": -10,
+            "happiness": 18,
+            "family": 15,
+            "physical": 10,
+            "confidence": 5
+          },
+          "consequences": {
+            "tag": "downgraded-career-for-life",
+            "relationshipChanges": [
+              { "npcId": "spouse", "delta": 20 }
+            ]
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "<": [{ "var": "stats.confidence" }, 55] } },
+          "narration": "The job search stalls. Your confidence wavers. No one seems to want what you're selling—or perhaps you've forgotten how to sell it. The comfort of the current job, however miserable, suddenly feels safer than the uncertainty of change.",
+          "statChanges": {
+            "confidence": -12,
+            "happiness": -8,
+            "careerLevel": 0,
+            "stress": 10
+          },
+          "consequences": {
+            "tag": "stuck-in-career-rut"
+          }
+        }
+      ]
+    }
+  ]
+}

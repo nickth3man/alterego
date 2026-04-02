@@ -1,0 +1,133 @@
+{
+  "id": "young-adult-imposter-syndrome",
+  "category": "emotional",
+  "lifeStages": ["young-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 22] },
+        { "<=": [{ "var": "stats.age" }, 32] }
+      ]
+    }
+  },
+  "weight": 16,
+  "priority": "weighted",
+  "title": "Feeling Like a Fraud",
+  "description": "You've just been promoted to a senior role at work. Everyone seems to think you're qualified—except you. At meetings, you wait for someone to call you out. Your success feels like luck, not skill. You stay late, over-prepare everything, and secretly fear being 'found out.' Your mentor notices your anxiety.",
+  "moods": [
+    { "id": "anxious", "label": "Anxious", "emoji": "😰", "color": "#3b82f6" },
+    { "id": "ambitious", "label": "Ambitious", "emoji": "💪", "color": "#ef4444" },
+    { "id": "resolute", "label": "Resolute", "emoji": "😤", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "talk-to-mentor",
+      "label": "Open up to your mentor",
+      "compatibleMoods": ["hopeful", "anxious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.empathy" }, 45] }
+          },
+          "narration": "You confess your fears over coffee. Your mentor laughs—not cruelly, but with recognition. 'I've felt that way for 20 years,' they say. 'It's called imposter syndrome. Everyone gets it. You're here because you earned it.' Something loosens in your chest. Maybe you're not a fraud.",
+          "statChanges": {
+            "confidence": 15,
+            "happiness": 12,
+            "empathy": 8,
+            "intellectual": 6,
+            "resilience": 8,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "overcame-imposter-syndrome"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.empathy" }, 45] }
+          },
+          "narration": "You try to explain, but your mentor seems puzzled. 'You're the youngest senior we've had,' they say, offering platitudes. It doesn't help. The fear persists. You continue overworking to hide the perceived inadequacy.",
+          "statChanges": {
+            "confidence": -5,
+            "happiness": -8,
+            "discipline": 8,
+            "physical": -8
+          },
+          "consequences": {
+            "tag": "still-doubting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "prove-them-wrong",
+      "label": "Work twice as hard to prove you belong",
+      "compatibleMoods": ["ambitious", "resolute"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.discipline" }, 70] }
+          },
+          "narration": "You triple your preparation, arrive first, leave last. Your work is impeccable—undeniable. The fear doesn't fully disappear, but your results speak louder. Eventually, you stop waiting to be exposed.",
+          "statChanges": {
+            "discipline": 18,
+            "confidence": 10,
+            "intellectual": 8,
+            "career": 12,
+            "happiness": 5,
+            "physical": -12,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "outworked-doubt"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.discipline" }, 70] }
+          },
+          "narration": "You try to outwork the doubt, but burnout hits hard. You collapse from exhaustion one Friday, missing deadlines. Your mentor sends you home. The imposter syndrome wins that round.",
+          "statChanges": {
+            "physical": -15,
+            "happiness": -12,
+            "confidence": -10,
+            "discipline": 5,
+            "career": -5
+          },
+          "consequences": {
+            "tag": "burned-out-chasing-validation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "accept-vulnerability",
+      "label": "Admit vulnerability to your team",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "In a team meeting, you confess: 'Honestly, I feel like I don't belong here sometimes.' Silence. Then another teammate laughs: 'Oh thank god, I thought it was just me.' Suddenly, everyone is sharing. The secret is out—everyone feels like a fraud sometimes. The vulnerability binds you together.",
+          "statChanges": {
+            "empathy": 15,
+            "confidence": 10,
+            "happiness": 12,
+            "morality": 8,
+            "charm": 10,
+            "independence": -3
+          },
+          "consequences": {
+            "tag": "found-belonging-through-vulnerability"
+          }
+        }
+      ]
+    }
+  ]
+}

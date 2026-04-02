@@ -1,0 +1,91 @@
+{
+  "id": "shared-unexpected-visitor",
+  "category": "social",
+  "lifeStages": ["childhood", "adolescence", "young-adulthood", "adulthood", "middle-adulthood", "old-age"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 5] }
+      ]
+    }
+  },
+  "weight": 14,
+  "priority": "weighted",
+  "title": "The Knock at the Door",
+  "description": "Someone you haven't seen in years stands on your doorstep. They look nervous, hopeful, uncertain. 'Sorry to just show up,' they say. It's an old friend, a former neighbor, a distant relative—someone who clearly made a journey to find you.",
+  "moods": [
+    { "id": "surprised", "label": "Surprised", "emoji": "😮", "color": "#3b82f6" },
+    { "id": "joyful", "label": "Joyful", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "cautious", "label": "Cautious", "emoji": "😐", "color": "#6b7280" }
+  ],
+  "choices": [
+    {
+      "id": "warm-welcome",
+      "label": "Welcome them in with open arms",
+      "compatibleMoods": ["surprised", "joyful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "'Of course! Come in!' Hours pass in conversation, catching up on years of stories. They show you old photos, tell you about their travels, ask about your life. When they finally leave, you both agree: you should never have lost touch.",
+          "statChanges": {
+            "happiness": 15,
+            "empathy": 8,
+            "charm": 5
+          },
+          "consequences": {
+            "tag": "reunited-with-old-friend",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "polite-visit",
+      "label": "Offer a polite but brief visit",
+      "compatibleMoods": ["cautious"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "'Sure, I have a few minutes.' You share some tea and polite conversation, but you're guarded. They seem to sense the distance between you now. The visit is pleasant but hollow. 'We should do this again,' you say, both knowing you won't.",
+          "statChanges": {
+            "independence": 5,
+            "happiness": 2,
+            "charm": 3
+          },
+          "consequences": {
+            "tag": "polite-reunion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "make-excuse",
+      "label": "Apologize and say this isn't a good time",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You make a polite excuse—another time, perhaps. Their face falls, just slightly, before they reconstruct their smile. 'I understand. Maybe next time.' They leave. You close the door and wonder if you just made a mistake or protected yourself from something painful.",
+          "statChanges": {
+            "resilience": 4,
+            "independence": 6,
+            "happiness": -5,
+            "morality": -6
+          },
+          "consequences": {
+            "tag": "turned-away-visitor"
+          }
+        }
+      ]
+    }
+  ]
+}

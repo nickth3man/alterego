@@ -1,0 +1,104 @@
+{
+  "id": "childhood-bike-race",
+  "category": "physical",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 6] },
+        { "<=": [{ "var": "stats.age" }, 12] }
+      ]
+    }
+  },
+  "weight": 16,
+  "priority": "weighted",
+  "title": "The Bicycle Race",
+  "description": "The older kids have organized a bike race down Miller's Hill—dangerous, steep, and strictly 'against the rules.' Everyone's watching to see who's brave enough to enter. Your friend Priya eggs you on, but your mom would kill you if she found out.",
+  "moods": [
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "angry", "label": "Angry", "emoji": "😠", "color": "#ef4444" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "race-full-speed",
+      "label": "Race as fast as you can",
+      "compatibleMoods": ["excited", "angry"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.riskTolerance" }, 50] }
+          },
+          "narration": "Wind tears at your face as you rocket down the hill, arms out, screaming with pure joy. You wipe out at the bottom, skinning both knees, but you're laughing as you get up. 'Did you see that?' The other kids look at you with new respect—or is that fear?",
+          "statChanges": {
+            "riskTolerance": 12,
+            "confidence": 10,
+            "physical": 8,
+            "happiness": 8
+          },
+          "consequences": {
+            "tag": "reckless-bike-race"
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.riskTolerance" }, 50] }
+          },
+          "narration": "You pedal hard, but fear grabs your brakes halfway down. You wobble to a stop, watching the others zip past. Some laugh, but Priya stays with you. 'Smart,' she says. 'My cousin broke his arm doing that.' You wonder if courage and stupidity are the same thing.",
+          "statChanges": {
+            "discipline": 8,
+            "resilience": 5,
+            "happiness": -4
+          },
+          "consequences": {}
+        }
+      ]
+    },
+    {
+      "id": "refuse-race",
+      "label": "Refuse and walk your bike home",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You walk your bike past the jeering crowd. One kid calls you a chicken. But as you walk away, you feel a quiet pride. You don't need to prove anything to anyone—especially not to yourself. Your mom is proud when you tell her you made the safe choice.",
+          "statChanges": {
+            "morality": 10,
+            "independence": 6,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "resisted-peer-pressure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "watch-and-learn",
+      "label": "Stay to watch, then judge",
+      "compatibleMoods": ["thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You watch as two kids wipe out badly. No serious injuries, but tears all around. 'That's going to leave a scar,' someone says. You've learned something valuable today—not everything is worth the thrill.",
+          "statChanges": {
+            "intellectual": 8,
+            "resilience": 5,
+            "happiness": 3
+          },
+          "consequences": {
+            "tag": "learned-from-others-mistakes"
+          }
+        }
+      ]
+    }
+  ]
+}

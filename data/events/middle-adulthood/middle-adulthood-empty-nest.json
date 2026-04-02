@@ -1,0 +1,92 @@
+{
+  "id": "middle-adulthood-empty-nest",
+  "category": "family",
+  "lifeStages": ["middle-adulthood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 56] },
+        { "<=": [{ "var": "stats.age" }, 75] },
+        { "==": [{ "var": "stats.hasChildren" }, true] }
+      ]
+    }
+  },
+  "weight": 18,
+  "priority": "weighted",
+  "title": "The Quiet House",
+  "description": "The last child has moved out. You walk through rooms that echo differently now—spaces that once held laughter, arguments, the chaos of growing up. The house is yours again. So is the silence.",
+  "moods": [
+    { "id": "reflective", "label": "Reflective", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "peaceful", "label": "Peaceful", "emoji": "🕊️", "color": "#10b981" },
+    { "id": "restless", "label": "Restless", "emoji": "🔥", "color": "#f59e0b" }
+  ],
+  "choices": [
+    {
+      "id": "fill-the-space",
+      "label": "Fill the space with new purpose",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You join the gym, volunteer at the library, take up gardening. The calendar fills. Some nights are still lonely, but you adapt. You learn that 'empty nest' can mean 'room for new beginnings.'",
+          "statChanges": {
+            "happiness": 10,
+            "physical": 8,
+            "independence": 10
+          },
+          "consequences": {
+            "tag": "found-new-purpose"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reconnect-with-spouse",
+      "label": "Reconnect with your spouse as a couple again",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "==": [{ "var": "stats.isMarried" }, true] } },
+          "narration": "For the first time in decades, it's just the two of you. You rediscover who you both became while raising children. First dates become second honeymoons. You talk about dreams you'd shelved when parenting took over.",
+          "statChanges": {
+            "happiness": 15,
+            "confidence": 5,
+            "empathy": 8
+          },
+          "consequences": {
+            "tag": "rekindled-marriage-empty-nest"
+          }
+        },
+        {
+          "condition": { "type": "jsonLogic", "rule": { "!": [{ "var": "stats.isMarried" }] } },
+          "narration": "You learn to enjoy your own company. The solitude that once terrified you becomes sanctuary. You furnish the spare room as a study. You read books you'd forgotten you loved.",
+          "statChanges": {
+            "independence": 12,
+            "happiness": 8,
+            "creativity": 7
+          },
+          "consequences": {
+            "tag": "embraced-solitude"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cling-to-the-past",
+      "label": "Hold onto the past—keep everything as it was",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You can't bring yourself to change anything. The untouched bedroom becomes a shrine. Some friends worry about you, but this is your grief and you'll process it in your own way. The house feels like a museum of your family.",
+          "statChanges": {
+            "happiness": -6,
+            "morality": 5,
+            "independence": -8
+          },
+          "consequences": {
+            "tag": "preserved-childhood-shrine"
+          }
+        }
+      ]
+    }
+  ]
+}

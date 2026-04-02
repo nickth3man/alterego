@@ -1,0 +1,82 @@
+{
+  "id": "adolescence-identity-crisis",
+  "category": "emotional",
+  "lifeStages": ["adolescence"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 13] },
+        { "<=": [{ "var": "stats.age" }, 17] }
+      ]
+    }
+  },
+  "weight": 22,
+  "priority": "story",
+  "title": "The Mirror Question",
+  "description": "You catch your reflection and don't recognize the person staring back. Who are you really? The answer used to feel simple.",
+  "moods": [
+    { "id": "confused", "label": "Confused", "emoji": "🤔", "color": "#8b5cf6" },
+    { "id": "defiant", "label": "Defiant", "emoji": "😤", "color": "#ef4444" },
+    { "id": "vulnerable", "label": "Vulnerable", "emoji": "😢", "color": "#3b82f6" }
+  ],
+  "choices": [
+    {
+      "id": "rebel-change",
+      "label": "Try being someone completely different",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You dye your hair, change your style, adopt new opinions. It's terrifying and exhilarating. For a moment, you feel like you could be anyone.",
+          "statChanges": {
+            "riskTolerance": 15,
+            "confidence": 10,
+            "independence": 12
+          },
+          "consequences": {
+            "tag": "found-passion",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "dig-deep",
+      "label": "Search for the real you beneath the noise",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "You start journaling, reading, asking hard questions. The answers don't come quickly, but you begin to trust your own voice.",
+          "statChanges": {
+            "intellectual": 15,
+            "empathy": 8,
+            "confidence": 5
+          },
+          "consequences": {
+            "tag": "identity-crisis",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ask-parents",
+      "label": "Ask your parents who they think you are",
+      "outcomes": [
+        {
+          "condition": { "type": "jsonLogic", "rule": { "always": true } },
+          "narration": "They look at each other, then at you. 'We've always wondered when you'd ask,' your mother says. The conversation is awkward but oddly comforting.",
+          "statChanges": {
+            "family": 10,
+            "independence": -5,
+            "happiness": 5
+          },
+          "consequences": {
+            "tag": "identity-crisis",
+            "relationshipChanges": []
+          }
+        }
+      ]
+    }
+  ]
+}

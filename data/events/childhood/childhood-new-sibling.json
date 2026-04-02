@@ -1,0 +1,115 @@
+{
+  "id": "childhood-new-sibling",
+  "category": "family",
+  "lifeStages": ["childhood"],
+  "prerequisites": {
+    "type": "jsonLogic",
+    "rule": {
+      "and": [
+        { ">=": [{ "var": "stats.age" }, 4] },
+        { "<=": [{ "var": "stats.age" }, 10] }
+      ]
+    }
+  },
+  "weight": 10,
+  "priority": "story",
+  "title": "The New Baby",
+  "description": "Your parents bring home a tiny, screaming bundle. They're exhausted, overwhelmed, and keep telling you to 'be gentle' and 'share.' The baby does nothing but sleep, cry, and demand attention at 3am.",
+  "moods": [
+    { "id": "angry", "label": "Angry", "emoji": "😠", "color": "#ef4444" },
+    { "id": "excited", "label": "Excited", "emoji": "😊", "color": "#f59e0b" },
+    { "id": "thoughtful", "label": "Thoughtful", "emoji": "🤔", "color": "#8b5cf6" }
+  ],
+  "choices": [
+    {
+      "id": "embrace-role",
+      "label": "Embrace the big sibling role",
+      "compatibleMoods": ["excited", "thoughtful"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { ">=": [{ "var": "stats.empathy" }, 35] }
+          },
+          "narration": "You rock the baby to sleep, make silly faces, and tell Mom she's doing a great job. The baby grabs your finger one day and holds on tight. In that moment, something shifts. This tiny person is your responsibility now. And somehow, you don't mind.",
+          "statChanges": {
+            "empathy": 12,
+            "happiness": 10,
+            "morality": 8,
+            "independence": 5
+          },
+          "consequences": {
+            "tag": "became-protective-sibling",
+            "relationshipChanges": [
+              { "npcId": "sibling", "delta": 15 }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "<": [{ "var": "stats.empathy" }, 35] }
+          },
+          "narration": "You try your best to help, even when it feels forced. The baby doesn't notice either way, but your parents do. 'Thank you for being so patient,' Mom says one evening, and her tired eyes fill with gratitude. It's not love yet—but it could grow.",
+          "statChanges": {
+            "empathy": 6,
+            "morality": 8,
+            "happiness": 4
+          },
+          "consequences": {
+            "relationshipChanges": [
+              { "npcId": "sibling", "delta": 5 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "act-out",
+      "label": "Act out for attention",
+      "compatibleMoods": ["angry"],
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You break a lamp, refuse to do homework, and scream until your throat is raw. Your parents are frustrated and short-tempered. The baby keeps crying anyway. You feel worse than before, and the house feels darker.",
+          "statChanges": {
+            "happiness": -10,
+            "morality": -8,
+            "confidence": -5
+          },
+          "consequences": {
+            "tag": "jealous-of-sibling",
+            "relationshipChanges": [
+              { "npcId": "parent", "delta": -12 }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "withdraw",
+      "label": "Withdraw into your room",
+      "outcomes": [
+        {
+          "condition": {
+            "type": "jsonLogic",
+            "rule": { "==": true, "rule": true }
+          },
+          "narration": "You spend more time alone in your room, building elaborate worlds with your toys. It's peaceful, but also lonely. Sometimes you overhear your parents talking about how 'mature' you're being, and you're not sure if that's a compliment.",
+          "statChanges": {
+            "creativity": 10,
+            "independence": 8,
+            "happiness": -5,
+            "empathy": -3
+          },
+          "consequences": {
+            "tag": "withdrew-from-family"
+          }
+        }
+      ]
+    }
+  ]
+}
