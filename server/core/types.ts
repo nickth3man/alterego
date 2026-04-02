@@ -300,7 +300,13 @@ export type WSMessageType =
   | 'stage-transition'
   | 'save-complete'
   | 'relationship-change'
-  | 'death';
+  | 'death'
+  | 'welcome'
+  | 'pong'
+  | 'subscribed'
+  | 'unsubscribed'
+  | 'error'
+  | 'state';
 
 export interface WSMessage<T = unknown> {
   type: WSMessageType;
